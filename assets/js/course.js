@@ -1,34 +1,116 @@
 document.documentElement.classList.add("js-ready");
 
+/* Smooth scrolling for internal anchors */
 for (const link of document.querySelectorAll('a[href^="#"]')) {
   link.addEventListener("click", (event) => {
-    const target = document.querySelector(link.getAttribute("href"));
-    if (!target) return;
+    const href = link.getAttribute("href");
+
+    if (!href || href === "#") {
+      return;
+    }
+
+    const target = document.querySelector(href);
+
+    if (!target) {
+      return;
+    }
+
     event.preventDefault();
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
   });
 }
 
-function sendCourseHeightToParent() {
-  const height = Math.max(
-    document.body.scrollHeight,
-    document.documentElement.scrollHeight,
-    document.body.offsetHeight,
-    document.documentElement.offsetHeight
-  );
+/* Send stable iframe height to the parent WordPress page */
+(function () {
+  const PARENT_ORIGIN = "https://melamedy.com";
+  const MIN_HEIGHT = 700;
+  const MAX_HEIGHT = 30000;
 
-  window.parent.postMessage(
-    {
-      type: "ym-course-height",
-      height: height + 40
-    },
-    "https://melamedy.com"
-  );
-}
+  let lastSentHeight = 0;
+  let scheduled = false;
 
-window.addEventListener("load", sendCourseHeightToParent);
-window.addEventListener("resize", sendCourseHeightToParent);
+  function getRealContentHeight() {
+    const main =
+      document.querySelector("main") ||
+      document.querySelector(".lesson-page") ||
+      document.querySelector(".course-page") ||
+      document.body;
 
-setTimeout(sendCourseHeightToParent, 300);
-setTimeout(sendCourseHeightToParent, 1000);
-setTimeout(sendCourseHeightToParent, 2000);
+    let maxBottom = 0;
+
+    function measureElement(el) {
+      if (!el) {
+        return;
+      }
+
+      const rect = el.getBoundingClientRect();
+      const bottom = rect.bottom + window.scrollY;
+
+      if (bottom > maxBottom) {
+        maxBottom = bottom;
+      }
+    }
+
+    measureElement(main);
+
+    for (const child of document.body.children) {
+      measureElement(child);
+    }
+
+    const finalHeight = Math.ceil(maxBottom + 40);
+
+    return Math.min(
+      MAX_HEIGHT,
+      Math.max(MIN_HEIGHT, finalHeight)
+    );
+  }
+
+  function sendHeight() {
+    scheduled = false;
+
+    const height = getRealContentHeight();
+
+    /*
+      Prevent endless growth loops:
+      if the height changed only slightly, do not send another update.
+    */
+    if (Math.abs(height - lastSentHeight) < 20) {
+      return;
+    }
+
+    lastSentHeight = height;
+
+    window.parent.postMessage(
+      {
+        type: "ym-course-height",
+        height: height
+      },
+      PARENT_ORIGIN
+    );
+  }
+
+  function scheduleHeightUpdate() {
+    if (scheduled) {
+      return;
+    }
+
+    scheduled = true;
+    window.requestAnimationFrame(sendHeight);
+  }
+
+  window.addEventListener("load", scheduleHeightUpdate);
+  window.addEventListener("resize", scheduleHeightUpdate);
+  document.addEventListener("DOMContentLoaded", scheduleHeightUpdate);
+
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(scheduleHeightUpdate);
+    observer.observe(document.body);
+  }
+
+  setTimeout(scheduleHeightUpdate, 300);
+  setTimeout(scheduleHeightUpdate, 1000);
+  setTimeout(scheduleHeightUpdate, 2000);
+})();
