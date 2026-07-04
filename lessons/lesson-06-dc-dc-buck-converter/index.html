@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>שיעור 6 - ממיר Buck</title>
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script defer src="../../assets/js/course.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">דלג לתוכן</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html">אלקטרוניקת הספק</a>
+    <nav class="top-nav" aria-label="ניווט שיעור">
+      <a href="../../index.html">דף הקורס</a>
+      <a href="../lesson-05-thyristors-and-controlled-rectifiers/">הקודם</a>
+      <a href="../lesson-07-dc-dc-boost-and-buck-boost/">הבא</a>
+    </nav>
+  </header>
+
+  <main id="content" class="lesson-page">
+    <section class="lesson-hero">
+      <p class="breadcrumb">שיעור 6 מתוך 12</p>
+      <h1>ממיר Buck</h1>
+      <p>פרק מלא על ממיר Buck: טופולוגיה אידיאלית, ON/OFF, דיודת Freewheel, Buck סינכרוני, CCM/DCM, ריפל, תכן ונצילות.</p>
+      <div class="lesson-meta">
+        <span>5-7 שעות לימוד</span>
+        <span>יחידת לימוד מורחבת</span>
+        <span>ה-PDF מתמקד במיישרים ומהפכים; שיעור זה מרחיב את הקורס ליסודות DC-DC הנדרשים במערכות הספק מודרניות.</span>
+      </div>
+      <div class="lesson-toc">
+        <strong>מפת השיעור</strong>
+        <ul>
+          <li><a href="#overview">מיקום ודרישות קדם</a></li>
+          <li><a href="#objectives">מטרות למידה</a></li>
+          <li><a href="#motivation">מוטיבציה והקשר הנדסי</a></li>
+          <li><a href="#concepts">הסבר מושגי</a></li>
+          <li><a href="#operation">פעולה ואינטואיציה</a></li>
+          <li><a href="#math">פיתוח מתמטי</a></li>
+          <li><a href="#waveforms">צורות גל</a></li>
+          <li><a href="#design">כללי תכן</a></li>
+          <li><a href="#examples">דוגמאות פתורות</a></li>
+          <li><a href="#practice">תרגול ותשובות</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="lesson-nav" aria-label="ניווט בין שיעורים">
+      <a class="nav-button" href="../lesson-05-thyristors-and-controlled-rectifiers/">לשיעור הקודם</a>
+      <a class="nav-button" href="../../index.html">חזרה לדף הקורס</a>
+      <a class="nav-button" href="../lesson-07-dc-dc-boost-and-buck-boost/">לשיעור הבא</a>
+    </nav>
+
+    <section id="overview" class="content-section">
+      <p class="section-kicker">Header and lesson overview</p>
+      <h2>מיקום השיעור בקורס</h2>
+      <div class="overview-grid">
+        <div class="overview-card"><h3>איפה זה משתלב?</h3><p>זהו השיעור המרכזי הראשון בממירי DC-DC ממותגים, והוא מחבר בין מיתוג, סליל, קבל ומאזני אנרגיה.</p></div>
+        <div class="overview-card"><h3>דרישות קדם</h3><p>שיעורים 1,2,4: הספק, רכיבי מיתוג, קבלים וריפל. שימוש בסיסי ב-v=Ldi/dt וב-i=Cdv/dt.</p></div>
+        <div class="overview-card"><h3>יישומים אופייניים</h3><ul><li>ספקי מתח למעבדים</li><li>מטעני סוללות עם שלב הורדה</li><li>מערכות רכב</li><li>המרת Bus גבוה למתחי בקרה</li><li>ספקי עזר תעשייתיים</li></ul></div>
+      </div>
+      <div class="definition"><strong>מטרת השיעור</strong><p>לבנות הבנה שניתן להשתמש בה גם בתרגיל וגם בתכן מעשי: לזהות מצבי פעולה, לכתוב משוואות נכונות, להבין את צורות הגל ולדעת אילו אי-אידיאליות יופיעו ברכיב אמיתי.</p></div>
+    </section>
+
+    <section id="objectives" class="content-section">
+      <h2>מטרות למידה</h2>
+      <ul><li>להסביר במילים את העיקרון הפיזיקלי של ממיר Buck.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, Rds(on), נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
+    </section>
+
+    <section id="motivation" class="content-section">
+      <h2>מוטיבציה והקשר הנדסי</h2>
+      <p>ממיר Buck אינו נושא תיאורטי מבודד. הוא מופיע במערכות שבהן נדרש להעביר אנרגיה באופן מבוקר, יעיל ובטוח. המהנדס אינו מסתפק בשאלה האם המעגל פועל, אלא שואל מה הנצילות, כמה חום נוצר, מה קורה בעומס קיצוני, ומהי צורת הגל שהמקור והעומס רואים.</p>
+<p>בפועל, ההבדל בין תכן טוב לתכן גבולי נמצא בפרטים: זרם RMS לעומת זרם ממוצע, מתח חסימה לעומת מתח נומינלי, ריפל לעומת ערך DC, ותנאי מעבר לעומת מצב יציב. לכן השיעור משלב הסבר מושגי, פיתוח מתמטי וכללי תכן.</p>
+<p>המודל האידיאלי חשוב כי הוא נותן שפה נקייה. אבל לאחר שנבין אותו, נוסיף את המציאות: רכיבים מתחממים, קבלים בעלי ESR, מתגים אינם עוברים מצב מיד, דיודות אינן אידיאליות, ותדר מיתוג משפיע גם על גודל רכיבים וגם על הפסדים.</p>
+      <div class="intuition"><strong>אינטואיציה מובילה</strong><p>בכל מעגל הספק כדאי לשאול: מי מקור האנרגיה ברגע זה, מי אוגר אותה, מי מוסר אותה לעומס, ואיפה היא הולכת לאיבוד כחום. התשובה לשאלות האלה מובילה למשוואות הנכונות.</p></div>
+    </section>
+
+    <section id="concepts" class="content-section">
+      <h2>הסבר מושגי</h2>
+      <p>Buck Converter מוריד מתח DC בעזרת מתג מהיר, דיודה או MOSFET סינכרוני, סליל וקבל. ההורדה אינה נובעת מבזבוז הפרש מתח אלא מממוצע אנרגטי של מצבי מיתוג.</p>
+<p>במצב ON המתג מחבר את Vin לסליל ולעומס. מתח הסליל חיובי והזרם בו עולה. חלק מהאנרגיה עובר לעומס וחלק נאגר בשדה המגנטי.</p>
+<p>במצב OFF המתג נפתח. הסליל אינו מאפשר לזרם להיעלם ולכן הוא משנה קוטביות ומזרים זרם דרך דיודת Freewheel או דרך מתג תחתון סינכרוני.</p>
+<p>במצב CCM הזרם בסליל נשאר גדול מאפס לכל אורך המחזור. במצב זה מאזן וולט-שנייה נותן את היחס הפשוט Vo=D·Vin.</p>
+<p>הקבל ביציאה אינו קובע את מתח ה-DC האידיאלי; הוא מצמצם את Ripple המתח שנובע מריפל זרם הסליל.</p>
+      <div class="note"><strong>הנחת עבודה לימודית</strong><p>בשלב הראשון ננתח רכיבים אידיאליים כדי לראות את המבנה. לאחר מכן נתקן את התוצאה בעזרת אי-אידיאליות. זו אינה התחמקות מהמציאות אלא דרך הנדסית מסודרת.</p></div>
+    </section>
+
+    <section id="operation" class="content-section">
+      <h2>פעולת המעגל ואינטואיציה פיזיקלית</h2>
+      <div class="intuition"><strong>ON interval - המתג העליון דולק</strong><p>מסלול הזרם: Vin -&gt; מתג -&gt; סליל -&gt; קבל/עומס -&gt; חזרה למקור. מתח הסליל הוא Vin-Vo ולכן הזרם בסליל עולה בקצב (Vin-Vo)/L.</p></div>
+<div class="intuition"><strong>OFF interval - נתיב Freewheel</strong><p>המתג העליון כבוי. הסליל ממשיך להזרים זרם לעומס דרך הדיודה או המתג התחתון. מתח הסליל בקירוב -Vo ולכן הזרם יורד בקצב Vo/L.</p></div>
+<div class="intuition"><strong>Synchronous Buck</strong><p>במקום דיודה משתמשים ב-MOSFET תחתון שמוליך בזמן OFF. כך מחליפים נפילת דיודה בהפסד I^2R נמוך יותר, אך חייבים Dead Time כדי למנוע Shoot-through.</p></div>
+<div class="intuition"><strong>העומס רואה</strong><p>העומס אינו רואה את פולסי המתג ישירות. הסליל והקבל מסננים את הרכיב הממותג ומשאירים מתח DC עם ריפל קטן.</p></div>
+      <h3>הנחות מפורשות</h3>
+      <ul class="compact-list"><li>ממיר אידיאלי ללא הפסדי רכיבים בפיתוח הראשון.</li><li>מצב הולכה רציפה CCM.</li><li>ריפל קטן ביחס לזרם ולמתח הממוצעים.</li><li>קבל בעל ESR אפסי בתחילת החישוב.</li><li>תדר מיתוג קבוע fsw ויחס עבודה D בין 0 ל-1.</li></ul>
+    </section>
+
+    <section id="math" class="content-section">
+      <h2>פיתוח מתמטי</h2>
+      <div class="definition"><strong>מאזן וולט-שנייה בסליל</strong><p>במצב יציב זרם הסליל בתחילת מחזור ובסופו זהה, ולכן המתח הממוצע על הסליל חייב להיות אפס.</p><p class="equation">D·(Vin-Vo) + (1-D)·(-Vo) = 0</p></div>
+<div class="definition"><strong>יחס המרה אידיאלי</strong><p>כאשר D גדל, זמן הטעינה של הסליל גדל והממוצע ביציאה עולה. כאשר D=0 אין יציאה, וכאשר D=1 היציאה שואפת ל-Vin.</p><p class="equation">Vo = D · Vin</p></div>
+<div class="definition"><strong>ריפל זרם בסליל</strong><p>בזמן ON הזרם עולה בקצב v/L למשך D·Ts. הגדלת L או fsw מקטינה את הריפל.</p><p class="equation">DeltaIL = (Vin-Vo)·D / (L·fsw)</p></div>
+<div class="definition"><strong>מאזן מטען בקבל</strong><p>זרם הקבל הוא ההפרש בין זרם הסליל המשולש לזרם העומס. עבור ריפל משולש מתקבל הקירוב הזה ללא ESR.</p><p class="equation">DeltaVo ≈ DeltaIL / (8·C·fsw)</p></div>
+<div class="definition"><strong>גבול CCM/DCM</strong><p>כאשר זרם העומס הממוצע קטן ממחצית ריפל הסליל, הזרם מגיע לאפס וחוק Vo=D·Vin כבר אינו מספיק.</p><p class="equation">Iout,boundary ≈ DeltaIL/2</p></div>
+<div class="definition"><strong>תיקון לא אידיאלי פשוט</strong><p>ב-Buck עם דיודה, נפילת MOSFET בזמן ON ונפילת דיודה בזמן OFF מקטינות את המתח בפועל ודורשות D מעט גבוה יותר.</p><p class="equation">Vo ≈ D·Vin - D·I·Ron - (1-D)·Vd</p></div>
+      <div class="formula-grid">
+        <div class="formula-card"><h3>נוסחה</h3><p class="equation">Vo=DVin</p></div>
+<div class="formula-card"><h3>נוסחה</h3><p class="equation">DeltaIL=(Vin-Vo)D/(Lfsw)</p></div>
+<div class="formula-card"><h3>נוסחה</h3><p class="equation">DeltaVo≈DeltaIL/(8Cfsw)</p></div>
+<div class="formula-card"><h3>נוסחה</h3><p class="equation">Iboundary≈DeltaIL/2</p></div>
+<div class="formula-card"><h3>נוסחה</h3><p class="equation">Ipeak=Iout+DeltaIL/2</p></div>
+      </div>
+    </section>
+
+    <section id="waveforms" class="content-section">
+      <h2>צורות גל חשובות</h2>
+      <p>באלקטרוניקת הספק צורת הגל היא חלק מהפתרון. לפני שמציבים מספרים, מציירים באופן איכותי את המתח והזרם ומוודאים שהם מתאימים למסלולי הזרם שתוארו.</p>
+      <pre class="diagram">Buck topology:
+Vin ---[SW]---o--- L ---+--- Vo
+               |        |
+              [D]       C
+               |        |
+GND -----------+--------+--- load
+
+ON:  Vin -&gt; SW -&gt; L -&gt; load
+OFF: L -&gt; load -&gt; D/MOSFET -&gt; L</pre>
+      <ul class="waveform-list">
+        <li><strong>מתח על המתג העליון</strong>נמוך בזמן ON וקרוב ל-Vin בזמן OFF. קפיצות נובעות מהשראות פרזיטית וקצב שינוי זרם.</li>
+<li><strong>מתח על דיודה</strong>בזמן ON הדיודה חסומה במתח הפוך. בזמן OFF היא מוליכה ונפילת המתח שלה קטנה אך לא אפסית.</li>
+<li><strong>מתח הסליל</strong>חיובי Vin-Vo בזמן ON ושלילי בערך -Vo בזמן OFF. הממוצע על פני מחזור הוא אפס ב-CCM.</li>
+<li><strong>זרם הסליל</strong>משולש סביב Iout. ריפל גבוה מדי מגדיל RMS, רעש וסיכון DCM.</li>
+<li><strong>מתח היציאה</strong>DC עם Ripple קטן. הקבל ו-ESR קובעים את גודל וצורת הריפל.</li>
+<li><strong>זרם המתג</strong>זורם בזמן ON בלבד במבנה לא סינכרוני; ב-Buck סינכרוני מתחלק בין שני MOSFETים.</li>
+      </ul>
+    </section>
+
+    <section id="design" class="content-section">
+      <h2>משוואות תכן וכללי אצבע</h2>
+      <div class="design-rule"><strong>כלל תכן</strong><p>מתחילים מדרישות: Vin min/max, Vo, Iout, ריפל זרם, ריפל מתח, נצילות ותדר.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בוחרים D לפי Vin הנומינלי, אך בודקים גם ב-Vin מינימלי ומקסימלי.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>ריפל זרם מקובל להתחלה: 20%-40% מזרם העומס הנומינלי.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>L נקבע לפי ריפל זרם, אך חייב לעמוד בזרם שיא בלי רוויה.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>C נקבע לפי ריפל מתח ותגובה לעומס; בודקים ESR וזרם ריפל.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בוחרים MOSFET לפי מתח חסימה, זרם RMS, Rds(on), Qg וקירור.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>ב-Buck סינכרוני מגדירים Dead Time כדי למנוע קצר בין Vin ל-GND.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>תדר גבוה מקטין L ו-C אך מגדיל Switching Losses ו-EMI.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>דיודה רגילה יוצרת הפסד משמעותי במתח נמוך; שוקלים Schottky או MOSFET סינכרוני.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בודקים התנהגות DCM בעומס קל ויציבות חוג בקרה אם יש משוב.</p></div>
+      <div class="warning"><strong>אזהרה הנדסית</strong><p>אם החישוב האידיאלי נותן רכיב בדיוק על גבול הדירוג, התכן עדיין לא מוכן. מוסיפים מרווחי בטיחות, תנאי טמפרטורה, סבילות רכיבים ומצבי מעבר.</p></div>
+    </section>
+
+    <section id="examples" class="content-section">
+      <h2>דוגמאות פתורות</h2>
+      <div class="example-block"><h3>דוגמה 1: יחס עבודה בסיסי</h3><p><strong>נתון:</strong> Vin=24V, Vo=5V, ממיר אידיאלי ב-CCM.</p><p><strong>נדרש:</strong> חשב D.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>ב-Buck אידיאלי Vo=D·Vin.</li><li>D=Vo/Vin=5/24.</li><li>D≈0.208.</li></ol><p><strong>תשובה:</strong> D≈20.8%.</p><p><strong>פירוש פיזיקלי:</strong> המתג מחבר את הכניסה לסליל כחמישית מהזמן.</p></div>
+<div class="example-block"><h3>דוגמה 2: תכן סליל לפי ריפל</h3><p><strong>נתון:</strong> Vin=24V, Vo=12V, fsw=200kHz, ריפל רצוי DeltaIL=0.8A.</p><p><strong>נדרש:</strong> חשב L.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>D=12/24=0.5.</li><li>L=(Vin-Vo)·D/(DeltaIL·fsw).</li><li>L=12·0.5/(0.8·200kHz)=37.5uH.</li></ol><p><strong>תשובה:</strong> L≈37.5uH.</p><p><strong>פירוש פיזיקלי:</strong> נבחר ערך סטנדרטי קרוב ונבדוק זרם רוויה מעל זרם השיא.</p></div>
+<div class="example-block"><h3>דוגמה 3: תכן קבל אידיאלי</h3><p><strong>נתון:</strong> DeltaIL=0.8A, fsw=200kHz, ריפל מתח רצוי 20mV ללא ESR.</p><p><strong>נדרש:</strong> חשב C.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>C=DeltaIL/(8·DeltaVo·fsw).</li><li>C=0.8/(8·0.02·200kHz).</li><li>C=25uF.</li></ol><p><strong>תשובה:</strong> לפחות 25uF אידיאלי.</p><p><strong>פירוש פיזיקלי:</strong> בפועל נבחר יותר בגלל ESR, סבילות DC Bias ותגובה לעומס.</p></div>
+<div class="example-block"><h3>דוגמה 4: תיקון דיודה לא אידיאלי</h3><p><strong>נתון:</strong> Vin=12V, Vo=5V, I=2A, Ron=40mOhm, Vd=0.5V.</p><p><strong>נדרש:</strong> הערך D מתוקן בקירוב.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>משוואה: Vo≈D(Vin-Iron) - (1-D)Vd.</li><li>5≈D(12-0.08) -0.5 +0.5D.</li><li>5.5≈12.42D ולכן D≈0.443.</li></ol><p><strong>תשובה:</strong> D≈44.3%, לעומת 41.7% אידיאלי.</p><p><strong>פירוש פיזיקלי:</strong> הפסדי הולכה דורשים יחס עבודה גבוה יותר כדי לקבל אותו מתח יציאה.</p></div>
+<div class="example-block"><h3>דוגמה 5: הערכת נצילות</h3><p><strong>נתון:</strong> Pout=25W, הפסדי MOSFET 0.8W, דיודה 1.2W, סליל 0.5W, קבל/בקרה 0.2W.</p><p><strong>נדרש:</strong> חשב נצילות.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>Ploss=0.8+1.2+0.5+0.2=2.7W.</li><li>Pin=Pout+Ploss=27.7W.</li><li>eta=25/27.7=90.3%.</li></ol><p><strong>תשובה:</strong> נצילות כ-90%.</p><p><strong>פירוש פיזיקלי:</strong> הדיודה היא איבר הפסד בולט; Buck סינכרוני עשוי לשפר נצילות.</p></div>
+    </section>
+
+    <section class="content-section">
+      <h2>טעויות נפוצות</h2>
+      <div class="mistake-block"><p><strong>הטעות:</strong> לחשוב שהקבל קובע את מתח היציאה.</p><p><strong>דרך נכונה:</strong> ב-Buck אידיאלי ב-CCM יחס העבודה והכניסה קובעים את המתח. הקבל מקטין Ripple.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> לשכוח נתיב זרם בזמן OFF.</p><p><strong>דרך נכונה:</strong> הסליל חייב להמשיך להזרים זרם. ללא דיודה או מתג סינכרוני יופיע מתח הרסני.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> להשתמש ב-Vo=D·Vin בעומס קל DCM בלי בדיקה.</p><p><strong>דרך נכונה:</strong> ב-DCM יחס ההמרה תלוי גם בעומס, L ותדר.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> להקטין L יותר מדי.</p><p><strong>דרך נכונה:</strong> ריפל גבוה מגדיל RMS, זרם שיא, רעש וסיכון DCM.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> להגדיל fsw בלי חשבון הפסדים.</p><p><strong>דרך נכונה:</strong> תדר גבוה מקטין רכיבים אך מעלה הפסדי מיתוג ודרישות דרייבר.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> להתעלם מ-ESR קבל.</p><p><strong>דרך נכונה:</strong> ריפל ESR יכול להיות גדול מהריפל הקיבולי האידיאלי.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> לא לבדוק רוויה בסליל.</p><p><strong>דרך נכונה:</strong> זרם השיא הוא Iout+DeltaIL/2 וצריך להיות נמוך מדירוג הרוויה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> ב-Buck סינכרוני להדליק שני מתגים יחד.</p><p><strong>דרך נכונה:</strong> נדרש Dead Time; אחרת נוצר Shoot-through בין Vin לאדמה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> שימוש בנוסחה של ממיר Buck בלי לבדוק את תחום התקפות שלה.</p><p><strong>דרך נכונה:</strong> לפני כל הצבה מזהים אם ההנחה היא אידיאלית, מצב CCM או DCM, עומס נגדי או RL, גל סינוסי או גל מעוות. נוסחה נכונה בהקשר שגוי נותנת תשובה משכנעת אך שגויה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> בלבול בין ערך ממוצע, ערך RMS וערך שיא.</p><p><strong>דרך נכונה:</strong> ערך ממוצע מתאים לרכיב DC, ערך RMS מתאים לחימום ולהספק בעומס נגדי, וערך שיא חשוב למתחי חסימה ולזרמי שיא. בכל חישוב כותבים במפורש איזה ערך נדרש.</p></div>
+    </section>
+
+    <section class="content-section">
+      <h2>בדקו את עצמכם</h2>
+      <div class="note"><p><strong>שאלה:</strong> למה המתח הממוצע על סליל חייב להיות אפס?</p><p><strong>תשובה קצרה:</strong> כי אחרת זרם הסליל היה עולה או יורד ממחזור למחזור ולא היה מצב יציב.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מה קורה ל-DeltaIL כאשר L מוכפל?</p><p><strong>תשובה קצרה:</strong> הריפל קטן פי שניים בקירוב.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מדוע Buck סינכרוני יעיל יותר במתח נמוך?</p><p><strong>תשובה קצרה:</strong> הוא מחליף נפילת דיודה קבועה בהפסד I^2R של MOSFET נמוך.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מהי השאלה האנרגטית המרכזית ב-ממיר Buck?</p><p><strong>תשובה קצרה:</strong> לזהות מאיפה האנרגיה מגיעה, מי אוגר אותה זמנית, מי מוסר אותה לעומס, ואיפה נוצרים הפסדים.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מדוע מציינים הנחות לפני פיתוח מתמטי?</p><p><strong>תשובה קצרה:</strong> כי שינוי קטן בהנחה, למשל מעבר מ-CCM ל-DCM או מעומס נגדי לעומס RL, משנה את המשוואות ואת הפרשנות.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מה בודקים אחרי קבלת תשובה מספרית?</p><p><strong>תשובה קצרה:</strong> יחידות, סדר גודל, סימן, גבולות פיזיקליים, מאמץ רכיבים ונצילות סבירה.</p></div>
+    </section>
+
+    <section id="practice" class="content-section">
+      <h2>תרגילים</h2>
+      <div class="exercise-block">
+        <ol><li>חשב D עבור Vin=48V, Vo=12V.</li><li>חשב L עבור Vin=20V, Vo=5V, fsw=250kHz, DeltaIL=0.5A.</li><li>חשב C עבור DeltaIL=0.5A, fsw=250kHz, DeltaVo=10mV.</li><li>אם Iout=1A ו-DeltaIL=2.4A, האם הממיר ב-CCM?</li><li>מה קורה לריפל הזרם כאשר fsw מוכפל?</li><li>הסבר את נתיב הזרם בזמן OFF.</li><li>חשב זרם שיא כאשר Iout=4A ו-DeltaIL=1A.</li><li>מדוע דיודה Schottky טובה בבאק לא סינכרוני?</li><li>איזה פרמטרים בודקים בסליל?</li><li>הערך נצילות אם Pout=60W ו-Ploss=4W.</li><li>הסבר למה Dead Time ארוך מדי גם מזיק.</li><li>תאר כיצד עומס קל יכול להעביר את הממיר ל-DCM.</li></ol>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>תשובות ורמזים</h2>
+      <div class="answer-block">
+        <ol><li>D=0.25.</li><li>D=0.25, L=(15·0.25)/(0.5·250k)=30uH.</li><li>C=0.5/(8·0.01·250k)=25uF.</li><li>גבול CCM הוא DeltaIL/2=1.2A, לכן ב-1A יש DCM.</li><li>הריפל קטן פי שניים בקירוב.</li><li>הסליל מזרים זרם דרך דיודה או MOSFET תחתון לעומס וחזרה אליו.</li><li>Ipeak=4+0.5=4.5A.</li><li>נפילת מתח נמוכה והתאוששות מהירה.</li><li>L, זרם רוויה, DCR, הפסדי ליבה, גודל וטמפרטורה.</li><li>eta=60/(64)=93.75%.</li><li>הוא גורם להולכה דרך דיודת גוף ולהפסדים נוספים.</li><li>כאשר הזרם הממוצע קטן מריפל/2, הזרם מגיע לאפס לפני סוף המחזור.</li></ol>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>סיכום</h2>
+      <ul><li>Buck מוריד מתח בעזרת ממוצע מיתוג ואגירת אנרגיה בסליל.</li><li>ב-CCM מתקבל Vo=DVin ממאזן וולט-שנייה.</li><li>ריפל הזרם נקבע על ידי L, fsw והמתחים בשני המצבים.</li><li>ריפל המתח נקבע על ידי C, ESR וזרם הקבל.</li><li>תכן מעשי כולל הפסדים, DCM, רוויה, Dead Time ותרמיות.</li><li>בשיעור הבא נלמד ממירים שמעלים מתח או הופכים קוטביות.</li></ul>
+      <div class="definition"><strong>מה לקחת הלאה</strong><p>מהשיעור הזה חשוב לזכור לא רק את הנוסחאות, אלא את דרך החשיבה: מצבי פעולה, מסלולי זרם, מאזן אנרגיה, צורות גל, ורק אז הצבה מספרית. היכולת הזו תופיע שוב בשיעור הבא ובכל תרגיל תכן.</p></div>
+    </section>
+
+    <nav class="lesson-nav footer-nav" aria-label="ניווט תחתון">
+      <a class="nav-button" href="../lesson-05-thyristors-and-controlled-rectifiers/">לשיעור הקודם</a>
+      <a class="nav-button" href="../../index.html">חזרה לדף הקורס</a>
+      <a class="nav-button" href="../lesson-07-dc-dc-boost-and-buck-boost/">לשיעור הבא</a>
+    </nav>
+  </main>
+</body>
+</html>

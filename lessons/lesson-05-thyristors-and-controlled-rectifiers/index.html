@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>שיעור 5 - תיריסטורים ומיישרים מבוקרים</title>
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script defer src="../../assets/js/course.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">דלג לתוכן</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html">אלקטרוניקת הספק</a>
+    <nav class="top-nav" aria-label="ניווט שיעור">
+      <a href="../../index.html">דף הקורס</a>
+      <a href="../lesson-04-filter-capacitor-and-ripple/">הקודם</a>
+      <a href="../lesson-06-dc-dc-buck-converter/">הבא</a>
+    </nav>
+  </header>
+
+  <main id="content" class="lesson-page">
+    <section class="lesson-hero">
+      <p class="breadcrumb">שיעור 5 מתוך 12</p>
+      <h1>תיריסטורים ומיישרים מבוקרים</h1>
+      <p>SCR, זווית הצתה, בקרת פאזה, מיישרים מבוקרים והקשר בין זווית ההצתה למתח RMS והספק.</p>
+      <div class="lesson-meta">
+        <span>4-5 שעות לימוד</span>
+        <span>יחידת לימוד מורחבת</span>
+        <span>ה-PDF כולל פרק על בקרת הספק חילופין על ידי SCR ושאלות חישוב זווית הצתה.</span>
+      </div>
+      <div class="lesson-toc">
+        <strong>מפת השיעור</strong>
+        <ul>
+          <li><a href="#overview">מיקום ודרישות קדם</a></li>
+          <li><a href="#objectives">מטרות למידה</a></li>
+          <li><a href="#motivation">מוטיבציה והקשר הנדסי</a></li>
+          <li><a href="#concepts">הסבר מושגי</a></li>
+          <li><a href="#operation">פעולה ואינטואיציה</a></li>
+          <li><a href="#math">פיתוח מתמטי</a></li>
+          <li><a href="#waveforms">צורות גל</a></li>
+          <li><a href="#design">כללי תכן</a></li>
+          <li><a href="#examples">דוגמאות פתורות</a></li>
+          <li><a href="#practice">תרגול ותשובות</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="lesson-nav" aria-label="ניווט בין שיעורים">
+      <a class="nav-button" href="../lesson-04-filter-capacitor-and-ripple/">לשיעור הקודם</a>
+      <a class="nav-button" href="../../index.html">חזרה לדף הקורס</a>
+      <a class="nav-button" href="../lesson-06-dc-dc-buck-converter/">לשיעור הבא</a>
+    </nav>
+
+    <section id="overview" class="content-section">
+      <p class="section-kicker">Header and lesson overview</p>
+      <h2>מיקום השיעור בקורס</h2>
+      <div class="overview-grid">
+        <div class="overview-card"><h3>איפה זה משתלב?</h3><p>לאחר מיישרים לא מבוקרים, עוברים למיישרים שבהם אפשר לקבוע מתי ההולכה מתחילה.</p></div>
+        <div class="overview-card"><h3>דרישות קדם</h3><p>שיעורים 1-4: RMS, דיודה, מיישר גל מלא, הספק בעומס וקבל החלקה.</p></div>
+        <div class="overview-card"><h3>יישומים אופייניים</h3><ul><li>עמעמי תאורה וגופי חימום</li><li>התנעת מנועים</li><li>מיישרים מבוקרים לתעשייה</li><li>בקרת תנורים</li><li>מערכות טעינה ישנות</li></ul></div>
+      </div>
+      <div class="definition"><strong>מטרת השיעור</strong><p>לבנות הבנה שניתן להשתמש בה גם בתרגיל וגם בתכן מעשי: לזהות מצבי פעולה, לכתוב משוואות נכונות, להבין את צורות הגל ולדעת אילו אי-אידיאליות יופיעו ברכיב אמיתי.</p></div>
+    </section>
+
+    <section id="objectives" class="content-section">
+      <h2>מטרות למידה</h2>
+      <ul><li>להסביר במילים את העיקרון הפיזיקלי של תיריסטורים ומיישרים מבוקרים.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, Rds(on), נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
+    </section>
+
+    <section id="motivation" class="content-section">
+      <h2>מוטיבציה והקשר הנדסי</h2>
+      <p>תיריסטורים ומיישרים מבוקרים אינו נושא תיאורטי מבודד. הוא מופיע במערכות שבהן נדרש להעביר אנרגיה באופן מבוקר, יעיל ובטוח. המהנדס אינו מסתפק בשאלה האם המעגל פועל, אלא שואל מה הנצילות, כמה חום נוצר, מה קורה בעומס קיצוני, ומהי צורת הגל שהמקור והעומס רואים.</p>
+<p>בפועל, ההבדל בין תכן טוב לתכן גבולי נמצא בפרטים: זרם RMS לעומת זרם ממוצע, מתח חסימה לעומת מתח נומינלי, ריפל לעומת ערך DC, ותנאי מעבר לעומת מצב יציב. לכן השיעור משלב הסבר מושגי, פיתוח מתמטי וכללי תכן.</p>
+<p>המודל האידיאלי חשוב כי הוא נותן שפה נקייה. אבל לאחר שנבין אותו, נוסיף את המציאות: רכיבים מתחממים, קבלים בעלי ESR, מתגים אינם עוברים מצב מיד, דיודות אינן אידיאליות, ותדר מיתוג משפיע גם על גודל רכיבים וגם על הפסדים.</p>
+      <div class="intuition"><strong>אינטואיציה מובילה</strong><p>בכל מעגל הספק כדאי לשאול: מי מקור האנרגיה ברגע זה, מי אוגר אותה, מי מוסר אותה לעומס, ואיפה היא הולכת לאיבוד כחום. התשובה לשאלות האלה מובילה למשוואות הנכונות.</p></div>
+    </section>
+
+    <section id="concepts" class="content-section">
+      <h2>הסבר מושגי</h2>
+      <p>SCR הוא רכיב חד כיווני שנדלק בפולס שער כאשר הוא בממתח קדמי ונשאר מוליך עד שהזרם יורד מתחת לזרם האחזקה.</p>
+<p>בקרת פאזה דוחה את תחילת ההולכה לזווית alpha. ככל שההדלקה מאוחרת יותר, קטן שטח הגל שמגיע לעומס.</p>
+<p>בעומס נגדי הכיבוי מתרחש במעבר האפס של המתח. בעומס השראתי הזרם יכול להמשיך אחרי מעבר האפס ולכן זווית ההולכה משתנה.</p>
+<p>הבקרה יעילה מבחינת הפסדי רכיב אך יוצרת הרמוניות, רעש ומקדם הספק נמוך יותר.</p>
+      <div class="note"><strong>הנחת עבודה לימודית</strong><p>בשלב הראשון ננתח רכיבים אידיאליים כדי לראות את המבנה. לאחר מכן נתקן את התוצאה בעזרת אי-אידיאליות. זו אינה התחמקות מהמציאות אלא דרך הנדסית מסודרת.</p></div>
+    </section>
+
+    <section id="operation" class="content-section">
+      <h2>פעולת המעגל ואינטואיציה פיזיקלית</h2>
+      <div class="intuition"><strong>לפני ההצתה</strong><p>ה-SCR בממתח קדמי אך חוסם. העומס אינו מקבל מתח אף שהמקור חיובי.</p></div>
+<div class="intuition"><strong>פולס שער</strong><p>זרם שער קצר מדליק את הרכיב. מרגע זה ערוץ ההספק מוליך וערוץ הבקרה כבר אינו צריך להחזיק זרם רציף.</p></div>
+<div class="intuition"><strong>הולכה</strong><p>העומס מחובר למקור דרך ה-SCR. בעומס נגדי הזרם עוקב אחרי המתח המיושר.</p></div>
+<div class="intuition"><strong>כיבוי טבעי</strong><p>כאשר הזרם יורד מתחת לזרם האחזקה, לרוב ליד מעבר האפס, ה-SCR חוזר לחסימה.</p></div>
+      <h3>הנחות מפורשות</h3>
+      <ul class="compact-list"><li>עומס נגדי בפיתוח בסיסי.</li><li>מקור סינוסי.</li><li>SCR אידיאלי מלבד עקרון ההצתה.</li><li>alpha נמדדת מתחילת חצי המחזור החיובי.</li></ul>
+    </section>
+
+    <section id="math" class="content-section">
+      <h2>פיתוח מתמטי</h2>
+      <div class="definition"><strong>מתח RMS בבקרת גל מלא נגדי</strong><p>האינטגרל מחשב את תרומת sin^2 רק מהזווית alpha ועד סוף חצי המחזור, ומשוכפל סימטרית.</p><p class="equation">Vrms = Vs,rms · sqrt((1/pi)·((pi-alpha)+0.5·sin(2alpha)))</p></div>
+<div class="definition"><strong>הספק בעומס נגדי</strong><p>לאחר שמצאנו את RMS של הגל החתוך, חישוב ההספק כמו בנגד רגיל.</p><p class="equation">P = Vrms^2 / R</p></div>
+<div class="definition"><strong>מקרה alpha=0</strong><p>ההצתה בתחילת החצי החיובי נותנת הולכה מלאה כמו דיודה אידיאלית.</p><p class="equation">Vrms = Vs,rms</p></div>
+<div class="definition"><strong>מקרה alpha קרוב ל-pi</strong><p>ההולכה קצרה מאוד ולכן מעט אנרגיה מגיעה לעומס.</p><p class="equation">Vrms -&gt; 0</p></div>
+      <div class="formula-grid">
+        <div class="formula-card"><h3>נוסחה</h3><p class="equation">P=Vrms^2/R</p></div>
+<div class="formula-card"><h3>נוסחה</h3><p class="equation">Vrms=Vs sqrt(((pi-alpha)+0.5sin2alpha)/pi)</p></div>
+<div class="formula-card"><h3>נוסחה</h3><p class="equation">alpha=0 -&gt; הולכה מלאה</p></div>
+      </div>
+    </section>
+
+    <section id="waveforms" class="content-section">
+      <h2>צורות גל חשובות</h2>
+      <p>באלקטרוניקת הספק צורת הגל היא חלק מהפתרון. לפני שמציבים מספרים, מציירים באופן איכותי את המתח והזרם ומוודאים שהם מתאימים למסלולי הזרם שתוארו.</p>
+      <pre class="diagram">source:     sine wave
+load v:     0 until alpha, then follows sine
+gate:       narrow pulse at alpha
+R load i:   same shape as load voltage / R</pre>
+      <ul class="waveform-list">
+        <li><strong>מתח עומס</strong>אפס עד alpha, ואז עוקב אחרי גל המקור עד סוף ההולכה.</li>
+<li><strong>זרם שער</strong>פולסים קצרים סביב זוויות ההצתה, לא זרם רציף.</li>
+<li><strong>זרם עומס נגדי</strong>בפאזה עם מתח העומס ומוגבל לפי R.</li>
+<li><strong>זרם עומס RL</strong>מוחלק ומאחר, עשוי להמשיך אחרי מעבר האפס.</li>
+<li><strong>הרמוניות</strong>החיתוך החד יוצר רכיבי תדר גבוה ונדרש סינון או תאימות EMC.</li>
+      </ul>
+    </section>
+
+    <section id="design" class="content-section">
+      <h2>משוואות תכן וכללי אצבע</h2>
+      <div class="design-rule"><strong>כלל תכן</strong><p>מגדירים טווח הספק נדרש וממפים אותו לטווח alpha.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בודקים זרם RMS ב-SCR ובעומס.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>מתכננים פולס שער מספיק אך לא חורג מדירוג השער.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בעומס השראתי מוסיפים הגנות dv/dt ו-snubber.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>במערכות רשת שוקלים בידוד אופטי ועמידה בתקנים.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בקרת פאזה אינה מתאימה לכל עומס בגלל הרמוניות.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בודקים זרם אחזקה וזרם נעילה.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>מפרידים בין ערוץ בקרה לערוץ הספק בבטיחות וב-PCB.</p></div>
+      <div class="warning"><strong>אזהרה הנדסית</strong><p>אם החישוב האידיאלי נותן רכיב בדיוק על גבול הדירוג, התכן עדיין לא מוכן. מוסיפים מרווחי בטיחות, תנאי טמפרטורה, סבילות רכיבים ומצבי מעבר.</p></div>
+    </section>
+
+    <section id="examples" class="content-section">
+      <h2>דוגמאות פתורות</h2>
+      <div class="example-block"><h3>דוגמה 1: הספק מגוף חימום</h3><p><strong>נתון:</strong> R=40 ohm, Vrms על העומס 120V.</p><p><strong>נדרש:</strong> חשב P.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>עומס נגדי: P=V^2/R.</li><li>P=120^2/40.</li><li>P=360W.</li></ol><p><strong>תשובה:</strong> 360W.</p><p><strong>פירוש פיזיקלי:</strong> אם נקטין Vrms בחצי, ההספק ירד לרבע.</p></div>
+<div class="example-block"><h3>דוגמה 2: משמעות alpha=90 degrees</h3><p><strong>נתון:</strong> בקרת גל מלא בעומס נגדי.</p><p><strong>נדרש:</strong> הסבר מה מקבל העומס.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>החצי הראשון של כל חצי מחזור נחסם.</li><li>הולכה מתחילה רק מהשיא והלאה.</li><li>RMS יורד ביחס למתח המקור.</li></ol><p><strong>תשובה:</strong> העומס מקבל חלק מאוחר מהגל בלבד.</p><p><strong>פירוש פיזיקלי:</strong> השליטה היא בזמן הולכה, לא בהקטנת השיא עצמו.</p></div>
+<div class="example-block"><h3>דוגמה 3: בחירת זווית להספק</h3><p><strong>נתון:</strong> עומס 100 ohm צריך 250W.</p><p><strong>נדרש:</strong> מצא Vrms נדרש.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>P=V^2/R.</li><li>V=sqrt(PR)=sqrt(250·100).</li><li>V≈158V.</li></ol><p><strong>תשובה:</strong> צריך כ-158V RMS על העומס.</p><p><strong>פירוש פיזיקלי:</strong> את alpha מוצאים מהנוסחה או מאופיין מנורמל.</p></div>
+<div class="example-block"><h3>דוגמה 4: פולס שער</h3><p><strong>נתון:</strong> SCR דורש Ig=50mA לזמן קצר והבקרה 5V דרך נגד.</p><p><strong>נדרש:</strong> הערך נגד שער אם נפילת שער 1V.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>המתח על הנגד 4V.</li><li>R=V/I=4/0.05.</li><li>R=80 ohm.</li></ol><p><strong>תשובה:</strong> כ-80 ohm, בכפוף לדף נתונים.</p><p><strong>פירוש פיזיקלי:</strong> זו הערכת התחלה; צריך לבדוק אנרגיית פולס ובידוד.</p></div>
+    </section>
+
+    <section class="content-section">
+      <h2>טעויות נפוצות</h2>
+      <div class="mistake-block"><p><strong>הטעות:</strong> לנסות לכבות SCR דרך השער.</p><p><strong>דרך נכונה:</strong> ברכיב רגיל השער מדליק בלבד. הכיבוי דורש ירידת זרם או מעגל קומוטציה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> להתעלם מעומס השראתי.</p><p><strong>דרך נכונה:</strong> בעומס RL הזרם לא מתאפס עם המתח ולכן זוויות ההולכה משתנות.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> לחשב לפי מתח ממוצע לגוף חימום.</p><p><strong>דרך נכונה:</strong> החימום נקבע לפי RMS של הגל החתוך.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> פולס שער ארוך מדי.</p><p><strong>דרך נכונה:</strong> שער SCR מוגבל בהספק. משתמשים בפולס מתאים ולא בהזרמה מיותרת.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> חיבור בקרה ללא בידוד לרשת.</p><p><strong>דרך נכונה:</strong> במערכות רשת נדרש בידוד ותכנון בטיחות קפדני.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> שימוש בנוסחה של תיריסטורים ומיישרים מבוקרים בלי לבדוק את תחום התקפות שלה.</p><p><strong>דרך נכונה:</strong> לפני כל הצבה מזהים אם ההנחה היא אידיאלית, מצב CCM או DCM, עומס נגדי או RL, גל סינוסי או גל מעוות. נוסחה נכונה בהקשר שגוי נותנת תשובה משכנעת אך שגויה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> בלבול בין ערך ממוצע, ערך RMS וערך שיא.</p><p><strong>דרך נכונה:</strong> ערך ממוצע מתאים לרכיב DC, ערך RMS מתאים לחימום ולהספק בעומס נגדי, וערך שיא חשוב למתחי חסימה ולזרמי שיא. בכל חישוב כותבים במפורש איזה ערך נדרש.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מכיוון זרם ומקוטביות מתח בזמן מעבר בין מצבים.</p><p><strong>דרך נכונה:</strong> מסמנים חצי זרם ומתח בכל מצב מיתוג. אם סימן האנרגיה לא ברור, חוזרים להגדרה p(t)=v(t)i(t) ובודקים אם הרכיב אוגר, מוסר או מבזבז אנרגיה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> הצבת מספרים בלי בדיקת יחידות.</p><p><strong>דרך נכונה:</strong> לפני התוצאה הסופית מוודאים שהיחידות מתכנסות: וולט, אמפר, ואט, הנרי, פאראד ושניות. בדיקת יחידות מגלה הרבה טעויות עוד לפני סימולציה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שרכיבים אידיאליים מייצגים רכיב אמיתי.</p><p><strong>דרך נכונה:</strong> המודל האידיאלי נועד להבנה ראשונית. בתכן מוסיפים נפילת דיודה, Rds(on), ESR, זמני מיתוג, מגבלות תרמיות, זרמי שיא וסבילות רכיבים.</p></div>
+    </section>
+
+    <section class="content-section">
+      <h2>בדקו את עצמכם</h2>
+      <div class="note"><p><strong>שאלה:</strong> מה קובע alpha?</p><p><strong>תשובה קצרה:</strong> הזמן מתחילת חצי המחזור שבו נשלח פולס שער.</p></div>
+<div class="note"><p><strong>שאלה:</strong> למה בקרת SCR יוצרת הרמוניות?</p><p><strong>תשובה קצרה:</strong> כי היא חותכת את הסינוס בחדות ומייצרת צורת גל לא סינוסית.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מה ההבדל בין דיודה ל-SCR במיישר?</p><p><strong>תשובה קצרה:</strong> דיודה נדלקת מיד בממתח קדמי; SCR ממתין לפולס שער.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מהי השאלה האנרגטית המרכזית ב-תיריסטורים ומיישרים מבוקרים?</p><p><strong>תשובה קצרה:</strong> לזהות מאיפה האנרגיה מגיעה, מי אוגר אותה זמנית, מי מוסר אותה לעומס, ואיפה נוצרים הפסדים.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מדוע מציינים הנחות לפני פיתוח מתמטי?</p><p><strong>תשובה קצרה:</strong> כי שינוי קטן בהנחה, למשל מעבר מ-CCM ל-DCM או מעומס נגדי לעומס RL, משנה את המשוואות ואת הפרשנות.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מה בודקים אחרי קבלת תשובה מספרית?</p><p><strong>תשובה קצרה:</strong> יחידות, סדר גודל, סימן, גבולות פיזיקליים, מאמץ רכיבים ונצילות סבירה.</p></div>
+    </section>
+
+    <section id="practice" class="content-section">
+      <h2>תרגילים</h2>
+      <div class="exercise-block">
+        <ol><li>גוף חימום 60 ohm מקבל 180V RMS. חשב P.</li><li>מה קורה להספק כאשר alpha גדל?</li><li>הסבר למה SCR מתאים לבקרת גוף חימום.</li><li>חשב Vrms נדרש ל-500W בעומס 80 ohm.</li><li>מהו תפקיד נגד שער?</li><li>מדוע נדרש snubber בעומסים מסוימים?</li><li>מה הסיכון בבקרת פאזה לרשת?</li><li>הסבר כיבוי טבעי במעבר אפס.</li><li>השווה בין מיישר דיודות למיישר SCR.</li><li>מדוע משתמשים בבידוד אופטי בפיקוד SCR?</li></ol>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>תשובות ורמזים</h2>
+      <div class="answer-block">
+        <ol><li>P=180^2/60=540W.</li><li>זמן ההולכה קטן ולכן RMS והספק יורדים.</li><li>האינרציה התרמית מחליקה את הפולסים.</li><li>V=sqrt(500·80)=200V.</li><li>להגביל זרם שער לרמה בטוחה.</li><li>להגן מפני dv/dt והדלקות שווא.</li><li>הרמוניות, EMI ומקדם הספק נמוך.</li><li>הזרם יורד מתחת לזרם האחזקה.</li><li>SCR מאפשר שליטה בזווית ההולכה; דיודה לא.</li><li>כדי להפריד בין מעגל בקרה נמוך מתח לרשת מסוכנת.</li></ol>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>סיכום</h2>
+      <ul><li>SCR מאפשר מיישר ובקרת הספק מבוקרים בזווית.</li><li>החישוב המרכזי הוא RMS של גל חתוך.</li><li>בעומס השראתי נדרשת זהירות נוספת.</li><li>בשיעור הבא נעבור לממיר DC-DC מסוג Buck.</li></ul>
+      <div class="definition"><strong>מה לקחת הלאה</strong><p>מהשיעור הזה חשוב לזכור לא רק את הנוסחאות, אלא את דרך החשיבה: מצבי פעולה, מסלולי זרם, מאזן אנרגיה, צורות גל, ורק אז הצבה מספרית. היכולת הזו תופיע שוב בשיעור הבא ובכל תרגיל תכן.</p></div>
+    </section>
+
+    <nav class="lesson-nav footer-nav" aria-label="ניווט תחתון">
+      <a class="nav-button" href="../lesson-04-filter-capacitor-and-ripple/">לשיעור הקודם</a>
+      <a class="nav-button" href="../../index.html">חזרה לדף הקורס</a>
+      <a class="nav-button" href="../lesson-06-dc-dc-buck-converter/">לשיעור הבא</a>
+    </nav>
+  </main>
+</body>
+</html>

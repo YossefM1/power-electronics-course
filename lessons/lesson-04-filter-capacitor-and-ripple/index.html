@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>שיעור 4 - קבל החלקה וריפל</title>
+  <link rel="stylesheet" href="../../assets/css/course.css">
+  <script defer src="../../assets/js/course.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">דלג לתוכן</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html">אלקטרוניקת הספק</a>
+    <nav class="top-nav" aria-label="ניווט שיעור">
+      <a href="../../index.html">דף הקורס</a>
+      <a href="../lesson-03-diodes-and-rectifiers/">הקודם</a>
+      <a href="../lesson-05-thyristors-and-controlled-rectifiers/">הבא</a>
+    </nav>
+  </header>
+
+  <main id="content" class="lesson-page">
+    <section class="lesson-hero">
+      <p class="breadcrumb">שיעור 4 מתוך 12</p>
+      <h1>קבל החלקה וריפל</h1>
+      <p>איך קבל אחרי מיישר מקטין ריפל, מדוע הוא יוצר זרמי שיא, וכיצד בוחרים קיבול, מתח עבודה ו-ESR.</p>
+      <div class="lesson-meta">
+        <span>3-5 שעות לימוד</span>
+        <span>יחידת לימוד מורחבת</span>
+        <span>ה-PDF דן במיישרים ותכנון חד פאזי; כאן מרחיבים את שלב הסינון המעשי אחרי המיישר.</span>
+      </div>
+      <div class="lesson-toc">
+        <strong>מפת השיעור</strong>
+        <ul>
+          <li><a href="#overview">מיקום ודרישות קדם</a></li>
+          <li><a href="#objectives">מטרות למידה</a></li>
+          <li><a href="#motivation">מוטיבציה והקשר הנדסי</a></li>
+          <li><a href="#concepts">הסבר מושגי</a></li>
+          <li><a href="#operation">פעולה ואינטואיציה</a></li>
+          <li><a href="#math">פיתוח מתמטי</a></li>
+          <li><a href="#waveforms">צורות גל</a></li>
+          <li><a href="#design">כללי תכן</a></li>
+          <li><a href="#examples">דוגמאות פתורות</a></li>
+          <li><a href="#practice">תרגול ותשובות</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="lesson-nav" aria-label="ניווט בין שיעורים">
+      <a class="nav-button" href="../lesson-03-diodes-and-rectifiers/">לשיעור הקודם</a>
+      <a class="nav-button" href="../../index.html">חזרה לדף הקורס</a>
+      <a class="nav-button" href="../lesson-05-thyristors-and-controlled-rectifiers/">לשיעור הבא</a>
+    </nav>
+
+    <section id="overview" class="content-section">
+      <p class="section-kicker">Header and lesson overview</p>
+      <h2>מיקום השיעור בקורס</h2>
+      <div class="overview-grid">
+        <div class="overview-card"><h3>איפה זה משתלב?</h3><p>ממשיך את שיעור המיישרים: המתח המיושר פועם, וכעת מוסיפים אגירת אנרגיה כדי להפוך אותו לשימושי יותר.</p></div>
+        <div class="overview-card"><h3>דרישות קדם</h3><p>שיעור 3 על גשר דיודות, ערך ממוצע, RMS ותדר ריפל.</p></div>
+        <div class="overview-card"><h3>יישומים אופייניים</h3><ul><li>ספקי כוח ליניאריים</li><li>DC Bus לפני ממיר</li><li>מטענים פשוטים</li><li>מערכות אודיו</li><li>מיישרי רשת תעשייתיים</li></ul></div>
+      </div>
+      <div class="definition"><strong>מטרת השיעור</strong><p>לבנות הבנה שניתן להשתמש בה גם בתרגיל וגם בתכן מעשי: לזהות מצבי פעולה, לכתוב משוואות נכונות, להבין את צורות הגל ולדעת אילו אי-אידיאליות יופיעו ברכיב אמיתי.</p></div>
+    </section>
+
+    <section id="objectives" class="content-section">
+      <h2>מטרות למידה</h2>
+      <ul><li>להסביר במילים את העיקרון הפיזיקלי של קבל החלקה וריפל.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, Rds(on), נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
+    </section>
+
+    <section id="motivation" class="content-section">
+      <h2>מוטיבציה והקשר הנדסי</h2>
+      <p>קבל החלקה וריפל אינו נושא תיאורטי מבודד. הוא מופיע במערכות שבהן נדרש להעביר אנרגיה באופן מבוקר, יעיל ובטוח. המהנדס אינו מסתפק בשאלה האם המעגל פועל, אלא שואל מה הנצילות, כמה חום נוצר, מה קורה בעומס קיצוני, ומהי צורת הגל שהמקור והעומס רואים.</p>
+<p>בפועל, ההבדל בין תכן טוב לתכן גבולי נמצא בפרטים: זרם RMS לעומת זרם ממוצע, מתח חסימה לעומת מתח נומינלי, ריפל לעומת ערך DC, ותנאי מעבר לעומת מצב יציב. לכן השיעור משלב הסבר מושגי, פיתוח מתמטי וכללי תכן.</p>
+<p>המודל האידיאלי חשוב כי הוא נותן שפה נקייה. אבל לאחר שנבין אותו, נוסיף את המציאות: רכיבים מתחממים, קבלים בעלי ESR, מתגים אינם עוברים מצב מיד, דיודות אינן אידיאליות, ותדר מיתוג משפיע גם על גודל רכיבים וגם על הפסדים.</p>
+      <div class="intuition"><strong>אינטואיציה מובילה</strong><p>בכל מעגל הספק כדאי לשאול: מי מקור האנרגיה ברגע זה, מי אוגר אותה, מי מוסר אותה לעומס, ואיפה היא הולכת לאיבוד כחום. התשובה לשאלות האלה מובילה למשוואות הנכונות.</p></div>
+    </section>
+
+    <section id="concepts" class="content-section">
+      <h2>הסבר מושגי</h2>
+      <p>קבל במקביל לעומס נטען ליד שיאי המתח ופורק אנרגיה לעומס בין השיאים.</p>
+<p>הריפל (Ripple) הוא שינוי המתח על הקבל בין טעינה לטעינה. הוא גדל עם זרם עומס וקטן עם קיבול ותדר ריפל.</p>
+<p>קבל גדול מקטין ריפל אך גורם לזרמי טעינה צרים וגבוהים דרך הדיודות והשנאי.</p>
+<p>ESR של הקבל יוצר רכיב ריפל נוסף וחימום פנימי. לכן בחירה לפי קיבול בלבד אינה מספיקה.</p>
+      <div class="note"><strong>הנחת עבודה לימודית</strong><p>בשלב הראשון ננתח רכיבים אידיאליים כדי לראות את המבנה. לאחר מכן נתקן את התוצאה בעזרת אי-אידיאליות. זו אינה התחמקות מהמציאות אלא דרך הנדסית מסודרת.</p></div>
+    </section>
+
+    <section id="operation" class="content-section">
+      <h2>פעולת המעגל ואינטואיציה פיזיקלית</h2>
+      <div class="intuition"><strong>טעינה ליד שיא</strong><p>כאשר מתח המיישר גבוה ממתח הקבל ועוד נפילות הדיודות, הדיודות מוליכות והקבל נטען במהירות.</p></div>
+<div class="intuition"><strong>פריקה בין שיאים</strong><p>כאשר מתח המיישר יורד מתחת למתח הקבל, הדיודות חסומות והעומס מוזן מהקבל.</p></div>
+<div class="intuition"><strong>זרמי שיא</strong><p>ככל שהקבל גדול יותר, חלון הטעינה קצר יותר ולכן הזרם המיידי גבוה יותר.</p></div>
+<div class="intuition"><strong>עומס משתנה</strong><p>כאשר זרם העומס גדל, הקבל מאבד יותר מטען בין שיאים והריפל גדל.</p></div>
+      <h3>הנחות מפורשות</h3>
+      <ul class="compact-list"><li>קירוב ריפל קטן ביחס למתח DC.</li><li>זרם עומס קבוע בקירוב בין שיאים.</li><li>גשר דיודות חד פאזי נותן fripple=2fline.</li><li>ESR מוזנח בפיתוח הראשון.</li></ul>
+    </section>
+
+    <section id="math" class="content-section">
+      <h2>פיתוח מתמטי</h2>
+      <div class="definition"><strong>קשר מטען-מתח</strong><p>אם זרם העומס כמעט קבוע, קצב ירידת מתח הקבל הוא I/C.</p><p class="equation">I = C · dV/dt</p></div>
+<div class="definition"><strong>ריפל מקורב</strong><p>בין שתי טעינות עובר זמן של 1/fripple. הקבל מאבד מטען I·Delta t ולכן המתח יורד.</p><p class="equation">Delta V ≈ Iload / (fripple · C)</p></div>
+<div class="definition"><strong>תדר ריפל בגשר</strong><p>בגל מלא יש שני שיאים חיוביים לכל מחזור רשת.</p><p class="equation">fripple = 2 · fline</p></div>
+<div class="definition"><strong>ריפל ESR</strong><p>זרם ריפל דרך התנגדות טורית שקולה מוסיף קפיצה מיידית במתח וחימום בקבל.</p><p class="equation">Delta V_ESR ≈ I_ripple · ESR</p></div>
+      <div class="formula-grid">
+        <div class="formula-card"><h3>נוסחה</h3><p class="equation">DeltaV≈I/(frippleC)</p></div>
+<div class="formula-card"><h3>נוסחה</h3><p class="equation">fripple=2fline</p></div>
+<div class="formula-card"><h3>נוסחה</h3><p class="equation">I=C dV/dt</p></div>
+<div class="formula-card"><h3>נוסחה</h3><p class="equation">DeltaV_ESR≈IrippleESR</p></div>
+      </div>
+    </section>
+
+    <section id="waveforms" class="content-section">
+      <h2>צורות גל חשובות</h2>
+      <p>באלקטרוניקת הספק צורת הגל היא חלק מהפתרון. לפני שמציבים מספרים, מציירים באופן איכותי את המתח והזרם ומוודאים שהם מתאימים למסלולי הזרם שתוארו.</p>
+      <pre class="diagram">Rectified voltage:  /  /  /  /\nCapacitor voltage: /  /  /  /    small sawtooth ripple
+Diode current:     | |   | |   | |   narrow charging pulses</pre>
+      <ul class="waveform-list">
+        <li><strong>מתח קבל</strong>עולה מהר ליד שיא ויורד כמעט ליניארית בין שיאים.</li>
+<li><strong>זרם דיודה</strong>פולסים צרים סביב השיאים, עם שיא גבוה מהממוצע.</li>
+<li><strong>מתח עומס</strong>DC עם רכיב Ripple קטן יחסית, תלוי בעומס ובקבל.</li>
+<li><strong>זרם מקור</strong>מעוות מאוד לעומת סינוס, ולכן מקדם ההספק יורד.</li>
+<li><strong>חימום קבל</strong>נובע מזרם ריפל דרך ESR ומושפע מטמפרטורה.</li>
+      </ul>
+    </section>
+
+    <section id="design" class="content-section">
+      <h2>משוואות תכן וכללי אצבע</h2>
+      <div class="design-rule"><strong>כלל תכן</strong><p>קובעים ריפל מותר לפי דרישת המערכת הבאה.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>מחשבים C ראשוני לפי I/(f·DeltaV).</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בוחרים מתח עבודה עם מרווח מעל מתח השיא.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בודקים ESR וזרם ריפל מותר.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>מעריכים זרמי טעינה ויכולת דיודות/שנאי.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>שוקלים NTC או הגבלת זרם התנעה בקבלים גדולים.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>במערכות רשת בודקים מקדם הספק והרמוניות.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>קבלים אלקטרוליטיים מזדקנים מהר יותר בטמפרטורה גבוהה.</p></div>
+      <div class="warning"><strong>אזהרה הנדסית</strong><p>אם החישוב האידיאלי נותן רכיב בדיוק על גבול הדירוג, התכן עדיין לא מוכן. מוסיפים מרווחי בטיחות, תנאי טמפרטורה, סבילות רכיבים ומצבי מעבר.</p></div>
+    </section>
+
+    <section id="examples" class="content-section">
+      <h2>דוגמאות פתורות</h2>
+      <div class="example-block"><h3>דוגמה 1: בחירת קבל בסיסית</h3><p><strong>נתון:</strong> Iload=1A, רשת 50Hz, ריפל מותר 2V אחרי גשר.</p><p><strong>נדרש:</strong> חשב C.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>fripple=100Hz.</li><li>C=I/(f·DeltaV)=1/(100·2).</li><li>C=0.005F=5000uF.</li></ol><p><strong>תשובה:</strong> כ-5000uF.</p><p><strong>פירוש פיזיקלי:</strong> זהו ערך אידיאלי התחלתי; בפועל בודקים ESR וזרמי טעינה.</p></div>
+<div class="example-block"><h3>דוגמה 2: השפעת עומס</h3><p><strong>נתון:</strong> C=4700uF, fripple=100Hz, I=0.5A.</p><p><strong>נדרש:</strong> חשב ריפל.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>DeltaV=I/(fC).</li><li>C=0.0047F.</li><li>DeltaV=0.5/(100·0.0047)=1.06V.</li></ol><p><strong>תשובה:</strong> כ-1.06V.</p><p><strong>פירוש פיזיקלי:</strong> אם הזרם יוכפל, הריפל יוכפל בקירוב.</p></div>
+<div class="example-block"><h3>דוגמה 3: מתח עבודה של קבל</h3><p><strong>נתון:</strong> שנאי 18V RMS וגשר דיודות.</p><p><strong>נדרש:</strong> איזה מתח קבל מינימלי תבחר?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>שיא אידיאלי: 18sqrt(2)=25.5V.</li><li>יש תנודות רשת ופריקה קלה.</li><li>לא בוחרים 25V כי זה גבולי; 35V הוא מינימום מעשי נפוץ, 50V נותן מרווח גדול יותר.</li></ol><p><strong>תשובה:</strong> לפחות 35V בסביבה רגילה.</p><p><strong>פירוש פיזיקלי:</strong> דירוג מתח הוא תנאי אמינות, לא רק חישוב נומינלי.</p></div>
+<div class="example-block"><h3>דוגמה 4: ריפל ESR</h3><p><strong>נתון:</strong> זרם ריפל 1.5A ו-ESR=0.08 ohm.</p><p><strong>נדרש:</strong> חשב רכיב ריפל ESR.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>DeltaV_ESR=I·ESR.</li><li>DeltaV=1.5·0.08=0.12V.</li><li>מוסיפים זאת לריפל הקיבולי בקירוב.</li></ol><p><strong>תשובה:</strong> 0.12V.</p><p><strong>פירוש פיזיקלי:</strong> בקבלים גדולים ESR יכול להיות גורם לא פחות חשוב מהקיבול.</p></div>
+    </section>
+
+    <section class="content-section">
+      <h2>טעויות נפוצות</h2>
+      <div class="mistake-block"><p><strong>הטעות:</strong> בחירת קבל רק לפי uF.</p><p><strong>דרך נכונה:</strong> צריך לבדוק מתח עבודה, ESR, זרם ריפל, טמפרטורה, אורך חיים וגודל פיזי.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מזרם התנעה.</p><p><strong>דרך נכונה:</strong> קבל ריק נראה בתחילה כמעט קצר ויכול למשוך זרם גדול מאוד.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שקבל מחליק בלי להשפיע על הרשת.</p><p><strong>דרך נכונה:</strong> הוא מצמצם זווית הולכה ויוצר זרמי שיא מעוותים.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> שימוש בתדר רשת במקום תדר ריפל בגשר.</p><p><strong>דרך נכונה:</strong> בגשר חד פאזי fripple הוא פי שניים מתדר הרשת.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שהריפל תמיד משולש מושלם.</p><p><strong>דרך נכונה:</strong> זהו קירוב. הצורה האמיתית תלויה בזווית הולכה, מקור ו-ESR.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> שימוש בנוסחה של קבל החלקה וריפל בלי לבדוק את תחום התקפות שלה.</p><p><strong>דרך נכונה:</strong> לפני כל הצבה מזהים אם ההנחה היא אידיאלית, מצב CCM או DCM, עומס נגדי או RL, גל סינוסי או גל מעוות. נוסחה נכונה בהקשר שגוי נותנת תשובה משכנעת אך שגויה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> בלבול בין ערך ממוצע, ערך RMS וערך שיא.</p><p><strong>דרך נכונה:</strong> ערך ממוצע מתאים לרכיב DC, ערך RMS מתאים לחימום ולהספק בעומס נגדי, וערך שיא חשוב למתחי חסימה ולזרמי שיא. בכל חישוב כותבים במפורש איזה ערך נדרש.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מכיוון זרם ומקוטביות מתח בזמן מעבר בין מצבים.</p><p><strong>דרך נכונה:</strong> מסמנים חצי זרם ומתח בכל מצב מיתוג. אם סימן האנרגיה לא ברור, חוזרים להגדרה p(t)=v(t)i(t) ובודקים אם הרכיב אוגר, מוסר או מבזבז אנרגיה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> הצבת מספרים בלי בדיקת יחידות.</p><p><strong>דרך נכונה:</strong> לפני התוצאה הסופית מוודאים שהיחידות מתכנסות: וולט, אמפר, ואט, הנרי, פאראד ושניות. בדיקת יחידות מגלה הרבה טעויות עוד לפני סימולציה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שרכיבים אידיאליים מייצגים רכיב אמיתי.</p><p><strong>דרך נכונה:</strong> המודל האידיאלי נועד להבנה ראשונית. בתכן מוסיפים נפילת דיודה, Rds(on), ESR, זמני מיתוג, מגבלות תרמיות, זרמי שיא וסבילות רכיבים.</p></div>
+    </section>
+
+    <section class="content-section">
+      <h2>בדקו את עצמכם</h2>
+      <div class="note"><p><strong>שאלה:</strong> למה קבל גדול מגדיל זרם שיא?</p><p><strong>תשובה קצרה:</strong> כי הוא נטען בפרק זמן קצר סביב שיא המתח.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מתי ESR משפיע על ריפל?</p><p><strong>תשובה קצרה:</strong> כאשר זרמי הריפל משמעותיים, במיוחד בתדרים גבוהים או בקבלים ישנים.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מה העומס רואה?</p><p><strong>תשובה קצרה:</strong> מתח DC עם ריפל, לא מתח קבוע מושלם.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מהי השאלה האנרגטית המרכזית ב-קבל החלקה וריפל?</p><p><strong>תשובה קצרה:</strong> לזהות מאיפה האנרגיה מגיעה, מי אוגר אותה זמנית, מי מוסר אותה לעומס, ואיפה נוצרים הפסדים.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מדוע מציינים הנחות לפני פיתוח מתמטי?</p><p><strong>תשובה קצרה:</strong> כי שינוי קטן בהנחה, למשל מעבר מ-CCM ל-DCM או מעומס נגדי לעומס RL, משנה את המשוואות ואת הפרשנות.</p></div>
+<div class="note"><p><strong>שאלה:</strong> מה בודקים אחרי קבלת תשובה מספרית?</p><p><strong>תשובה קצרה:</strong> יחידות, סדר גודל, סימן, גבולות פיזיקליים, מאמץ רכיבים ונצילות סבירה.</p></div>
+    </section>
+
+    <section id="practice" class="content-section">
+      <h2>תרגילים</h2>
+      <div class="exercise-block">
+        <ol><li>חשב C עבור I=2A, DeltaV=1V, גשר ב-50Hz.</li><li>חשב ריפל עבור C=2200uF, I=0.3A, fripple=100Hz.</li><li>מה תדר הריפל בגשר על רשת 60Hz?</li><li>מדוע קבל ריק יוצר זרם התנעה?</li><li>בחר מתח עבודה לקבל אחרי 24V RMS.</li><li>הסבר איך ESR משפיע על חימום הקבל.</li><li>מה יקרה לריפל אם התדר יוכפל?</li><li>מדוע מקדם ההספק יורד במיישר עם קבל?</li><li>ציין שתי דרכים להקטין זרמי שיא.</li><li>השווה קבל גדול מול מייצב ממותג בהמשך המסלול.</li></ol>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>תשובות ורמזים</h2>
+      <div class="answer-block">
+        <ol><li>C=2/(100·1)=0.02F=20000uF.</li><li>DeltaV=0.3/(100·0.0022)=1.36V.</li><li>120Hz.</li><li>כי מתחו בתחילה אפס והוא נטען קרוב לקצר דרך דיודות.</li><li>שיא≈34V; בוחרים לפחות 50V לרוב.</li><li>P_ESR=Irms^2·ESR גורם לחום פנימי.</li><li>הריפל יקטן בערך פי שניים.</li><li>הזרם מגיע בפולסים צרים ולא כסינוס.</li><li>הגבלת זרם, השראות/התנגדות סדרתית, PFC או קבל קטן יותר.</li><li>קבל גדול פסיבי ופשוט; ממיר המשך נותן ויסות טוב יותר אך מורכב.</li></ol>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>סיכום</h2>
+      <ul><li>קבל החלקה אוגר אנרגיה בין שיאי המיישר.</li><li>הריפל תלוי בזרם, תדר וקיבול.</li><li>קבל גדול מפחית ריפל אך מגדיל זרמי שיא.</li><li>ESR וזרם ריפל הם פרמטרים מעשיים חשובים.</li><li>בשיעור הבא נלמד לשלוט במיישר בעזרת SCR.</li></ul>
+      <div class="definition"><strong>מה לקחת הלאה</strong><p>מהשיעור הזה חשוב לזכור לא רק את הנוסחאות, אלא את דרך החשיבה: מצבי פעולה, מסלולי זרם, מאזן אנרגיה, צורות גל, ורק אז הצבה מספרית. היכולת הזו תופיע שוב בשיעור הבא ובכל תרגיל תכן.</p></div>
+    </section>
+
+    <nav class="lesson-nav footer-nav" aria-label="ניווט תחתון">
+      <a class="nav-button" href="../lesson-03-diodes-and-rectifiers/">לשיעור הקודם</a>
+      <a class="nav-button" href="../../index.html">חזרה לדף הקורס</a>
+      <a class="nav-button" href="../lesson-05-thyristors-and-controlled-rectifiers/">לשיעור הבא</a>
+    </nav>
+  </main>
+</body>
+</html>

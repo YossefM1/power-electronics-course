@@ -1,80 +1,55 @@
-<!-- force redeploy -->
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>אלקטרוניקת הספק</title>
-
+  <title>אלקטרוניקת הספק - קורס מלא</title>
   <link rel="stylesheet" href="assets/css/course.css">
+  <script defer src="assets/js/course.js"></script>
 </head>
-
 <body>
-
-  <main class="course-page">
-
+  <a class="skip-link" href="#content">דלג לתוכן</a>
+  <header class="site-header">
+    <a class="brand" href="index.html">אלקטרוניקת הספק</a>
+    <nav class="top-nav" aria-label="ניווט ראשי">
+      <a href="#syllabus">סילבוס</a>
+      <a href="#topics">נושאי הקורס</a>
+    </nav>
+  </header>
+  <main id="content" class="course-page">
     <section class="course-hero">
-      <div class="course-label">קורס חינמי</div>
-
-      <h1>אלקטרוניקת הספק</h1>
-
-      <p>
-        קורס מבוא באלקטרוניקת הספק העוסק בדיודות, מיישרים, ממירי DC-DC,
-        ממירים, PWM, רכיבי מיתוג, הספקים, הפסדים וניתוח מעגלים בסיסי.
-      </p>
-    </section>
-
-    <section class="course-section">
-      <h2>שיעורי הקורס</h2>
-
-      <div class="lesson-grid">
-
-        <a class="lesson-card" href="lessons/lesson-01-introduction.html">
-          <span class="lesson-number">שיעור 1</span>
-          <h3>מבוא לאלקטרוניקת הספק</h3>
-          <p>
-            מהי אלקטרוניקת הספק, למה משתמשים במיתוג, ומה ההבדל בין מגבר ליניארי
-            לבין ממיר ממותג.
-          </p>
-        </a>
-
-        <div class="lesson-card locked">
-          <span class="lesson-number">שיעור 2</span>
-          <h3>דיודות ומיישרים</h3>
-          <p>
-            מיישר חצי גל, מיישר גל מלא, גשר דיודות, מתח ממוצע ו־RMS.
-          </p>
-        </div>
-
-        <div class="lesson-card locked">
-          <span class="lesson-number">שיעור 3</span>
-          <h3>קבל החלקה וריפל</h3>
-          <p>
-            טעינה ופריקה של קבל, Ripple voltage, והשפעת העומס על מתח המוצא.
-          </p>
-        </div>
-
-        <div class="lesson-card locked">
-          <span class="lesson-number">שיעור 4</span>
-          <h3>ממירי DC-DC</h3>
-          <p>
-            Buck, Boost, Buck-Boost, יחס עבודה, סליל, קבל ומצב הולכה רציפה.
-          </p>
-        </div>
-
-        <div class="lesson-card locked">
-          <span class="lesson-number">שיעור 5</span>
-          <h3>ממירים ו־PWM</h3>
-          <p>
-            יצירת מתח AC מתוך DC, מיתוג, הרמוניות, תדר מיתוג ובקרת PWM.
-          </p>
-        </div>
-
+      <div class="hero-copy">
+        <p class="course-label">קורס הנדסי בעברית</p>
+        <h1>אלקטרוניקת הספק</h1>
+        <p>קורס לימוד מפורט באלקטרוניקת הספק, המבוסס על חומרי תרגול והרצאה ומורחב ליחידות לימוד עצמאיות. הקורס מתחיל במושגי הספק, RMS ופאזורים, ממשיך למיישרים, קבלים, SCR וממירי DC-DC, ומגיע למהפכים, PWM, הפסדים ותכן.</p>
+      </div>
+      <div class="hero-visual" aria-label="שרשרת המרת הספק">
+        <div class="power-chain"><span>AC</span><strong>יישור</strong><span>DC Bus</span><strong>מיתוג ובקרה</strong><span>עומס</span></div>
+        <div class="waveform" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
       </div>
     </section>
-
+    <section id="topics" class="course-section">
+      <h2>על הקורס</h2>
+      <p>זהו קורס מתפתח המבוסס על דפי תרגול, נוסחאות וחומרי הרצאה, ומורחב כאן להסברים פדגוגיים מלאים. הדגש הוא על הבנה הנדסית: מסלולי זרם, זרימת אנרגיה, צורות גל, משוואות תכן, אי-אידיאליות ותרגול.</p>
+      <div class="note"><strong>הערת מקור</strong><p>ה-PDF בתיקיית source_materials שימש כמפת נושאים: הספקים ומונחי יסוד, מיישרים, SCR, מהפכים, בקרת מהפכים, הפסדים, מייצבים ונוסחאות עזר. הטקסט באתר אינו העתקה אלא עיבוד, הרחבה וארגון מחדש ללמידה עצמית.</p></div>
+    </section>
+    <section id="syllabus" class="course-section">
+      <h2>סילבוס מפורט</h2>
+      <div class="lesson-grid">
+        <a class="lesson-card" href="lessons/lesson-01-introduction/"><span class="lesson-number">שיעור 1</span><h3>מבוא, הספקים וערכי RMS</h3><p>שפת היסוד של אלקטרוניקת הספק: הספק רגעי, ממוצע, RMS, פאזורים, הספק נראה ומקדם הספק.</p><div class="card-meta"><span>3-4 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-02-power-semiconductors/"><span class="lesson-number">שיעור 2</span><h3>רכיבי הספק מוליכים למחצה</h3><p>היכרות מעמיקה עם דיודה, MOSFET, IGBT ו-SCR כמתגים לא אידיאליים במערכות הספק.</p><div class="card-meta"><span>3-4 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-03-diodes-and-rectifiers/"><span class="lesson-number">שיעור 3</span><h3>דיודות ומיישרים</h3><p>ניתוח מיישרי חצי גל, גל מלא וגשר דיודות, כולל ערכים ממוצעים, RMS, עומס נגדי ומבוא למיישרים תלת פאזיים.</p><div class="card-meta"><span>3-5 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-04-filter-capacitor-and-ripple/"><span class="lesson-number">שיעור 4</span><h3>קבל החלקה וריפל</h3><p>איך קבל אחרי מיישר מקטין ריפל, מדוע הוא יוצר זרמי שיא, וכיצד בוחרים קיבול, מתח עבודה ו-ESR.</p><div class="card-meta"><span>3-5 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-05-thyristors-and-controlled-rectifiers/"><span class="lesson-number">שיעור 5</span><h3>תיריסטורים ומיישרים מבוקרים</h3><p>SCR, זווית הצתה, בקרת פאזה, מיישרים מבוקרים והקשר בין זווית ההצתה למתח RMS והספק.</p><div class="card-meta"><span>4-5 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-06-dc-dc-buck-converter/"><span class="lesson-number">שיעור 6</span><h3>ממיר Buck</h3><p>פרק מלא על ממיר Buck: טופולוגיה אידיאלית, ON/OFF, דיודת Freewheel, Buck סינכרוני, CCM/DCM, ריפל, תכן ונצילות.</p><div class="card-meta"><span>5-7 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-07-dc-dc-boost-and-buck-boost/"><span class="lesson-number">שיעור 7</span><h3>ממירי Boost ו-Buck-Boost</h3><p>ממירי Step-up והיפוך קוטביות: אגירת אנרגיה בסליל, יחס המרה, מגבלות D גבוה ותכן מעשי.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-08-inductors-capacitors-and-ccm-dcm/"><span class="lesson-number">שיעור 8</span><h3>סלילים, קבלים ו-CCM/DCM</h3><p>רכיבי אגירת אנרגיה, ריפל, מסננים, גבול הולכה רציפה ומקוטעת והשפעת תדר ועומס.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-09-inverters-and-pwm/"><span class="lesson-number">שיעור 9</span><h3>מהפכים ו-PWM</h3><p>המרת DC ל-AC, גשר H, מהפך תלת פאזי, PWM, SPWM, הרמוניות ו-THD.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-10-switching-losses-and-efficiency/"><span class="lesson-number">שיעור 10</span><h3>הפסדי מיתוג ונצילות</h3><p>הפסדי הולכה, Switching Losses, הפסדי שער, הפסדי מגנטיקה, נצילות ומודל תרמי בסיסי.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-11-design-examples/"><span class="lesson-number">שיעור 11</span><h3>דוגמאות תכן</h3><p>תהליך תכן משולב: דרישות, בחירת טופולוגיה, חישוב רכיבים, הפסדים, בדיקות קצה וסימולציה.</p><div class="card-meta"><span>5-7 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-12-summary-and-practice/"><span class="lesson-number">שיעור 12</span><h3>סיכום ותרגול</h3><p>חזרה מסכמת, נוסחאות מרכזיות, אסטרטגיית פתרון ותרגול משולב לכל הקורס.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+      </div>
+    </section>
   </main>
-
 </body>
 </html>
