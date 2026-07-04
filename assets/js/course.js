@@ -23,6 +23,49 @@ for (const link of document.querySelectorAll('a[href^="#"]')) {
   });
 }
 
+/* Highlight the current lesson TOC item while reading */
+(function () {
+  const tocLinks = Array.from(document.querySelectorAll(".lesson-toc a[href^='#']"));
+
+  if (!tocLinks.length || !("IntersectionObserver" in window)) {
+    return;
+  }
+
+  const sectionById = new Map();
+
+  for (const link of tocLinks) {
+    const id = link.getAttribute("href").slice(1);
+    const section = document.getElementById(id);
+
+    if (section) {
+      sectionById.set(id, { link, section });
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (!visible) {
+      return;
+    }
+
+    const id = visible.target.id;
+
+    for (const { link } of sectionById.values()) {
+      link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
+    }
+  }, {
+    rootMargin: "-20% 0px -65% 0px",
+    threshold: [0.05, 0.2, 0.5]
+  });
+
+  for (const { section } of sectionById.values()) {
+    observer.observe(section);
+  }
+})();
+
 /* Send stable iframe height to the parent WordPress page */
 (function () {
   const PARENT_ORIGIN = "https://melamedy.com";
