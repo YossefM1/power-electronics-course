@@ -189,8 +189,8 @@ Blocked diode: sees reverse voltage</pre>
 
     <section id="examples" class="content-section">
       <h2>דוגמאות פתורות</h2>
-      <div class="example-block"><h3>דוגמה 1: מתח ממוצע בגשר</h3><p><strong>נתון:</strong> מקור 24V RMS, דיודות אידיאליות.</p><p><strong>נדרש:</strong> חשב <span class="ym-math-inline">\(V_{dc}\)</span> ללא קבל.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>Vm=24sqrt(2)=33.9V.</li><li><span class="ym-math-inline">\(V_{dc}\)</span>=2Vm/pi.</li><li><span class="ym-math-inline">\(V_{dc}\)</span>≈21.6V.</li></ol><p><strong>תשובה:</strong> כ-21.6V.</p><p><strong>פירוש פיזיקלי:</strong> זהו ממוצע של גל מלא מיושר, לא מתח DC חלק.</p></div>
-<div class="example-block"><h3>דוגמה 2: הספק בעומס חצי גל</h3><p><strong>נתון:</strong> Vm=20V, R=10 ohm.</p><p><strong>נדרש:</strong> חשב P בעומס.</p><p><strong>פתרון בשלבים:</strong></p><ol><li><span class="ym-math-inline">\(V_{rms,half}\)</span>=Vm/2=10V.</li><li><span class="ym-math-inline">\(P=\frac{V_{rms}^{2}}{R}\)</span>=100/10.</li><li>P=10W.</li></ol><p><strong>תשובה:</strong> 10W.</p><p><strong>פירוש פיזיקלי:</strong> אם היינו משתמשים ב-<span class="ym-math-inline">\(V_{dc}\)</span>=6.37V היינו מקבלים הספק שגוי.</p></div>
+      <div class="example-block"><h3>דוגמה 1: מתח ממוצע בגשר</h3><p><strong>נתון:</strong> מקור 24V RMS, דיודות אידיאליות.</p><p><strong>נדרש:</strong> חשב <span class="ym-math-inline">\(V_{dc}\)</span> ללא קבל.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>Vm=24sqrt(2)=33.9V.</li><li><span class="ym-math-inline">\(V_{dc}=\frac{2V_m}{\pi}\)</span>.</li><li><span class="ym-math-inline">\(V_{dc}\)</span>≈21.6V.</li></ol><p><strong>תשובה:</strong> כ-21.6V.</p><p><strong>פירוש פיזיקלי:</strong> זהו ממוצע של גל מלא מיושר, לא מתח DC חלק.</p></div>
+<div class="example-block"><h3>דוגמה 2: הספק בעומס חצי גל</h3><p><strong>נתון:</strong> Vm=20V, R=10 ohm.</p><p><strong>נדרש:</strong> חשב P בעומס.</p><p><strong>פתרון בשלבים:</strong></p><ol><li><span class="ym-math-inline">\(V_{rms,half}=\frac{V_m}{2}=10\,\mathrm{V}\)</span>.</li><li><span class="ym-math-inline">\(P=\frac{V_{rms}^{2}}{R}=\frac{100}{10}\)</span>.</li><li><span class="ym-math-inline">\(P=10\,\mathrm{W}\)</span>.</li></ol><p><strong>תשובה:</strong> 10W.</p><p><strong>פירוש פיזיקלי:</strong> אם היינו משתמשים ב-<span class="ym-math-inline">\(V_{dc}\)</span>=6.37V היינו מקבלים הספק שגוי.</p></div>
 <div class="example-block"><h3>דוגמה 3: נפילת דיודות בגשר</h3><p><strong>נתון:</strong> גשר עם שתי דיודות מוליכות, <span class="ym-math-inline">\(V_D\)</span>=0.8V כל אחת.</p><p><strong>נדרש:</strong> מה הירידה במסלול?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>בכל רגע זרם עובר דרך שתי דיודות.</li><li>הירידה הכוללת היא 1.6V.</li><li>בזרם 3A ההפסד הוא 4.8W.</li></ol><p><strong>תשובה:</strong> 1.6V ו-4.8W.</p><p><strong>פירוש פיזיקלי:</strong> במתחי יציאה נמוכים זה הפסד משמעותי.</p></div>
 <div class="example-block"><h3>דוגמה 4: בחירת מתח חסימה</h3><p><strong>נתון:</strong> מקור 230V RMS מוזן לגשר.</p><p><strong>נדרש:</strong> מה סדר גודל מתח השיא?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>Vm=230sqrt(2)≈325V.</li><li>דיודה צריכה לעמוד לפחות במתח זה, עם מרווח.</li><li>בפועל בוחרים דירוג גבוה יותר כגון 600V או 1000V בהתאם לסביבה.</li></ol><p><strong>תשובה:</strong> השיא כ-325V, דירוג מעשי גבוה יותר.</p><p><strong>פירוש פיזיקלי:</strong> מתחי רשת כוללים נחשולים ולכן לא עובדים על הגבול.</p></div>
     </section>
@@ -229,7 +229,7 @@ Blocked diode: sees reverse voltage</pre>
     <section class="content-section">
       <h2>תשובות ורמזים</h2>
       <div class="answer-block">
-        <ol><li><span class="ym-math-inline">\(V_{dc}\)</span>=30/pi≈9.55V.</li><li>Vm=16.97V, <span class="ym-math-inline">\(V_{dc}\)</span>≈10.8V.</li><li><span class="ym-math-inline">\(V_{rms}\)</span>=40/sqrt(2)=28.3V, P≈40W.</li><li>שתי דיודות: P=2·0.7·5=7W.</li><li>יש יותר פולסים במחזור ופחות זמן פריקה בין שיאים.</li><li>120Hz.</li><li>כל דיודה מוליכה רק בחלק מהמחזור, ולכן הזרם שלה פולסי.</li><li>שיא≈67.9V; בוחרים דירוג גבוה משמעותית לפי סביבה.</li><li>המתח יורד בגלל התנגדות מקור ונפילות דיודה.</li><li>גשר מנצל שני חצאי מחזור ולכן עדיף מחצי גל.</li></ol>
+        <ol><li><span class="ym-math-inline">\(V_{dc}=\frac{30}{\pi}\approx9.55\,\mathrm{V}\)</span>.</li><li><span class="ym-math-inline">\(V_m=16.97\,\mathrm{V}\)</span>, <span class="ym-math-inline">\(V_{dc}\approx10.8\,\mathrm{V}\)</span>.</li><li><span class="ym-math-inline">\(V_{rms}=\frac{40}{\sqrt{2}}=28.3\,\mathrm{V}\)</span>, <span class="ym-math-inline">\(P\approx40\,\mathrm{W}\)</span>.</li><li>שתי דיודות: P=2·0.7·5=7W.</li><li>יש יותר פולסים במחזור ופחות זמן פריקה בין שיאים.</li><li>120Hz.</li><li>כל דיודה מוליכה רק בחלק מהמחזור, ולכן הזרם שלה פולסי.</li><li>שיא≈67.9V; בוחרים דירוג גבוה משמעותית לפי סביבה.</li><li>המתח יורד בגלל התנגדות מקור ונפילות דיודה.</li><li>גשר מנצל שני חצאי מחזור ולכן עדיף מחצי גל.</li></ol>
       </div>
     </section>
 
@@ -341,9 +341,9 @@ AC bottom -> diode -> load same direction -> diode -> AC top</pre>
         <p><strong>נתונים:</strong> Vm=100V ועומס R=100Ω. השוו חצי גל וגל מלא אידיאליים.</p>
         <p><strong>נדרש:</strong> חשבו <span class="ym-math-inline">\(V_{dc}\)</span>, <span class="ym-math-inline">\(V_{rms}\)</span> ו-P בכל מקרה.</p>
         <ol>
-          <li>חצי גל: <span class="ym-math-inline">\(V_{dc}\)</span>=100/pi=31.8V, <span class="ym-math-inline">\(V_{rms}\)</span>=100/2=50V.</li>
+          <li>חצי גל: <span class="ym-math-inline">\(V_{dc}=\frac{100}{\pi}=31.8\,\mathrm{V}\)</span>, <span class="ym-math-inline">\(V_{rms}=\frac{100}{2}=50\,\mathrm{V}\)</span>.</li>
           <li>הספק חצי גל: P=50²/100=25W.</li>
-          <li>גל מלא: <span class="ym-math-inline">\(V_{dc}\)</span>=2·100/pi=63.7V, <span class="ym-math-inline">\(V_{rms}\)</span>=100/sqrt(2)=70.7V.</li>
+          <li>גל מלא: <span class="ym-math-inline">\(V_{dc}=\frac{2\cdot100}{\pi}=63.7\,\mathrm{V}\)</span>, <span class="ym-math-inline">\(V_{rms}=\frac{100}{\sqrt{2}}=70.7\,\mathrm{V}\)</span>.</li>
           <li>הספק גל מלא: P=70.7²/100=50W.</li>
         </ol>
         <p><strong>תשובה:</strong> גל מלא מכפיל את ההספק בעומס ביחס לחצי גל עבור אותו Vm ו-R.</p>
@@ -356,7 +356,7 @@ AC bottom -> diode -> load same direction -> diode -> AC top</pre>
         <ol>
           <li>בגשר מוליכות שתי דיודות, לכן נפילת המתח הכוללת היא 1.4V.</li>
           <li>הפסד הגשר: P=1.4·2=2.8W.</li>
-          <li>הספק העומס: <span class="ym-math-inline">\(P_{load}\)</span>=5·2=10W.</li>
+          <li>הספק העומס: <span class="ym-math-inline">\(P_{load}=5\cdot2=10\,\mathrm{W}\)</span>.</li>
           <li>הפסד הגשר הוא 28% מהספק העומס.</li>
         </ol>
         <p><strong>תשובה:</strong> 2.8W, הפסד גדול מאוד יחסית ל-10W.</p>
@@ -367,7 +367,7 @@ AC bottom -> diode -> load same direction -> diode -> AC top</pre>
         <p><strong>נתונים:</strong> עומס צורך 0.8A אחרי גשר דיודות ברשת 50Hz. רוצים Ripple של עד 2V.</p>
         <p><strong>נדרש:</strong> חשבו קיבול ראשוני.</p>
         <ol>
-          <li>בגשר חד פאזי <span class="ym-math-inline">\(f_{ripple}\)</span>=2<span class="ym-math-inline">\(f_{line}\)</span>=100Hz.</li>
+          <li>בגשר חד פאזי <span class="ym-math-inline">\(f_{ripple}=2f_{line}=100\,\mathrm{Hz}\)</span>.</li>
           <li>משתמשים בקירוב <span class="ym-math-inline">\(C=\frac{I}{f\Delta V}\)</span>.</li>
           <li>C=0.8/(100·2)=0.004F=4000µF.</li>
         </ol>

@@ -99,7 +99,7 @@
 
     <section id="operation" class="content-section">
       <h2>פעולת המעגל ואינטואיציה פיזיקלית</h2>
-      <div class="intuition"><strong>כאשר עומס צורך אנרגיה</strong><p>אם <span class="ym-math-inline">\(v(t)\)</span> ו-<span class="ym-math-inline">\(i(t)\)</span> חיוביים לפי סימון הפסיבי, <span class="ym-math-inline">\(p(t)\)</span>&gt;0. אנרגיה זורמת מהמקור אל העומס ומומרת לחום, עבודה מכנית, אור או אגירה זמנית.</p></div>
+      <div class="intuition"><strong>כאשר עומס צורך אנרגיה</strong><p>אם <span class="ym-math-inline">\(v(t)\)</span> ו-<span class="ym-math-inline">\(i(t)\)</span> חיוביים לפי סימון הפסיבי, <span class="ym-math-inline">\(p(t)\gt0\)</span>. אנרגיה זורמת מהמקור אל העומס ומומרת לחום, עבודה מכנית, אור או אגירה זמנית.</p></div>
 <div class="intuition"><strong>כאשר רכיב אוגר אנרגיה</strong><p>סליל וקבל יכולים לקבל אנרגיה בחלק מהמחזור ולהחזיר אותה בחלק אחר. לכן הספק רגעי יכול להיות חיובי ושלילי גם כאשר המערכת אינה מייצרת אנרגיה חדשה.</p></div>
 <div class="intuition"><strong>כאשר מקור רואה זרם מעוות</strong><p>במיישר עם קבל הזרם מהרשת מגיע בפולסים ליד שיא המתח. גם אם המתח כמעט סינוסי, הזרם אינו כזה, ולכן S ו-P אינם מספרים את אותו סיפור.</p></div>
       <h3>הנחות מפורשות</h3>
@@ -188,9 +188,9 @@ p(t):   positive area -&gt; energy to load
 
     <section id="examples" class="content-section">
       <h2>דוגמאות פתורות</h2>
-      <div class="example-block"><h3>דוגמה 1: הספק בנגד DC</h3><p><strong>נתון:</strong> מקור 24V מחובר לנגד 12 ohm.</p><p><strong>נדרש:</strong> חשב זרם והספק.</p><p><strong>פתרון בשלבים:</strong></p><ol><li><span class="ym-math-inline">\(I=\frac{V}{R}\)</span>=24/12=2A.</li><li><span class="ym-math-inline">\(P=VI\)</span>=24·2=48W.</li><li>אפשר גם <span class="ym-math-inline">\(P=\frac{V^2}{R}\)</span>=576/12=48W.</li></ol><p><strong>תשובה:</strong> הזרם 2A וההספק 48W.</p><p><strong>פירוש פיזיקלי:</strong> כל האנרגיה שנכנסת לנגד הופכת לחום, ולכן זהו גם עומס תרמי של 48W.</p></div>
-<div class="example-block"><h3>דוגמה 2: RMS של מקור סינוסי</h3><p><strong>נתון:</strong> מתח סינוסי בעל שיא Vm=325V.</p><p><strong>נדרש:</strong> מצא <span class="ym-math-inline">\(V_{rms}\)</span>.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>לסינוס טהור <span class="ym-math-inline">\(V_{rms}\)</span>=Vm/sqrt(2).</li><li><span class="ym-math-inline">\(V_{rms}\)</span>=325/1.414≈230V.</li></ol><p><strong>תשובה:</strong> <span class="ym-math-inline">\(V_{rms}\)</span>≈230V.</p><p><strong>פירוש פיזיקלי:</strong> זהו מתח רשת טיפוסי. אף שהשיא 325V, החימום בנגד שקול ל-230V DC.</p></div>
-<div class="example-block"><h3>דוגמה 3: מקדם הספק בעומס ליניארי</h3><p><strong>נתון:</strong> <span class="ym-math-inline">\(V_{rms}\)</span>=230V, <span class="ym-math-inline">\(I_{rms}\)</span>=5A, phi=36.9 degrees.</p><p><strong>נדרש:</strong> חשב S, P ו-<span class="ym-math-inline">\(PF\)</span>.</p><p><strong>פתרון בשלבים:</strong></p><ol><li><span class="ym-math-inline">\(S=230\cdot5=1150\,\mathrm{VA}\)</span>.</li><li>cos(36.9)≈0.8.</li><li><span class="ym-math-inline">\(P=S\cdot0.8=920\,\mathrm{W}\)</span>.</li><li><span class="ym-math-inline">\(PF=\frac{P}{S}\)</span>=0.8.</li></ol><p><strong>תשובה:</strong> S=1150VA, P=920W, <span class="ym-math-inline">\(PF\)</span>=0.8.</p><p><strong>פירוש פיזיקלי:</strong> המקור נושא זרם של 5A, אך רק 920W הופכים להספק ממשי.</p></div>
+      <div class="example-block"><h3>דוגמה 1: הספק בנגד DC</h3><p><strong>נתון:</strong> מקור 24V מחובר לנגד 12 ohm.</p><p><strong>נדרש:</strong> חשב זרם והספק.</p><p><strong>פתרון בשלבים:</strong></p><ol><li><span class="ym-math-inline">\(I=\frac{V}{R}=\frac{24}{12}=2\,\mathrm{A}\)</span>.</li><li><span class="ym-math-inline">\(P=VI=24\cdot2=48\,\mathrm{W}\)</span>.</li><li>אפשר גם <span class="ym-math-inline">\(P=\frac{V^2}{R}=\frac{576}{12}=48\,\mathrm{W}\)</span>.</li></ol><p><strong>תשובה:</strong> הזרם 2A וההספק 48W.</p><p><strong>פירוש פיזיקלי:</strong> כל האנרגיה שנכנסת לנגד הופכת לחום, ולכן זהו גם עומס תרמי של 48W.</p></div>
+<div class="example-block"><h3>דוגמה 2: RMS של מקור סינוסי</h3><p><strong>נתון:</strong> מתח סינוסי בעל שיא Vm=325V.</p><p><strong>נדרש:</strong> מצא <span class="ym-math-inline">\(V_{rms}\)</span>.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>לסינוס טהור <span class="ym-math-inline">\(V_{rms}=\frac{V_m}{\sqrt{2}}\)</span>.</li><li><span class="ym-math-inline">\(V_{rms}=\frac{325}{1.414}\approx230\,\mathrm{V}\)</span>.</li></ol><p><strong>תשובה:</strong> <span class="ym-math-inline">\(V_{rms}\)</span>≈230V.</p><p><strong>פירוש פיזיקלי:</strong> זהו מתח רשת טיפוסי. אף שהשיא 325V, החימום בנגד שקול ל-230V DC.</p></div>
+<div class="example-block"><h3>דוגמה 3: מקדם הספק בעומס ליניארי</h3><p><strong>נתון:</strong> <span class="ym-math-inline">\(V_{rms}\)</span>=230V, <span class="ym-math-inline">\(I_{rms}\)</span>=5A, phi=36.9 degrees.</p><p><strong>נדרש:</strong> חשב S, P ו-<span class="ym-math-inline">\(PF\)</span>.</p><p><strong>פתרון בשלבים:</strong></p><ol><li><span class="ym-math-inline">\(S=230\cdot5=1150\,\mathrm{VA}\)</span>.</li><li>cos(36.9)≈0.8.</li><li><span class="ym-math-inline">\(P=S\cdot0.8=920\,\mathrm{W}\)</span>.</li><li><span class="ym-math-inline">\(PF=\frac{P}{S}=0.8\)</span>.</li></ol><p><strong>תשובה:</strong> S=1150VA, P=920W, <span class="ym-math-inline">\(PF\)</span>=0.8.</p><p><strong>פירוש פיזיקלי:</strong> המקור נושא זרם של 5A, אך רק 920W הופכים להספק ממשי.</p></div>
 <div class="example-block"><h3>דוגמה 4: השוואת שיא ל-RMS בזרם פולסי</h3><p><strong>נתון:</strong> שני זרמים בעלי אותו ממוצע אך אחד רציף ואחד פולסי.</p><p><strong>נדרש:</strong> איזה יחמם יותר מוליך?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>חימום תלוי ב-<span class="ym-math-inline">\(I_{rms}\)</span>^2·R.</li><li>זרם פולסי בעל שיאים גדולים מגדיל את ממוצע הריבוע.</li><li>לכן <span class="ym-math-inline">\(I_{rms}\)</span> שלו יכול להיות גבוה גם אם הממוצע זהה.</li></ol><p><strong>תשובה:</strong> הזרם הפולסי יחמם יותר אם ה-RMS שלו גבוה.</p><p><strong>פירוש פיזיקלי:</strong> זו הסיבה שמיישרים עם קבל מעמיסים על רשת ודיודות יותר ממה שהזרם הממוצע מרמז.</p></div>
     </section>
 
@@ -228,7 +228,7 @@ p(t):   positive area -&gt; energy to load
     <section class="content-section">
       <h2>תשובות ורמזים</h2>
       <div class="answer-block">
-        <ol><li>I=2A, P=32W.</li><li><span class="ym-math-inline">\(V_{rms}\)</span>=170/sqrt(2)≈120V.</li><li>S=690VA, P=483W.</li><li>החימום תלוי ב-RMS, ו-RMS גדל כאשר יש שיאים גבוהים.</li><li><span class="ym-math-inline">\(PF\)</span>=400/500=0.8.</li><li>במתחי חסימה, זרמי שיא, דירוג דיודות ומתגים וקבלי כניסה.</li><li>הקבל מחזיר אנרגיה למעגל כאשר המתח עליו גבוה מהמקור המקומי.</li><li>בנגד הזרם בפאזה עם המתח. בסליל אידיאלי הזרם מאחר ויש אנרגיה מוחזרת.</li><li>הזרם RMS יגדל ולכן ההפסדים בכבלים ובמקור יגדלו.</li><li><span class="ym-math-inline">\(PF\)</span> לא יכול להיות גדול מ-1; יש טעות בהגדרת RMS, P או S.</li></ol>
+        <ol><li>I=2A, P=32W.</li><li><span class="ym-math-inline">\(V_{rms}=\frac{170}{\sqrt{2}}\approx120\,\mathrm{V}\)</span>.</li><li>S=690VA, P=483W.</li><li>החימום תלוי ב-RMS, ו-RMS גדל כאשר יש שיאים גבוהים.</li><li><span class="ym-math-inline">\(PF=\frac{400}{500}=0.8\)</span>.</li><li>במתחי חסימה, זרמי שיא, דירוג דיודות ומתגים וקבלי כניסה.</li><li>הקבל מחזיר אנרגיה למעגל כאשר המתח עליו גבוה מהמקור המקומי.</li><li>בנגד הזרם בפאזה עם המתח. בסליל אידיאלי הזרם מאחר ויש אנרגיה מוחזרת.</li><li>הזרם RMS יגדל ולכן ההפסדים בכבלים ובמקור יגדלו.</li><li><span class="ym-math-inline">\(PF\)</span> לא יכול להיות גדול מ-1; יש טעות בהגדרת RMS, P או S.</li></ol>
       </div>
     </section>
 
@@ -248,7 +248,7 @@ p(t):   positive area -&gt; energy to load
         </p>
       </div>
       <p>
-        סימן ההספק הוא חלק מהסיפור. אם הגדרנו את הזרם כנכנס להדק החיובי של רכיב, אז <span class="ym-math-inline">\(p(t)>0\)</span> אומר שהרכיב צורך או אוגר אנרגיה לפי המוסכמה הפסיבית. אם <span class="ym-math-inline">\(p(t)<0\)</span>, הרכיב מחזיר אנרגיה למעגל. בממירי הספק תופעה זו רגילה לחלוטין: סליל בממיר Buck מוסר אנרגיה לעומס בזמן שהמתג כבוי; קבל ביציאת מיישר מזין עומס בין שיאי הרשת; מנוע יכול להחזיר אנרגיה בזמן בלימה רגנרטיבית.
+        סימן ההספק הוא חלק מהסיפור. אם הגדרנו את הזרם כנכנס להדק החיובי של רכיב, אז <span class="ym-math-inline">\(p(t)\gt0\)</span> אומר שהרכיב צורך או אוגר אנרגיה לפי המוסכמה הפסיבית. אם <span class="ym-math-inline">\(p(t)\lt0\)</span>, הרכיב מחזיר אנרגיה למעגל. בממירי הספק תופעה זו רגילה לחלוטין: סליל בממיר Buck מוסר אנרגיה לעומס בזמן שהמתג כבוי; קבל ביציאת מיישר מזין עומס בין שיאי הרשת; מנוע יכול להחזיר אנרגיה בזמן בלימה רגנרטיבית.
       </p>
       <p>
         בהמשך הקורס נשתמש בשפה הזו כדי לנתח כל טופולוגיה. במיישר נשאל מהו RMS הזרם בדיודה ומהו מתח השיא שהדיודה חוסמת. בממיר Buck נשאל מהו המתח הממוצע על הסליל ומדוע הוא חייב להיות אפס במצב יציב. במהפך נשאל אילו הרמוניות מופיעות ומה ה-<span class="ym-math-inline">\(THD\)</span>. בכל המקרים הבסיס הוא אותו בסיס: אנרגיה, צורת גל, RMS, ממוצע ומקדם הספק.
@@ -258,7 +258,7 @@ p(t):   positive area -&gt; energy to load
     <section class="content-section">
       <h2>פיתוח נוסף: RMS מתוך חימום ולא מתוך נוסחה לזיכרון</h2>
       <p>
-        הדרך הטובה ביותר להבין RMS היא להתחיל מנגד. עבור נגד R, ההספק הרגעי הוא <span class="ym-math-inline">\(p(t)\)</span>=i²(t)R. אם הזרם משתנה בזמן, ההספק משתנה בזמן, אך הטמפרטורה של הנגד מגיבה בעיקר להספק ממוצע. לכן נחשב:
+        הדרך הטובה ביותר להבין RMS היא להתחיל מנגד. עבור נגד R, ההספק הרגעי הוא <span class="ym-math-inline">\(p(t)=i^2(t)R\)</span>. אם הזרם משתנה בזמן, ההספק משתנה בזמן, אך הטמפרטורה של הנגד מגיבה בעיקר להספק ממוצע. לכן נחשב:
       </p>
       <div class="ym-math-block ym-math-highlight" dir="ltr">
 \[
@@ -316,7 +316,7 @@ PF=\frac{P}{V_{rms}I_{rms}}
         <ol>
           <li>הזרם הממוצע הוא אפס, כי החלק החיובי והחלק השלילי מתבטלים.</li>
           <li>בחישוב RMS מרבעים את הזרם: גם +5A וגם -5A נותנים 25A².</li>
-          <li>לכן <span class="ym-math-inline">\(I_{rms}\)</span>=sqrt(25)=5A.</li>
+          <li>לכן <span class="ym-math-inline">\(I_{rms}=\sqrt{25}=5\,\mathrm{A}\)</span>.</li>
         </ol>
         <p><strong>תשובה:</strong> הזרם הממוצע אפס, אך <span class="ym-math-inline">\(I_{rms}\)</span>=5A.</p>
         <p><strong>פירוש פיזיקלי:</strong> המוליך יתחמם בדיוק כמו בזרם DC של 5A, כי חימום אינו תלוי בכיוון הזרם.</p>
@@ -327,7 +327,7 @@ PF=\frac{P}{V_{rms}I_{rms}}
         <p><strong>נדרש:</strong> חשבו <span class="ym-math-inline">\(PF\)</span> ובדקו אם הנתונים אפשריים.</p>
         <ol>
           <li>הספק נראה: S=230·2=460VA.</li>
-          <li>מקדם הספק לפי הנתונים: <span class="ym-math-inline">\(PF\)</span>=600/460=1.30.</li>
+          <li>מקדם הספק לפי הנתונים: <span class="ym-math-inline">\(PF=\frac{600}{460}=1.30\)</span>.</li>
           <li><span class="ym-math-inline">\(PF\)</span> לא יכול להיות גדול מ-1, לכן לפחות אחד הנתונים או המדידות שגוי.</li>
         </ol>
         <p><strong>תשובה:</strong> הנתונים אינם עקביים.</p>
@@ -339,8 +339,8 @@ PF=\frac{P}{V_{rms}I_{rms}}
         <p><strong>נדרש:</strong> חשבו <span class="ym-math-inline">\(P_{out}\)</span>, <span class="ym-math-inline">\(P_{in}\)</span> ו-<span class="ym-math-inline">\(P_{loss}\)</span>.</p>
         <ol>
           <li><span class="ym-math-inline">\(P_{out}=V_o I_o=12\cdot5=60\,\mathrm{W}\)</span>.</li>
-          <li><span class="ym-math-inline">\(\eta\)</span>=<span class="ym-math-inline">\(P_{out}\)</span>/<span class="ym-math-inline">\(P_{in}\)</span> ולכן <span class="ym-math-inline">\(P_{in}\)</span>=<span class="ym-math-inline">\(P_{out}\)</span>/<span class="ym-math-inline">\(\eta\)</span>=60/0.9=66.7W.</li>
-          <li><span class="ym-math-inline">\(P_{loss}\)</span>=<span class="ym-math-inline">\(P_{in}\)</span>-<span class="ym-math-inline">\(P_{out}\)</span>=6.7W.</li>
+          <li><span class="ym-math-inline">\(\eta=\frac{P_{out}}{P_{in}}\)</span> ולכן <span class="ym-math-inline">\(P_{in}=\frac{P_{out}}{\eta}=\frac{60}{0.9}=66.7\,\mathrm{W}\)</span>.</li>
+          <li><span class="ym-math-inline">\(P_{loss}=P_{in}-P_{out}=6.7\,\mathrm{W}\)</span>.</li>
         </ol>
         <p><strong>תשובה:</strong> הממיר מוציא 60W, צורך כ-66.7W ומאבד כ-6.7W כחום.</p>
         <p><strong>פירוש פיזיקלי:</strong> 6.7W הם לא פרט קטן; הם קובעים טמפרטורה, גוף קירור, אמינות וצפיפות הספק.</p>
