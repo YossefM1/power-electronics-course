@@ -6,6 +6,19 @@
   <title>אלקטרוניקת הספק - קורס מלא</title>
   <link rel="stylesheet" href="assets/css/course.css">
   <script defer src="assets/js/course.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#content">דלג לתוכן</a>
@@ -59,7 +72,7 @@
         </div>
         <div class="overview-card">
           <h3>לחשוב כמו מתכנן</h3>
-          <p>לבחור רכיבים לפי מתח, זרם, תדר, חום, ESR, Rds(on), הפסדי מיתוג ומרווחי בטיחות.</p>
+          <p>לבחור רכיבים לפי מתח, זרם, תדר, חום, ESR, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, הפסדי מיתוג ומרווחי בטיחות.</p>
         </div>
       </div>
     </section>
@@ -92,7 +105,7 @@
 <a class="lesson-card" href="lessons/lesson-06-dc-dc-buck-converter/"><span class="lesson-number">שיעור 6</span><h3>ממיר Buck</h3><p>פרק מלא על ממיר Buck: טופולוגיה אידיאלית, ON/OFF, דיודת Freewheel, Buck סינכרוני, CCM/DCM, ריפל, תכן ונצילות.</p><div class="card-meta"><span>5-7 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
 <a class="lesson-card" href="lessons/lesson-07-dc-dc-boost-and-buck-boost/"><span class="lesson-number">שיעור 7</span><h3>ממירי Boost ו-Buck-Boost</h3><p>ממירי Step-up והיפוך קוטביות: אגירת אנרגיה בסליל, יחס המרה, מגבלות D גבוה ותכן מעשי.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
 <a class="lesson-card" href="lessons/lesson-08-inductors-capacitors-and-ccm-dcm/"><span class="lesson-number">שיעור 8</span><h3>סלילים, קבלים ו-CCM/DCM</h3><p>רכיבי אגירת אנרגיה, ריפל, מסננים, גבול הולכה רציפה ומקוטעת והשפעת תדר ועומס.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
-<a class="lesson-card" href="lessons/lesson-09-inverters-and-pwm/"><span class="lesson-number">שיעור 9</span><h3>מהפכים ו-PWM</h3><p>המרת DC ל-AC, גשר H, מהפך תלת פאזי, PWM, SPWM, הרמוניות ו-THD.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
+<a class="lesson-card" href="lessons/lesson-09-inverters-and-pwm/"><span class="lesson-number">שיעור 9</span><h3>מהפכים ו-PWM</h3><p>המרת DC ל-AC, גשר H, מהפך תלת פאזי, PWM, SPWM, הרמוניות ו-<span class="ym-math-inline">\(THD\)</span>.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
 <a class="lesson-card" href="lessons/lesson-10-switching-losses-and-efficiency/"><span class="lesson-number">שיעור 10</span><h3>הפסדי מיתוג ונצילות</h3><p>הפסדי הולכה, Switching Losses, הפסדי שער, הפסדי מגנטיקה, נצילות ומודל תרמי בסיסי.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
 <a class="lesson-card" href="lessons/lesson-11-design-examples/"><span class="lesson-number">שיעור 11</span><h3>דוגמאות תכן</h3><p>תהליך תכן משולב: דרישות, בחירת טופולוגיה, חישוב רכיבים, הפסדים, בדיקות קצה וסימולציה.</p><div class="card-meta"><span>5-7 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>
 <a class="lesson-card" href="lessons/lesson-12-summary-and-practice/"><span class="lesson-number">שיעור 12</span><h3>סיכום ותרגול</h3><p>חזרה מסכמת, נוסחאות מרכזיות, אסטרטגיית פתרון ותרגול משולב לכל הקורס.</p><div class="card-meta"><span>4-6 שעות לימוד</span><span>יחידת לימוד מורחבת</span></div></a>

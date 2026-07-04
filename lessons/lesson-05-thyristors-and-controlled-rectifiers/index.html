@@ -6,6 +6,19 @@
   <title>שיעור 5 - תיריסטורים ומיישרים מבוקרים</title>
   <link rel="stylesheet" href="../../assets/css/course.css">
   <script defer src="../../assets/js/course.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#content">דלג לתוכן</a>
@@ -64,7 +77,7 @@
 
     <section id="objectives" class="content-section">
       <h2>מטרות למידה</h2>
-      <ul><li>להסביר במילים את העיקרון הפיזיקלי של תיריסטורים ומיישרים מבוקרים.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, Rds(on), נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
+      <ul><li>להסביר במילים את העיקרון הפיזיקלי של תיריסטורים ומיישרים מבוקרים.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
     </section>
 
     <section id="motivation" class="content-section">
@@ -96,14 +109,42 @@
 
     <section id="math" class="content-section">
       <h2>פיתוח מתמטי</h2>
-      <div class="definition"><strong>מתח RMS בבקרת גל מלא נגדי</strong><p>האינטגרל מחשב את תרומת sin^2 רק מהזווית alpha ועד סוף חצי המחזור, ומשוכפל סימטרית.</p><p class="equation">Vrms = Vs,rms · sqrt((1/pi)·((pi-alpha)+0.5·sin(2alpha)))</p></div>
-<div class="definition"><strong>הספק בעומס נגדי</strong><p>לאחר שמצאנו את RMS של הגל החתוך, חישוב ההספק כמו בנגד רגיל.</p><p class="equation">P = Vrms^2 / R</p></div>
-<div class="definition"><strong>מקרה alpha=0</strong><p>ההצתה בתחילת החצי החיובי נותנת הולכה מלאה כמו דיודה אידיאלית.</p><p class="equation">Vrms = Vs,rms</p></div>
-<div class="definition"><strong>מקרה alpha קרוב ל-pi</strong><p>ההולכה קצרה מאוד ולכן מעט אנרגיה מגיעה לעומס.</p><p class="equation">Vrms -&gt; 0</p></div>
+      <div class="definition"><strong>מתח RMS בבקרת גל מלא נגדי</strong><p>האינטגרל מחשב את תרומת sin^2 רק מהזווית alpha ועד סוף חצי המחזור, ומשוכפל סימטרית.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+V_{rms}=V_{s,rms}\sqrt{\frac{(\pi-\alpha)+\frac{1}{2}\sin(2\alpha)}{\pi}}
+\]
+</div></div>
+<div class="definition"><strong>הספק בעומס נגדי</strong><p>לאחר שמצאנו את RMS של הגל החתוך, חישוב ההספק כמו בנגד רגיל.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P=\frac{V_{rms}^{2}}{R}
+\]
+</div></div>
+<div class="definition"><strong>מקרה alpha=0</strong><p>ההצתה בתחילת החצי החיובי נותנת הולכה מלאה כמו דיודה אידיאלית.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+V_{rms}=V_{s,rms}
+\]
+</div></div>
+<div class="definition"><strong>מקרה alpha קרוב ל-pi</strong><p>ההולכה קצרה מאוד ולכן מעט אנרגיה מגיעה לעומס.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+V_{rms}\rightarrow 0
+\]
+</div></div>
       <div class="formula-grid">
-        <div class="formula-card"><h3>נוסחה</h3><p class="equation">P=Vrms^2/R</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">Vrms=Vs sqrt(((pi-alpha)+0.5sin2alpha)/pi)</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">alpha=0 -&gt; הולכה מלאה</p></div>
+        <div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P=\frac{V_{rms}^{2}}{R}
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+V_{rms}=V_s\sqrt{\frac{(\pi-\alpha)+0.5\sin(2\alpha)}{\pi}}
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+\alpha=0
+\]
+</div></div>
       </div>
     </section>
 
@@ -138,9 +179,9 @@ R load i:   same shape as load voltage / R</pre>
 
     <section id="examples" class="content-section">
       <h2>דוגמאות פתורות</h2>
-      <div class="example-block"><h3>דוגמה 1: הספק מגוף חימום</h3><p><strong>נתון:</strong> R=40 ohm, Vrms על העומס 120V.</p><p><strong>נדרש:</strong> חשב P.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>עומס נגדי: P=V^2/R.</li><li>P=120^2/40.</li><li>P=360W.</li></ol><p><strong>תשובה:</strong> 360W.</p><p><strong>פירוש פיזיקלי:</strong> אם נקטין Vrms בחצי, ההספק ירד לרבע.</p></div>
+      <div class="example-block"><h3>דוגמה 1: הספק מגוף חימום</h3><p><strong>נתון:</strong> R=40 ohm, <span class="ym-math-inline">\(V_{rms}\)</span> על העומס 120V.</p><p><strong>נדרש:</strong> חשב P.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>עומס נגדי: <span class="ym-math-inline">\(P=\frac{V^2}{R}\)</span>.</li><li>P=120^2/40.</li><li>P=360W.</li></ol><p><strong>תשובה:</strong> 360W.</p><p><strong>פירוש פיזיקלי:</strong> אם נקטין <span class="ym-math-inline">\(V_{rms}\)</span> בחצי, ההספק ירד לרבע.</p></div>
 <div class="example-block"><h3>דוגמה 2: משמעות alpha=90 degrees</h3><p><strong>נתון:</strong> בקרת גל מלא בעומס נגדי.</p><p><strong>נדרש:</strong> הסבר מה מקבל העומס.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>החצי הראשון של כל חצי מחזור נחסם.</li><li>הולכה מתחילה רק מהשיא והלאה.</li><li>RMS יורד ביחס למתח המקור.</li></ol><p><strong>תשובה:</strong> העומס מקבל חלק מאוחר מהגל בלבד.</p><p><strong>פירוש פיזיקלי:</strong> השליטה היא בזמן הולכה, לא בהקטנת השיא עצמו.</p></div>
-<div class="example-block"><h3>דוגמה 3: בחירת זווית להספק</h3><p><strong>נתון:</strong> עומס 100 ohm צריך 250W.</p><p><strong>נדרש:</strong> מצא Vrms נדרש.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>P=V^2/R.</li><li>V=sqrt(PR)=sqrt(250·100).</li><li>V≈158V.</li></ol><p><strong>תשובה:</strong> צריך כ-158V RMS על העומס.</p><p><strong>פירוש פיזיקלי:</strong> את alpha מוצאים מהנוסחה או מאופיין מנורמל.</p></div>
+<div class="example-block"><h3>דוגמה 3: בחירת זווית להספק</h3><p><strong>נתון:</strong> עומס 100 ohm צריך 250W.</p><p><strong>נדרש:</strong> מצא <span class="ym-math-inline">\(V_{rms}\)</span> נדרש.</p><p><strong>פתרון בשלבים:</strong></p><ol><li><span class="ym-math-inline">\(P=\frac{V^2}{R}\)</span>.</li><li><span class="ym-math-inline">\(V=\sqrt{PR}\)</span>=sqrt(250·100).</li><li>V≈158V.</li></ol><p><strong>תשובה:</strong> צריך כ-158V RMS על העומס.</p><p><strong>פירוש פיזיקלי:</strong> את alpha מוצאים מהנוסחה או מאופיין מנורמל.</p></div>
 <div class="example-block"><h3>דוגמה 4: פולס שער</h3><p><strong>נתון:</strong> SCR דורש Ig=50mA לזמן קצר והבקרה 5V דרך נגד.</p><p><strong>נדרש:</strong> הערך נגד שער אם נפילת שער 1V.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>המתח על הנגד 4V.</li><li>R=V/I=4/0.05.</li><li>R=80 ohm.</li></ol><p><strong>תשובה:</strong> כ-80 ohm, בכפוף לדף נתונים.</p><p><strong>פירוש פיזיקלי:</strong> זו הערכת התחלה; צריך לבדוק אנרגיית פולס ובידוד.</p></div>
     </section>
 
@@ -153,9 +194,9 @@ R load i:   same shape as load voltage / R</pre>
 <div class="mistake-block"><p><strong>הטעות:</strong> חיבור בקרה ללא בידוד לרשת.</p><p><strong>דרך נכונה:</strong> במערכות רשת נדרש בידוד ותכנון בטיחות קפדני.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> שימוש בנוסחה של תיריסטורים ומיישרים מבוקרים בלי לבדוק את תחום התקפות שלה.</p><p><strong>דרך נכונה:</strong> לפני כל הצבה מזהים אם ההנחה היא אידיאלית, מצב CCM או DCM, עומס נגדי או RL, גל סינוסי או גל מעוות. נוסחה נכונה בהקשר שגוי נותנת תשובה משכנעת אך שגויה.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> בלבול בין ערך ממוצע, ערך RMS וערך שיא.</p><p><strong>דרך נכונה:</strong> ערך ממוצע מתאים לרכיב DC, ערך RMS מתאים לחימום ולהספק בעומס נגדי, וערך שיא חשוב למתחי חסימה ולזרמי שיא. בכל חישוב כותבים במפורש איזה ערך נדרש.</p></div>
-<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מכיוון זרם ומקוטביות מתח בזמן מעבר בין מצבים.</p><p><strong>דרך נכונה:</strong> מסמנים חצי זרם ומתח בכל מצב מיתוג. אם סימן האנרגיה לא ברור, חוזרים להגדרה p(t)=v(t)i(t) ובודקים אם הרכיב אוגר, מוסר או מבזבז אנרגיה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מכיוון זרם ומקוטביות מתח בזמן מעבר בין מצבים.</p><p><strong>דרך נכונה:</strong> מסמנים חצי זרם ומתח בכל מצב מיתוג. אם סימן האנרגיה לא ברור, חוזרים להגדרה <span class="ym-math-inline">\(p(t)=v(t)i(t)\)</span> ובודקים אם הרכיב אוגר, מוסר או מבזבז אנרגיה.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> הצבת מספרים בלי בדיקת יחידות.</p><p><strong>דרך נכונה:</strong> לפני התוצאה הסופית מוודאים שהיחידות מתכנסות: וולט, אמפר, ואט, הנרי, פאראד ושניות. בדיקת יחידות מגלה הרבה טעויות עוד לפני סימולציה.</p></div>
-<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שרכיבים אידיאליים מייצגים רכיב אמיתי.</p><p><strong>דרך נכונה:</strong> המודל האידיאלי נועד להבנה ראשונית. בתכן מוסיפים נפילת דיודה, Rds(on), ESR, זמני מיתוג, מגבלות תרמיות, זרמי שיא וסבילות רכיבים.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שרכיבים אידיאליים מייצגים רכיב אמיתי.</p><p><strong>דרך נכונה:</strong> המודל האידיאלי נועד להבנה ראשונית. בתכן מוסיפים נפילת דיודה, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, ESR, זמני מיתוג, מגבלות תרמיות, זרמי שיא וסבילות רכיבים.</p></div>
     </section>
 
     <section class="content-section">
@@ -171,7 +212,7 @@ R load i:   same shape as load voltage / R</pre>
     <section id="practice" class="content-section">
       <h2>תרגילים</h2>
       <div class="exercise-block">
-        <ol><li>גוף חימום 60 ohm מקבל 180V RMS. חשב P.</li><li>מה קורה להספק כאשר alpha גדל?</li><li>הסבר למה SCR מתאים לבקרת גוף חימום.</li><li>חשב Vrms נדרש ל-500W בעומס 80 ohm.</li><li>מהו תפקיד נגד שער?</li><li>מדוע נדרש snubber בעומסים מסוימים?</li><li>מה הסיכון בבקרת פאזה לרשת?</li><li>הסבר כיבוי טבעי במעבר אפס.</li><li>השווה בין מיישר דיודות למיישר SCR.</li><li>מדוע משתמשים בבידוד אופטי בפיקוד SCR?</li></ol>
+        <ol><li>גוף חימום 60 ohm מקבל 180V RMS. חשב P.</li><li>מה קורה להספק כאשר alpha גדל?</li><li>הסבר למה SCR מתאים לבקרת גוף חימום.</li><li>חשב <span class="ym-math-inline">\(V_{rms}\)</span> נדרש ל-500W בעומס 80 ohm.</li><li>מהו תפקיד נגד שער?</li><li>מדוע נדרש snubber בעומסים מסוימים?</li><li>מה הסיכון בבקרת פאזה לרשת?</li><li>הסבר כיבוי טבעי במעבר אפס.</li><li>השווה בין מיישר דיודות למיישר SCR.</li><li>מדוע משתמשים בבידוד אופטי בפיקוד SCR?</li></ol>
       </div>
     </section>
 

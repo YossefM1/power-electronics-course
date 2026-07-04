@@ -6,6 +6,19 @@
   <title>שיעור 8 - סלילים, קבלים ו-CCM/DCM</title>
   <link rel="stylesheet" href="../../assets/css/course.css">
   <script defer src="../../assets/js/course.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#content">דלג לתוכן</a>
@@ -64,7 +77,7 @@
 
     <section id="objectives" class="content-section">
       <h2>מטרות למידה</h2>
-      <ul><li>להסביר במילים את העיקרון הפיזיקלי של סלילים, קבלים ו-CCM/DCM.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, Rds(on), נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
+      <ul><li>להסביר במילים את העיקרון הפיזיקלי של סלילים, קבלים ו-CCM/DCM.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
     </section>
 
     <section id="motivation" class="content-section">
@@ -96,15 +109,47 @@
 
     <section id="math" class="content-section">
       <h2>פיתוח מתמטי</h2>
-      <div class="definition"><strong>משוואת עוגן</strong><p>זו המשוואה המרכזית של השיעור. היא מתקבלת ממאזן אנרגיה, מאזן וולט-שנייה, מאזן מטען או פירוק הרמוני לפי ההקשר.</p><p class="equation">EL=0.5LI^2; EC=0.5CV^2; vL=Ldi/dt; iC=Cdv/dt</p></div>
-<div class="definition"><strong>מאזן הספק</strong><p>אין ממיר שמייצר אנרגיה. כל הפרש בין כניסה ליציאה מופיע כהפסד חום, אגירה זמנית או אנרגיה חוזרת.</p><p class="equation">Pin = Pout + Ploss</p></div>
-<div class="definition"><strong>בדיקת גבולות</strong><p>בדיקת גבולות מראה אם המשוואה מתנהגת פיזיקלית. אם תוצאה שואפת לאינסוף, בודקים אילו הנחות נשברו.</p><p class="equation">D -&gt; 0, D -&gt; 1, Iload -&gt; 0, fsw -&gt; high</p></div>
-<div class="definition"><strong>ריפל והמסנן</strong><p>ריפל גדל כאשר זמן המחזור גדל או רכיבי האגירה קטנים, וקטן כאשר L, C או fsw גדלים.</p><p class="equation">ripple is proportional to current slope and switching period</p></div>
+      <div class="definition"><strong>משוואת עוגן</strong><p>זו המשוואה המרכזית של השיעור. היא מתקבלת ממאזן אנרגיה, מאזן וולט-שנייה, מאזן מטען או פירוק הרמוני לפי ההקשר.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+E_L=\frac{1}{2}LI^2,\quad E_C=\frac{1}{2}CV^2,\quad v_L=L\frac{di}{dt},\quad i_C=C\frac{dv}{dt}
+\]
+</div></div>
+<div class="definition"><strong>מאזן הספק</strong><p>אין ממיר שמייצר אנרגיה. כל הפרש בין כניסה ליציאה מופיע כהפסד חום, אגירה זמנית או אנרגיה חוזרת.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{in}=P_{out}+P_{loss}
+\]
+</div></div>
+<div class="definition"><strong>בדיקת גבולות</strong><p>בדיקת גבולות מראה אם המשוואה מתנהגת פיזיקלית. אם תוצאה שואפת לאינסוף, בודקים אילו הנחות נשברו.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+D\rightarrow 0,\quad D\rightarrow 1,\quad I_{load}\rightarrow 0,\quad f_s\rightarrow \infty
+\]
+</div></div>
+<div class="definition"><strong>ריפל והמסנן</strong><p>ריפל גדל כאשר זמן המחזור גדל או רכיבי האגירה קטנים, וקטן כאשר L, C או <span class="ym-math-inline">\(f_s\)</span> גדלים.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+\Delta x\propto \left(\frac{dx}{dt}\right)T_s
+\]
+</div></div>
       <div class="formula-grid">
-        <div class="formula-card"><h3>נוסחה</h3><p class="equation">EL=0.5LI^2; EC=0.5CV^2; vL=Ldi/dt; iC=Cdv/dt</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">Pin=Pout+Ploss</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">eta=Pout/Pin</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">Ripple decreases when L/C/fsw increase</p></div>
+        <div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+E_L=\frac{1}{2}LI^2,\quad E_C=\frac{1}{2}CV^2,\quad v_L=L\frac{di}{dt},\quad i_C=C\frac{dv}{dt}
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{in}=P_{out}+P_{loss}
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+\eta=\frac{P_{out}}{P_{in}}
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+\Delta I,\Delta V\downarrow\quad \text{when}\quad L,C,f_s\uparrow
+\]
+</div></div>
       </div>
     </section>
 
@@ -130,7 +175,7 @@ Capacitor voltage: small ripple around Vo</pre>
 <div class="design-rule"><strong>כלל תכן</strong><p>מחשבים תחילה מודל אידיאלי ואז מוסיפים תיקונים.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>בודקים זרם RMS, זרם שיא ומתח חסימה לכל רכיב.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>מגדירים ריפל מותר ובוחרים L/C בהתאם.</p></div>
-<div class="design-rule"><strong>כלל תכן</strong><p>בודקים ESR, Rds(on), נפילת דיודה ו-Switching Losses.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בודקים ESR, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, נפילת דיודה ו-Switching Losses.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>בודקים טמפרטורת צומת ומרווחי בטיחות.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>מנתחים מצבי קצה: עומס נמוך, עומס גבוה, כניסה מינימלית ומקסימלית.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>מאמתים בסימולציה אך לא מוותרים על בדיקת סבירות ידנית.</p></div>
@@ -140,8 +185,8 @@ Capacitor voltage: small ripple around Vo</pre>
     <section id="examples" class="content-section">
       <h2>דוגמאות פתורות</h2>
       <div class="example-block"><h3>דוגמה 1: דוגמה מושגית</h3><p><strong>נתון:</strong> נדרש להסביר את תפקיד רכיב האגירה בנושא השיעור.</p><p><strong>נדרש:</strong> מה הוא עושה פיזיקלית?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>מזהים מתי הרכיב מקבל אנרגיה.</li><li>מזהים מתי הוא מוסר אנרגיה.</li><li>בודקים מה העומס רואה לאחר הסינון או המיתוג.</li></ol><p><strong>תשובה:</strong> הרכיב מעביר אנרגיה בזמן ומקטין שינויי זרם או מתח.</p><p><strong>פירוש פיזיקלי:</strong> זו הסיבה שממיר ממותג יכול לתת ערך ממוצע מבוקר במקום גל פולסי גס.</p></div>
-<div class="example-block"><h3>דוגמה 2: דוגמה מספרית בסיסית</h3><p><strong>נתון:</strong> הספק יציאה 100W ונצילות משוערת 90%.</p><p><strong>נדרש:</strong> חשב הספק כניסה והפסדים.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>Pin=Pout/eta=100/0.9.</li><li>Pin=111.1W.</li><li>Ploss=11.1W.</li></ol><p><strong>תשובה:</strong> Pin≈111W והפסדים≈11W.</p><p><strong>פירוש פיזיקלי:</strong> גם נצילות טובה משאירה חום שצריך לפנות.</p></div>
-<div class="example-block"><h3>דוגמה 3: דוגמת תכן ריפל</h3><p><strong>נתון:</strong> רוצים להקטין Ripple פי שניים בלי לשנות עומס.</p><p><strong>נדרש:</strong> מה אפשר לעשות?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>להגדיל L או C בהתאם לסוג הריפל.</li><li>להעלות fsw אם הפסדי מיתוג מאפשרים.</li><li>לשפר ESR או טופולוגיה.</li></ol><p><strong>תשובה:</strong> אין פעולה אחת חינמית; כל פתרון יוצר פשרה.</p><p><strong>פירוש פיזיקלי:</strong> תכן הספק הוא איזון בין גודל, חום, רעש ועלות.</p></div>
+<div class="example-block"><h3>דוגמה 2: דוגמה מספרית בסיסית</h3><p><strong>נתון:</strong> הספק יציאה 100W ונצילות משוערת 90%.</p><p><strong>נדרש:</strong> חשב הספק כניסה והפסדים.</p><p><strong>פתרון בשלבים:</strong></p><ol><li><span class="ym-math-inline">\(P_{in}\)</span>=<span class="ym-math-inline">\(P_{out}\)</span>/<span class="ym-math-inline">\(\eta\)</span>=100/0.9.</li><li><span class="ym-math-inline">\(P_{in}\)</span>=111.1W.</li><li><span class="ym-math-inline">\(P_{loss}\)</span>=11.1W.</li></ol><p><strong>תשובה:</strong> <span class="ym-math-inline">\(P_{in}\)</span>≈111W והפסדים≈11W.</p><p><strong>פירוש פיזיקלי:</strong> גם נצילות טובה משאירה חום שצריך לפנות.</p></div>
+<div class="example-block"><h3>דוגמה 3: דוגמת תכן ריפל</h3><p><strong>נתון:</strong> רוצים להקטין Ripple פי שניים בלי לשנות עומס.</p><p><strong>נדרש:</strong> מה אפשר לעשות?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>להגדיל L או C בהתאם לסוג הריפל.</li><li>להעלות <span class="ym-math-inline">\(f_s\)</span> אם הפסדי מיתוג מאפשרים.</li><li>לשפר ESR או טופולוגיה.</li></ol><p><strong>תשובה:</strong> אין פעולה אחת חינמית; כל פתרון יוצר פשרה.</p><p><strong>פירוש פיזיקלי:</strong> תכן הספק הוא איזון בין גודל, חום, רעש ועלות.</p></div>
 <div class="example-block"><h3>דוגמה 4: תיקון לא אידיאלי</h3><p><strong>נתון:</strong> חישוב אידיאלי נתן רכיב על גבול הדירוג.</p><p><strong>נדרש:</strong> מה עושים?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>מוסיפים נפילות מתח, זרמי שיא וטמפרטורה.</li><li>בוחרים דירוג גבוה יותר.</li><li>בודקים מחדש נצילות וקירור.</li></ol><p><strong>תשובה:</strong> לא משתמשים ברכיב על הגבול.</p><p><strong>פירוש פיזיקלי:</strong> אמינות נבנית ממרווחים ולא מתוצאה נומינלית בלבד.</p></div>
     </section>
 
@@ -150,13 +195,13 @@ Capacitor voltage: small ripple around Vo</pre>
       <div class="mistake-block"><p><strong>הטעות:</strong> לזכור את הנוסחה בלי להבין את מצבי הפעולה.</p><p><strong>דרך נכונה:</strong> מציירים ON/OFF או מקטעי הולכה ומסמנים מסלולי זרם לפני הצבה.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> להתעלם מהשפעת עומס.</p><p><strong>דרך נכונה:</strong> עומס קובע זרמים, ריפל, מצב CCM/DCM והפסדים.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> להניח שנצילות אינה תלויה בתדר.</p><p><strong>דרך נכונה:</strong> הפסדי מיתוג והפסדי ליבה משתנים עם תדר.</p></div>
-<div class="mistake-block"><p><strong>הטעות:</strong> לשכוח ESR או Rds(on).</p><p><strong>דרך נכונה:</strong> רכיבים לא אידיאליים קובעים ריפל וחימום בפועל.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> לשכוח ESR או <span class="ym-math-inline">\(R_{DS(on)}\)</span>.</p><p><strong>דרך נכונה:</strong> רכיבים לא אידיאליים קובעים ריפל וחימום בפועל.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> לא לבדוק גבולות.</p><p><strong>דרך נכונה:</strong> בודקים D, זרם, מתח ונצילות מול גבולות פיזיקליים.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> שימוש בנוסחה של סלילים, קבלים ו-CCM/DCM בלי לבדוק את תחום התקפות שלה.</p><p><strong>דרך נכונה:</strong> לפני כל הצבה מזהים אם ההנחה היא אידיאלית, מצב CCM או DCM, עומס נגדי או RL, גל סינוסי או גל מעוות. נוסחה נכונה בהקשר שגוי נותנת תשובה משכנעת אך שגויה.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> בלבול בין ערך ממוצע, ערך RMS וערך שיא.</p><p><strong>דרך נכונה:</strong> ערך ממוצע מתאים לרכיב DC, ערך RMS מתאים לחימום ולהספק בעומס נגדי, וערך שיא חשוב למתחי חסימה ולזרמי שיא. בכל חישוב כותבים במפורש איזה ערך נדרש.</p></div>
-<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מכיוון זרם ומקוטביות מתח בזמן מעבר בין מצבים.</p><p><strong>דרך נכונה:</strong> מסמנים חצי זרם ומתח בכל מצב מיתוג. אם סימן האנרגיה לא ברור, חוזרים להגדרה p(t)=v(t)i(t) ובודקים אם הרכיב אוגר, מוסר או מבזבז אנרגיה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מכיוון זרם ומקוטביות מתח בזמן מעבר בין מצבים.</p><p><strong>דרך נכונה:</strong> מסמנים חצי זרם ומתח בכל מצב מיתוג. אם סימן האנרגיה לא ברור, חוזרים להגדרה <span class="ym-math-inline">\(p(t)=v(t)i(t)\)</span> ובודקים אם הרכיב אוגר, מוסר או מבזבז אנרגיה.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> הצבת מספרים בלי בדיקת יחידות.</p><p><strong>דרך נכונה:</strong> לפני התוצאה הסופית מוודאים שהיחידות מתכנסות: וולט, אמפר, ואט, הנרי, פאראד ושניות. בדיקת יחידות מגלה הרבה טעויות עוד לפני סימולציה.</p></div>
-<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שרכיבים אידיאליים מייצגים רכיב אמיתי.</p><p><strong>דרך נכונה:</strong> המודל האידיאלי נועד להבנה ראשונית. בתכן מוסיפים נפילת דיודה, Rds(on), ESR, זמני מיתוג, מגבלות תרמיות, זרמי שיא וסבילות רכיבים.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שרכיבים אידיאליים מייצגים רכיב אמיתי.</p><p><strong>דרך נכונה:</strong> המודל האידיאלי נועד להבנה ראשונית. בתכן מוסיפים נפילת דיודה, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, ESR, זמני מיתוג, מגבלות תרמיות, זרמי שיא וסבילות רכיבים.</p></div>
     </section>
 
     <section class="content-section">
@@ -172,14 +217,14 @@ Capacitor voltage: small ripple around Vo</pre>
     <section id="practice" class="content-section">
       <h2>תרגילים</h2>
       <div class="exercise-block">
-        <ol><li>כתוב את מצבי הפעולה העיקריים של הנושא.</li><li>הסבר מה העומס רואה לאחר הסינון או המיתוג.</li><li>חשב הפסדים אם Pout=50W והנצילות 85%.</li><li>ציין שלושה פרמטרים לא אידיאליים שיש לבדוק.</li><li>הסבר איך הגדלת fsw משפיעה על ריפל ועל הפסדים.</li><li>תאר בדיקת גבולות למשוואה המרכזית.</li><li>הצע דרך להקטנת Ripple וציין מחיר הנדסי.</li><li>כתוב רשימת בדיקות לרכיב המיתוג.</li><li>הסבר מתי RMS חשוב יותר מממוצע.</li><li>נסח שאלת תכן אחת שדורשת גם חישוב וגם שיקול מעשי.</li></ol>
+        <ol><li>כתוב את מצבי הפעולה העיקריים של הנושא.</li><li>הסבר מה העומס רואה לאחר הסינון או המיתוג.</li><li>חשב הפסדים אם <span class="ym-math-inline">\(P_{out}\)</span>=50W והנצילות 85%.</li><li>ציין שלושה פרמטרים לא אידיאליים שיש לבדוק.</li><li>הסבר איך הגדלת <span class="ym-math-inline">\(f_s\)</span> משפיעה על ריפל ועל הפסדים.</li><li>תאר בדיקת גבולות למשוואה המרכזית.</li><li>הצע דרך להקטנת Ripple וציין מחיר הנדסי.</li><li>כתוב רשימת בדיקות לרכיב המיתוג.</li><li>הסבר מתי RMS חשוב יותר מממוצע.</li><li>נסח שאלת תכן אחת שדורשת גם חישוב וגם שיקול מעשי.</li></ol>
       </div>
     </section>
 
     <section class="content-section">
       <h2>תשובות ורמזים</h2>
       <div class="answer-block">
-        <ol><li>יש לפרט את מצב ההולכה, מצב החסימה/פריקה ומצב המעבר.</li><li>העומס רואה את הרכיב הממוצע הרצוי ועוד ריפל.</li><li>Pin=50/0.85=58.8W, הפסדים=8.8W.</li><li>לדוגמה ESR, Rds(on), נפילת דיודה, זמן מיתוג, טמפרטורה.</li><li>ריפל קטן אך הפסדי מיתוג גדלים.</li><li>בודקים D קיצוני, עומס אפס, עומס מלא ותדר גבוה.</li><li>להגדיל L/C או fsw; המחיר הוא גודל, עלות או הפסדים.</li><li>מתח חסימה, זרם RMS, זרם שיא, הפסדים, דרייבר וקירור.</li><li>כאשר מחשבים חימום או הספק בעומס נגדי.</li><li>לדוגמה: תכנן רכיב שמקטין ריפל בלי לעבור טמפרטורה מותרת.</li></ol>
+        <ol><li>יש לפרט את מצב ההולכה, מצב החסימה/פריקה ומצב המעבר.</li><li>העומס רואה את הרכיב הממוצע הרצוי ועוד ריפל.</li><li><span class="ym-math-inline">\(P_{in}\)</span>=50/0.85=58.8W, הפסדים=8.8W.</li><li>לדוגמה ESR, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, נפילת דיודה, זמן מיתוג, טמפרטורה.</li><li>ריפל קטן אך הפסדי מיתוג גדלים.</li><li>בודקים D קיצוני, עומס אפס, עומס מלא ותדר גבוה.</li><li>להגדיל L/C או <span class="ym-math-inline">\(f_s\)</span>; המחיר הוא גודל, עלות או הפסדים.</li><li>מתח חסימה, זרם RMS, זרם שיא, הפסדים, דרייבר וקירור.</li><li>כאשר מחשבים חימום או הספק בעומס נגדי.</li><li>לדוגמה: תכנן רכיב שמקטין ריפל בלי לעבור טמפרטורה מותרת.</li></ol>
       </div>
     </section>
 

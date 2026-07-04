@@ -6,6 +6,19 @@
   <title>שיעור 1 - מבוא, הספקים וערכי RMS</title>
   <link rel="stylesheet" href="../../assets/css/course.css">
   <script defer src="../../assets/js/course.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#content">דלג לתוכן</a>
@@ -64,7 +77,7 @@
 
     <section id="objectives" class="content-section">
       <h2>מטרות למידה</h2>
-      <ul><li>להסביר במילים את העיקרון הפיזיקלי של מבוא, הספקים וערכי RMS.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, Rds(on), נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
+      <ul><li>להסביר במילים את העיקרון הפיזיקלי של מבוא, הספקים וערכי RMS.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
     </section>
 
     <section id="motivation" class="content-section">
@@ -86,25 +99,61 @@
 
     <section id="operation" class="content-section">
       <h2>פעולת המעגל ואינטואיציה פיזיקלית</h2>
-      <div class="intuition"><strong>כאשר עומס צורך אנרגיה</strong><p>אם v(t) ו-i(t) חיוביים לפי סימון הפסיבי, p(t)&gt;0. אנרגיה זורמת מהמקור אל העומס ומומרת לחום, עבודה מכנית, אור או אגירה זמנית.</p></div>
+      <div class="intuition"><strong>כאשר עומס צורך אנרגיה</strong><p>אם <span class="ym-math-inline">\(v(t)\)</span> ו-<span class="ym-math-inline">\(i(t)\)</span> חיוביים לפי סימון הפסיבי, <span class="ym-math-inline">\(p(t)\)</span>&gt;0. אנרגיה זורמת מהמקור אל העומס ומומרת לחום, עבודה מכנית, אור או אגירה זמנית.</p></div>
 <div class="intuition"><strong>כאשר רכיב אוגר אנרגיה</strong><p>סליל וקבל יכולים לקבל אנרגיה בחלק מהמחזור ולהחזיר אותה בחלק אחר. לכן הספק רגעי יכול להיות חיובי ושלילי גם כאשר המערכת אינה מייצרת אנרגיה חדשה.</p></div>
 <div class="intuition"><strong>כאשר מקור רואה זרם מעוות</strong><p>במיישר עם קבל הזרם מהרשת מגיע בפולסים ליד שיא המתח. גם אם המתח כמעט סינוסי, הזרם אינו כזה, ולכן S ו-P אינם מספרים את אותו סיפור.</p></div>
       <h3>הנחות מפורשות</h3>
-      <ul class="compact-list"><li>אותות מחזוריים נמדדים על פני מחזור שלם T.</li><li>הסימן של הספק נקבע לפי כיוון הזרם שסומן במעגל.</li><li>כאשר משתמשים בפאזורים, הערכים הם בדרך כלל RMS ולא שיא.</li><li>נוסחת P=Vrms·Irms·cos(phi) תקפה לעומס ליניארי סינוסואידלי.</li></ul>
+      <ul class="compact-list"><li>אותות מחזוריים נמדדים על פני מחזור שלם T.</li><li>הסימן של הספק נקבע לפי כיוון הזרם שסומן במעגל.</li><li>כאשר משתמשים בפאזורים, הערכים הם בדרך כלל RMS ולא שיא.</li><li>נוסחת <span class="ym-math-inline">\(P=V_{rms}I_{rms}\cos(\phi)\)</span> תקפה לעומס ליניארי סינוסואידלי.</li></ul>
     </section>
 
     <section id="math" class="content-section">
       <h2>פיתוח מתמטי</h2>
-      <div class="definition"><strong>הספק רגעי</strong><p>הספק הוא קצב מעבר אנרגיה. אם מתח נמדד בוולט וזרם באמפר, המכפלה היא ואט. סימן ההספק תלוי בהגדרת כיוון הזרם והמתח.</p><p class="equation">p(t) = v(t) · i(t)  [W]</p></div>
-<div class="definition"><strong>הספק ממוצע</strong><p>המערכת התרמית או המכאנית מגיבה לרוב להספק ממוצע לאורך זמן. לכן במעגלי AC אנו מבצעים ממוצע על מחזור שלם.</p><p class="equation">Pavg = (1/T) · integral_0^T p(t) dt</p></div>
-<div class="definition"><strong>ערך RMS</strong><p>הריבוע מבטל סימנים ומדגיש את תרומת החימום. השורש מחזיר את היחידות למתח או זרם.</p><p class="equation">Xrms = sqrt((1/T) · integral_0^T x^2(t) dt)</p></div>
-<div class="definition"><strong>הספק נראה ומקדם הספק</strong><p>המקור והכבלים צריכים לשאת את הזרם הכולל, גם אם חלק ממנו אינו הופך להספק ממשי. לכן S נמדד ב-VA ולא ב-W.</p><p class="equation">S = Vrms · Irms  [VA],   PF = Pavg / S</p></div>
+      <div class="definition"><strong>הספק רגעי</strong><p>הספק הוא קצב מעבר אנרגיה. אם מתח נמדד בוולט וזרם באמפר, המכפלה היא ואט. סימן ההספק תלוי בהגדרת כיוון הזרם והמתח.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+p(t)=v(t)i(t)\quad [\mathrm{W}]
+\]
+</div></div>
+<div class="definition"><strong>הספק ממוצע</strong><p>המערכת התרמית או המכאנית מגיבה לרוב להספק ממוצע לאורך זמן. לכן במעגלי AC אנו מבצעים ממוצע על מחזור שלם.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{avg}=\frac{1}{T}\int_{0}^{T}p(t)\,dt
+\]
+</div></div>
+<div class="definition"><strong>ערך RMS</strong><p>הריבוע מבטל סימנים ומדגיש את תרומת החימום. השורש מחזיר את היחידות למתח או זרם.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+X_{rms}=\sqrt{\frac{1}{T}\int_{0}^{T}x^2(t)\,dt}
+\]
+</div></div>
+<div class="definition"><strong>הספק נראה ומקדם הספק</strong><p>המקור והכבלים צריכים לשאת את הזרם הכולל, גם אם חלק ממנו אינו הופך להספק ממשי. לכן S נמדד ב-VA ולא ב-W.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+S=V_{rms}I_{rms}\quad [\mathrm{VA}],\qquad PF=\frac{P_{avg}}{S}
+\]
+</div></div>
       <div class="formula-grid">
-        <div class="formula-card"><h3>נוסחה</h3><p class="equation">p(t)=v(t)i(t)</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">Pavg=(1/T)integral p(t)dt</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">Xrms=sqrt((1/T)integral x^2(t)dt)</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">S=VrmsIrms</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">PF=P/S</p></div>
+        <div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+p(t)=v(t)i(t)
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{avg}=\frac{1}{T}\int p(t)\,dt
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+X_{rms}=\sqrt{\frac{1}{T}\int x^2(t)\,dt}
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+S=V_{rms}I_{rms}
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+PF=\frac{P}{S}
+\]
+</div></div>
       </div>
     </section>
 
@@ -127,8 +176,8 @@ p(t):   positive area -&gt; energy to load
     <section id="design" class="content-section">
       <h2>משוואות תכן וכללי אצבע</h2>
       <div class="design-rule"><strong>כלל תכן</strong><p>בכל בעיה רושמים תחילה אם הערכים הם peak, RMS או average.</p></div>
-<div class="design-rule"><strong>כלל תכן</strong><p>בעומס נגדי משתמשים ב-P=Vrms^2/R לחישוב חימום.</p></div>
-<div class="design-rule"><strong>כלל תכן</strong><p>במערכת לא ליניארית לא מסתפקים בזווית פאזה. בודקים גם THD ומקדם הספק כולל.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>בעומס נגדי משתמשים ב-<span class="ym-math-inline">\(P=\frac{V_{rms}^{2}}{R}\)</span> לחישוב חימום.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>במערכת לא ליניארית לא מסתפקים בזווית פאזה. בודקים גם <span class="ym-math-inline">\(THD\)</span> ומקדם הספק כולל.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>בוחרים רכיבים לפי RMS לחימום, לפי שיא למתחי חסימה וזרמי שיא, ולפי ממוצע למאזן אנרגיה.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>כאשר תוצאה מספרית נראית גבוהה מדי, בודקים אם הוכפל ערך שיא במקום RMS.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>הספק שלילי רגעי אינו כשל; הוא מידע על כיוון זרימת האנרגיה.</p></div>
@@ -139,10 +188,10 @@ p(t):   positive area -&gt; energy to load
 
     <section id="examples" class="content-section">
       <h2>דוגמאות פתורות</h2>
-      <div class="example-block"><h3>דוגמה 1: הספק בנגד DC</h3><p><strong>נתון:</strong> מקור 24V מחובר לנגד 12 ohm.</p><p><strong>נדרש:</strong> חשב זרם והספק.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>I=V/R=24/12=2A.</li><li>P=V·I=24·2=48W.</li><li>אפשר גם P=V^2/R=576/12=48W.</li></ol><p><strong>תשובה:</strong> הזרם 2A וההספק 48W.</p><p><strong>פירוש פיזיקלי:</strong> כל האנרגיה שנכנסת לנגד הופכת לחום, ולכן זהו גם עומס תרמי של 48W.</p></div>
-<div class="example-block"><h3>דוגמה 2: RMS של מקור סינוסי</h3><p><strong>נתון:</strong> מתח סינוסי בעל שיא Vm=325V.</p><p><strong>נדרש:</strong> מצא Vrms.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>לסינוס טהור Vrms=Vm/sqrt(2).</li><li>Vrms=325/1.414≈230V.</li></ol><p><strong>תשובה:</strong> Vrms≈230V.</p><p><strong>פירוש פיזיקלי:</strong> זהו מתח רשת טיפוסי. אף שהשיא 325V, החימום בנגד שקול ל-230V DC.</p></div>
-<div class="example-block"><h3>דוגמה 3: מקדם הספק בעומס ליניארי</h3><p><strong>נתון:</strong> Vrms=230V, Irms=5A, phi=36.9 degrees.</p><p><strong>נדרש:</strong> חשב S, P ו-PF.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>S=230·5=1150VA.</li><li>cos(36.9)≈0.8.</li><li>P=S·0.8=920W.</li><li>PF=P/S=0.8.</li></ol><p><strong>תשובה:</strong> S=1150VA, P=920W, PF=0.8.</p><p><strong>פירוש פיזיקלי:</strong> המקור נושא זרם של 5A, אך רק 920W הופכים להספק ממשי.</p></div>
-<div class="example-block"><h3>דוגמה 4: השוואת שיא ל-RMS בזרם פולסי</h3><p><strong>נתון:</strong> שני זרמים בעלי אותו ממוצע אך אחד רציף ואחד פולסי.</p><p><strong>נדרש:</strong> איזה יחמם יותר מוליך?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>חימום תלוי ב-Irms^2·R.</li><li>זרם פולסי בעל שיאים גדולים מגדיל את ממוצע הריבוע.</li><li>לכן Irms שלו יכול להיות גבוה גם אם הממוצע זהה.</li></ol><p><strong>תשובה:</strong> הזרם הפולסי יחמם יותר אם ה-RMS שלו גבוה.</p><p><strong>פירוש פיזיקלי:</strong> זו הסיבה שמיישרים עם קבל מעמיסים על רשת ודיודות יותר ממה שהזרם הממוצע מרמז.</p></div>
+      <div class="example-block"><h3>דוגמה 1: הספק בנגד DC</h3><p><strong>נתון:</strong> מקור 24V מחובר לנגד 12 ohm.</p><p><strong>נדרש:</strong> חשב זרם והספק.</p><p><strong>פתרון בשלבים:</strong></p><ol><li><span class="ym-math-inline">\(I=\frac{V}{R}\)</span>=24/12=2A.</li><li><span class="ym-math-inline">\(P=VI\)</span>=24·2=48W.</li><li>אפשר גם <span class="ym-math-inline">\(P=\frac{V^2}{R}\)</span>=576/12=48W.</li></ol><p><strong>תשובה:</strong> הזרם 2A וההספק 48W.</p><p><strong>פירוש פיזיקלי:</strong> כל האנרגיה שנכנסת לנגד הופכת לחום, ולכן זהו גם עומס תרמי של 48W.</p></div>
+<div class="example-block"><h3>דוגמה 2: RMS של מקור סינוסי</h3><p><strong>נתון:</strong> מתח סינוסי בעל שיא Vm=325V.</p><p><strong>נדרש:</strong> מצא <span class="ym-math-inline">\(V_{rms}\)</span>.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>לסינוס טהור <span class="ym-math-inline">\(V_{rms}\)</span>=Vm/sqrt(2).</li><li><span class="ym-math-inline">\(V_{rms}\)</span>=325/1.414≈230V.</li></ol><p><strong>תשובה:</strong> <span class="ym-math-inline">\(V_{rms}\)</span>≈230V.</p><p><strong>פירוש פיזיקלי:</strong> זהו מתח רשת טיפוסי. אף שהשיא 325V, החימום בנגד שקול ל-230V DC.</p></div>
+<div class="example-block"><h3>דוגמה 3: מקדם הספק בעומס ליניארי</h3><p><strong>נתון:</strong> <span class="ym-math-inline">\(V_{rms}\)</span>=230V, <span class="ym-math-inline">\(I_{rms}\)</span>=5A, phi=36.9 degrees.</p><p><strong>נדרש:</strong> חשב S, P ו-<span class="ym-math-inline">\(PF\)</span>.</p><p><strong>פתרון בשלבים:</strong></p><ol><li><span class="ym-math-inline">\(S=230\cdot5=1150\,\mathrm{VA}\)</span>.</li><li>cos(36.9)≈0.8.</li><li><span class="ym-math-inline">\(P=S\cdot0.8=920\,\mathrm{W}\)</span>.</li><li><span class="ym-math-inline">\(PF=\frac{P}{S}\)</span>=0.8.</li></ol><p><strong>תשובה:</strong> S=1150VA, P=920W, <span class="ym-math-inline">\(PF\)</span>=0.8.</p><p><strong>פירוש פיזיקלי:</strong> המקור נושא זרם של 5A, אך רק 920W הופכים להספק ממשי.</p></div>
+<div class="example-block"><h3>דוגמה 4: השוואת שיא ל-RMS בזרם פולסי</h3><p><strong>נתון:</strong> שני זרמים בעלי אותו ממוצע אך אחד רציף ואחד פולסי.</p><p><strong>נדרש:</strong> איזה יחמם יותר מוליך?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>חימום תלוי ב-<span class="ym-math-inline">\(I_{rms}\)</span>^2·R.</li><li>זרם פולסי בעל שיאים גדולים מגדיל את ממוצע הריבוע.</li><li>לכן <span class="ym-math-inline">\(I_{rms}\)</span> שלו יכול להיות גבוה גם אם הממוצע זהה.</li></ol><p><strong>תשובה:</strong> הזרם הפולסי יחמם יותר אם ה-RMS שלו גבוה.</p><p><strong>פירוש פיזיקלי:</strong> זו הסיבה שמיישרים עם קבל מעמיסים על רשת ודיודות יותר ממה שהזרם הממוצע מרמז.</p></div>
     </section>
 
     <section class="content-section">
@@ -154,9 +203,9 @@ p(t):   positive area -&gt; energy to load
 <div class="mistake-block"><p><strong>הטעות:</strong> לשכוח את סימן ההספק.</p><p><strong>דרך נכונה:</strong> הסימן אומר אם הרכיב צורך או מחזיר אנרגיה לפי סימון הזרם.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> שימוש בנוסחה של מבוא, הספקים וערכי RMS בלי לבדוק את תחום התקפות שלה.</p><p><strong>דרך נכונה:</strong> לפני כל הצבה מזהים אם ההנחה היא אידיאלית, מצב CCM או DCM, עומס נגדי או RL, גל סינוסי או גל מעוות. נוסחה נכונה בהקשר שגוי נותנת תשובה משכנעת אך שגויה.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> בלבול בין ערך ממוצע, ערך RMS וערך שיא.</p><p><strong>דרך נכונה:</strong> ערך ממוצע מתאים לרכיב DC, ערך RMS מתאים לחימום ולהספק בעומס נגדי, וערך שיא חשוב למתחי חסימה ולזרמי שיא. בכל חישוב כותבים במפורש איזה ערך נדרש.</p></div>
-<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מכיוון זרם ומקוטביות מתח בזמן מעבר בין מצבים.</p><p><strong>דרך נכונה:</strong> מסמנים חצי זרם ומתח בכל מצב מיתוג. אם סימן האנרגיה לא ברור, חוזרים להגדרה p(t)=v(t)i(t) ובודקים אם הרכיב אוגר, מוסר או מבזבז אנרגיה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מכיוון זרם ומקוטביות מתח בזמן מעבר בין מצבים.</p><p><strong>דרך נכונה:</strong> מסמנים חצי זרם ומתח בכל מצב מיתוג. אם סימן האנרגיה לא ברור, חוזרים להגדרה <span class="ym-math-inline">\(p(t)=v(t)i(t)\)</span> ובודקים אם הרכיב אוגר, מוסר או מבזבז אנרגיה.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> הצבת מספרים בלי בדיקת יחידות.</p><p><strong>דרך נכונה:</strong> לפני התוצאה הסופית מוודאים שהיחידות מתכנסות: וולט, אמפר, ואט, הנרי, פאראד ושניות. בדיקת יחידות מגלה הרבה טעויות עוד לפני סימולציה.</p></div>
-<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שרכיבים אידיאליים מייצגים רכיב אמיתי.</p><p><strong>דרך נכונה:</strong> המודל האידיאלי נועד להבנה ראשונית. בתכן מוסיפים נפילת דיודה, Rds(on), ESR, זמני מיתוג, מגבלות תרמיות, זרמי שיא וסבילות רכיבים.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שרכיבים אידיאליים מייצגים רכיב אמיתי.</p><p><strong>דרך נכונה:</strong> המודל האידיאלי נועד להבנה ראשונית. בתכן מוסיפים נפילת דיודה, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, ESR, זמני מיתוג, מגבלות תרמיות, זרמי שיא וסבילות רכיבים.</p></div>
     </section>
 
     <section class="content-section">
@@ -172,14 +221,14 @@ p(t):   positive area -&gt; energy to load
     <section id="practice" class="content-section">
       <h2>תרגילים</h2>
       <div class="exercise-block">
-        <ol><li>חשב את ההספק בנגד 8 ohm המחובר ל-16V DC.</li><li>מקור סינוסי בעל Vm=170V. חשב Vrms.</li><li>עומס צורך 3A RMS מ-230V עם PF=0.7. חשב S ו-P.</li><li>הסבר מדוע זרם פולסי יכול ליצור חימום גבוה גם אם הזרם הממוצע קטן.</li><li>במעגל מסוים Pavg=400W ו-S=500VA. חשב PF.</li><li>ציין מתי יש להשתמש בערך שיא בבחירת רכיב.</li><li>הסבר מדוע קבל יכול לגרום להספק רגעי שלילי בחלק מהמחזור.</li><li>השווה בין עומס נגדי לעומס השראתי מבחינת פאזה והספק ריאקטיבי.</li><li>תאר מה יקרה לזרם הכניסה אם מקדם ההספק ירד וההספק הממשי נשאר קבוע.</li><li>כתוב בדיקת סבירות לחישוב שבו התקבל PF=1.2.</li></ol>
+        <ol><li>חשב את ההספק בנגד 8 ohm המחובר ל-16V DC.</li><li>מקור סינוסי בעל Vm=170V. חשב <span class="ym-math-inline">\(V_{rms}\)</span>.</li><li>עומס צורך 3A RMS מ-230V עם <span class="ym-math-inline">\(PF\)</span>=0.7. חשב S ו-P.</li><li>הסבר מדוע זרם פולסי יכול ליצור חימום גבוה גם אם הזרם הממוצע קטן.</li><li>במעגל מסוים <span class="ym-math-inline">\(P_{avg}\)</span>=400W ו-S=500VA. חשב <span class="ym-math-inline">\(PF\)</span>.</li><li>ציין מתי יש להשתמש בערך שיא בבחירת רכיב.</li><li>הסבר מדוע קבל יכול לגרום להספק רגעי שלילי בחלק מהמחזור.</li><li>השווה בין עומס נגדי לעומס השראתי מבחינת פאזה והספק ריאקטיבי.</li><li>תאר מה יקרה לזרם הכניסה אם מקדם ההספק ירד וההספק הממשי נשאר קבוע.</li><li>כתוב בדיקת סבירות לחישוב שבו התקבל <span class="ym-math-inline">\(PF\)</span>=1.2.</li></ol>
       </div>
     </section>
 
     <section class="content-section">
       <h2>תשובות ורמזים</h2>
       <div class="answer-block">
-        <ol><li>I=2A, P=32W.</li><li>Vrms=170/sqrt(2)≈120V.</li><li>S=690VA, P=483W.</li><li>החימום תלוי ב-RMS, ו-RMS גדל כאשר יש שיאים גבוהים.</li><li>PF=400/500=0.8.</li><li>במתחי חסימה, זרמי שיא, דירוג דיודות ומתגים וקבלי כניסה.</li><li>הקבל מחזיר אנרגיה למעגל כאשר המתח עליו גבוה מהמקור המקומי.</li><li>בנגד הזרם בפאזה עם המתח. בסליל אידיאלי הזרם מאחר ויש אנרגיה מוחזרת.</li><li>הזרם RMS יגדל ולכן ההפסדים בכבלים ובמקור יגדלו.</li><li>PF לא יכול להיות גדול מ-1; יש טעות בהגדרת RMS, P או S.</li></ol>
+        <ol><li>I=2A, P=32W.</li><li><span class="ym-math-inline">\(V_{rms}\)</span>=170/sqrt(2)≈120V.</li><li>S=690VA, P=483W.</li><li>החימום תלוי ב-RMS, ו-RMS גדל כאשר יש שיאים גבוהים.</li><li><span class="ym-math-inline">\(PF\)</span>=400/500=0.8.</li><li>במתחי חסימה, זרמי שיא, דירוג דיודות ומתגים וקבלי כניסה.</li><li>הקבל מחזיר אנרגיה למעגל כאשר המתח עליו גבוה מהמקור המקומי.</li><li>בנגד הזרם בפאזה עם המתח. בסליל אידיאלי הזרם מאחר ויש אנרגיה מוחזרת.</li><li>הזרם RMS יגדל ולכן ההפסדים בכבלים ובמקור יגדלו.</li><li><span class="ym-math-inline">\(PF\)</span> לא יכול להיות גדול מ-1; יש טעות בהגדרת RMS, P או S.</li></ol>
       </div>
     </section>
 
@@ -199,26 +248,38 @@ p(t):   positive area -&gt; energy to load
         </p>
       </div>
       <p>
-        סימן ההספק הוא חלק מהסיפור. אם הגדרנו את הזרם כנכנס להדק החיובי של רכיב, אז p(t)>0 אומר שהרכיב צורך או אוגר אנרגיה לפי המוסכמה הפסיבית. אם p(t)<0, הרכיב מחזיר אנרגיה למעגל. בממירי הספק תופעה זו רגילה לחלוטין: סליל בממיר Buck מוסר אנרגיה לעומס בזמן שהמתג כבוי; קבל ביציאת מיישר מזין עומס בין שיאי הרשת; מנוע יכול להחזיר אנרגיה בזמן בלימה רגנרטיבית.
+        סימן ההספק הוא חלק מהסיפור. אם הגדרנו את הזרם כנכנס להדק החיובי של רכיב, אז <span class="ym-math-inline">\(p(t)>0\)</span> אומר שהרכיב צורך או אוגר אנרגיה לפי המוסכמה הפסיבית. אם <span class="ym-math-inline">\(p(t)<0\)</span>, הרכיב מחזיר אנרגיה למעגל. בממירי הספק תופעה זו רגילה לחלוטין: סליל בממיר Buck מוסר אנרגיה לעומס בזמן שהמתג כבוי; קבל ביציאת מיישר מזין עומס בין שיאי הרשת; מנוע יכול להחזיר אנרגיה בזמן בלימה רגנרטיבית.
       </p>
       <p>
-        בהמשך הקורס נשתמש בשפה הזו כדי לנתח כל טופולוגיה. במיישר נשאל מהו RMS הזרם בדיודה ומהו מתח השיא שהדיודה חוסמת. בממיר Buck נשאל מהו המתח הממוצע על הסליל ומדוע הוא חייב להיות אפס במצב יציב. במהפך נשאל אילו הרמוניות מופיעות ומה ה-THD. בכל המקרים הבסיס הוא אותו בסיס: אנרגיה, צורת גל, RMS, ממוצע ומקדם הספק.
+        בהמשך הקורס נשתמש בשפה הזו כדי לנתח כל טופולוגיה. במיישר נשאל מהו RMS הזרם בדיודה ומהו מתח השיא שהדיודה חוסמת. בממיר Buck נשאל מהו המתח הממוצע על הסליל ומדוע הוא חייב להיות אפס במצב יציב. במהפך נשאל אילו הרמוניות מופיעות ומה ה-<span class="ym-math-inline">\(THD\)</span>. בכל המקרים הבסיס הוא אותו בסיס: אנרגיה, צורת גל, RMS, ממוצע ומקדם הספק.
       </p>
     </section>
 
     <section class="content-section">
       <h2>פיתוח נוסף: RMS מתוך חימום ולא מתוך נוסחה לזיכרון</h2>
       <p>
-        הדרך הטובה ביותר להבין RMS היא להתחיל מנגד. עבור נגד R, ההספק הרגעי הוא p(t)=i²(t)R. אם הזרם משתנה בזמן, ההספק משתנה בזמן, אך הטמפרטורה של הנגד מגיבה בעיקר להספק ממוצע. לכן נחשב:
+        הדרך הטובה ביותר להבין RMS היא להתחיל מנגד. עבור נגד R, ההספק הרגעי הוא <span class="ym-math-inline">\(p(t)\)</span>=i²(t)R. אם הזרם משתנה בזמן, ההספק משתנה בזמן, אך הטמפרטורה של הנגד מגיבה בעיקר להספק ממוצע. לכן נחשב:
       </p>
-      <p class="equation">Pavg = (1/T) integral_0^T i²(t)R dt = R · (1/T) integral_0^T i²(t)dt</p>
+      <div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{avg}=\frac{1}{T}\int_{0}^{T}i^2(t)R\,dt=R\frac{1}{T}\int_{0}^{T}i^2(t)\,dt
+\]
+</div>
       <p>
-        עכשיו נגדיר זרם DC שקול בשם Irms כך שאותו נגד יתחמם באותו אופן. בזרם DC ההספק הוא Irms²R. נשווה בין הביטויים ונקבל:
+        עכשיו נגדיר זרם DC שקול בשם <span class="ym-math-inline">\(I_{rms}\)</span> כך שאותו נגד יתחמם באותו אופן. בזרם DC ההספק הוא <span class="ym-math-inline">\(I_{rms}\)</span>²R. נשווה בין הביטויים ונקבל:
       </p>
-      <p class="equation">Irms²R = R · (1/T) integral_0^T i²(t)dt</p>
-      <p class="equation">Irms = sqrt((1/T) integral_0^T i²(t)dt)</p>
+      <div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+I_{rms}^2R=R\frac{1}{T}\int_{0}^{T}i^2(t)\,dt
+\]
+</div>
+      <div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+I_{rms}=\sqrt{\frac{1}{T}\int_{0}^{T}i^2(t)\,dt}
+\]
+</div>
       <p>
-        שימו לב שההתנגדות R נעלמת. לכן RMS הוא תכונה של צורת הגל עצמה, לא של נגד מסוים. הסיבה שהוא חשוב לרכיבים היא שהרבה הפסדים במעגלי הספק הם מהצורה I²R: התנגדות מוליכים, Rds(on) של MOSFET, התנגדות נחושת של סליל, התנגדות מסלול PCB ועוד.
+        שימו לב שההתנגדות R נעלמת. לכן RMS הוא תכונה של צורת הגל עצמה, לא של נגד מסוים. הסיבה שהוא חשוב לרכיבים היא שהרבה הפסדים במעגלי הספק הם מהצורה I²R: התנגדות מוליכים, <span class="ym-math-inline">\(R_{DS(on)}\)</span> של MOSFET, התנגדות נחושת של סליל, התנגדות מסלול PCB ועוד.
       </p>
       <div class="warning">
         <strong>מסקנה לתכן</strong>
@@ -234,11 +295,15 @@ p(t):   positive area -&gt; energy to load
         בעומס ליניארי המחובר למתח סינוסי, הזרם גם הוא סינוסי באותו תדר. במקרה כזה אפשר לתאר את ההפרש בין המתח לזרם בזווית phi, ומקדם ההספק הוא cos(phi). זהו המקרה הקלאסי של עומס R, L או C ליניארי. אולם אלקטרוניקת הספק מלאה בעומסים לא ליניאריים: דיודות, תיריסטורים, מתגים וקבלים גדולים.
       </p>
       <p>
-        כאשר הזרם אינו סינוסי, אפשר לפרק אותו לרכיב יסוד בתדר הרשת ולהרמוניות בתדרים גבוהים יותר. רק רכיב היסוד שנמצא בפאזה עם המתח הסינוסי תורם ישירות להספק ממשי מהרשת. ההרמוניות מגדילות את Irms, ולכן מגדילות את S=VrmsIrms, אך אינן בהכרח מוסיפות הספק ממשי באותו יחס. לכן PF יורד.
+        כאשר הזרם אינו סינוסי, אפשר לפרק אותו לרכיב יסוד בתדר הרשת ולהרמוניות בתדרים גבוהים יותר. רק רכיב היסוד שנמצא בפאזה עם המתח הסינוסי תורם ישירות להספק ממשי מהרשת. ההרמוניות מגדילות את <span class="ym-math-inline">\(I_{rms}\)</span>, ולכן מגדילות את S=<span class="ym-math-inline">\(V_{rms}\)</span><span class="ym-math-inline">\(I_{rms}\)</span>, אך אינן בהכרח מוסיפות הספק ממשי באותו יחס. לכן <span class="ym-math-inline">\(PF\)</span> יורד.
       </p>
-      <p class="equation">PF = P / (Vrms · Irms)</p>
+      <div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+PF=\frac{P}{V_{rms}I_{rms}}
+\]
+</div>
       <p>
-        ניתן לחשוב על PF כולל כמכפלה של שני גורמים: גורם ההעתק, שמתאר את הזווית בין המתח לבין רכיב היסוד של הזרם, וגורם העיוות, שמתאר כמה מהזרם נמצא בהרמוניות. בקורס זה לא נצטרך תמיד לחשב פירוק פורייה מלא, אך חשוב להבין את המשמעות: גם אם הזרם נראה קרוב לשיא המתח, הוא עדיין יכול להיות בעייתי אם הוא צר ופולסי.
+        ניתן לחשוב על <span class="ym-math-inline">\(PF\)</span> כולל כמכפלה של שני גורמים: גורם ההעתק, שמתאר את הזווית בין המתח לבין רכיב היסוד של הזרם, וגורם העיוות, שמתאר כמה מהזרם נמצא בהרמוניות. בקורס זה לא נצטרך תמיד לחשב פירוק פורייה מלא, אך חשוב להבין את המשמעות: גם אם הזרם נראה קרוב לשיא המתח, הוא עדיין יכול להיות בעייתי אם הוא צר ופולסי.
       </p>
     </section>
 
@@ -251,19 +316,19 @@ p(t):   positive area -&gt; energy to load
         <ol>
           <li>הזרם הממוצע הוא אפס, כי החלק החיובי והחלק השלילי מתבטלים.</li>
           <li>בחישוב RMS מרבעים את הזרם: גם +5A וגם -5A נותנים 25A².</li>
-          <li>לכן Irms=sqrt(25)=5A.</li>
+          <li>לכן <span class="ym-math-inline">\(I_{rms}\)</span>=sqrt(25)=5A.</li>
         </ol>
-        <p><strong>תשובה:</strong> הזרם הממוצע אפס, אך Irms=5A.</p>
+        <p><strong>תשובה:</strong> הזרם הממוצע אפס, אך <span class="ym-math-inline">\(I_{rms}\)</span>=5A.</p>
         <p><strong>פירוש פיזיקלי:</strong> המוליך יתחמם בדיוק כמו בזרם DC של 5A, כי חימום אינו תלוי בכיוון הזרם.</p>
       </div>
       <div class="example-block">
         <h3>דוגמה 7: בדיקת סבירות של מקדם הספק</h3>
         <p><strong>נתונים:</strong> מערכת מחוברת ל-230V RMS, נמדד זרם 2A RMS, והספק ממשי 600W.</p>
-        <p><strong>נדרש:</strong> חשבו PF ובדקו אם הנתונים אפשריים.</p>
+        <p><strong>נדרש:</strong> חשבו <span class="ym-math-inline">\(PF\)</span> ובדקו אם הנתונים אפשריים.</p>
         <ol>
           <li>הספק נראה: S=230·2=460VA.</li>
-          <li>מקדם הספק לפי הנתונים: PF=600/460=1.30.</li>
-          <li>PF לא יכול להיות גדול מ-1, לכן לפחות אחד הנתונים או המדידות שגוי.</li>
+          <li>מקדם הספק לפי הנתונים: <span class="ym-math-inline">\(PF\)</span>=600/460=1.30.</li>
+          <li><span class="ym-math-inline">\(PF\)</span> לא יכול להיות גדול מ-1, לכן לפחות אחד הנתונים או המדידות שגוי.</li>
         </ol>
         <p><strong>תשובה:</strong> הנתונים אינם עקביים.</p>
         <p><strong>פירוש פיזיקלי:</strong> אי אפשר לקבל יותר הספק ממשי מההספק הנראה שהמקור מספק. זוהי בדיקת סבירות פשוטה אך חשובה מאוד.</p>
@@ -271,11 +336,11 @@ p(t):   positive area -&gt; energy to load
       <div class="example-block">
         <h3>דוגמה 8: מאזן הפסדים בממיר</h3>
         <p><strong>נתונים:</strong> ממיר מספק 12V ו-5A לעומס. נצילותו 90%.</p>
-        <p><strong>נדרש:</strong> חשבו Pout, Pin ו-Ploss.</p>
+        <p><strong>נדרש:</strong> חשבו <span class="ym-math-inline">\(P_{out}\)</span>, <span class="ym-math-inline">\(P_{in}\)</span> ו-<span class="ym-math-inline">\(P_{loss}\)</span>.</p>
         <ol>
-          <li>Pout=VoIo=12·5=60W.</li>
-          <li>eta=Pout/Pin ולכן Pin=Pout/eta=60/0.9=66.7W.</li>
-          <li>Ploss=Pin-Pout=6.7W.</li>
+          <li><span class="ym-math-inline">\(P_{out}=V_o I_o=12\cdot5=60\,\mathrm{W}\)</span>.</li>
+          <li><span class="ym-math-inline">\(\eta\)</span>=<span class="ym-math-inline">\(P_{out}\)</span>/<span class="ym-math-inline">\(P_{in}\)</span> ולכן <span class="ym-math-inline">\(P_{in}\)</span>=<span class="ym-math-inline">\(P_{out}\)</span>/<span class="ym-math-inline">\(\eta\)</span>=60/0.9=66.7W.</li>
+          <li><span class="ym-math-inline">\(P_{loss}\)</span>=<span class="ym-math-inline">\(P_{in}\)</span>-<span class="ym-math-inline">\(P_{out}\)</span>=6.7W.</li>
         </ol>
         <p><strong>תשובה:</strong> הממיר מוציא 60W, צורך כ-66.7W ומאבד כ-6.7W כחום.</p>
         <p><strong>פירוש פיזיקלי:</strong> 6.7W הם לא פרט קטן; הם קובעים טמפרטורה, גוף קירור, אמינות וצפיפות הספק.</p>

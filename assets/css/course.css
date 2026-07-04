@@ -624,6 +624,40 @@ p {
   line-height: 1.65;
 }
 
+.ym-math-inline {
+  direction: ltr;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+}
+
+.ym-math-block {
+  direction: ltr;
+  text-align: center;
+  margin: 1.4rem 0;
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.ym-math-highlight {
+  background: linear-gradient(135deg, #eef6ff, #f8fbff);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.ym-math-block mjx-container {
+  margin: 0 auto !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.ym-math-inline mjx-container {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .diagram {
   overflow-x: auto;
   direction: ltr;

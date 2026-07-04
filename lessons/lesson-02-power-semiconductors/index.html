@@ -6,6 +6,19 @@
   <title>שיעור 2 - רכיבי הספק מוליכים למחצה</title>
   <link rel="stylesheet" href="../../assets/css/course.css">
   <script defer src="../../assets/js/course.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#content">דלג לתוכן</a>
@@ -64,7 +77,7 @@
 
     <section id="objectives" class="content-section">
       <h2>מטרות למידה</h2>
-      <ul><li>להסביר במילים את העיקרון הפיזיקלי של רכיבי הספק מוליכים למחצה.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, Rds(on), נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
+      <ul><li>להסביר במילים את העיקרון הפיזיקלי של רכיבי הספק מוליכים למחצה.</li><li>לזהות את מסלולי הזרם ואת כיוון זרימת האנרגיה בכל מצב פעולה.</li><li>להגדיר את ההנחות לפני שימוש במשוואות.</li><li>לגזור או להצדיק את המשוואות המרכזיות של השיעור.</li><li>לפרש צורות גל של מתח, זרם והספק ולא רק לחשב מספר סופי.</li><li>לבחור ערכי רכיבים או דירוגים ראשוניים לפי דרישות הנדסיות.</li><li>להעריך השפעות לא אידיאליות כגון ESR, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, נפילת דיודה, Switching Losses ומגבלות תרמיות.</li><li>לפתור תרגילים מספריים ולבדוק סבירות של התוצאה.</li></ul>
     </section>
 
     <section id="motivation" class="content-section">
@@ -79,7 +92,7 @@
       <h2>הסבר מושגי</h2>
       <p>רכיב הספק אינו מתג מושלם. כאשר הוא דולק יש עליו נפילת מתח או התנגדות; כאשר הוא כבוי יש עליו מתח חסימה; ובמעבר בין המצבים יש חפיפה בין מתח לזרם.</p>
 <p>דיודה היא רכיב לא מבוקר שמוליך כאשר הוא בממתח קדמי. היא פשוטה ואמינה, אך נפילת המתח והתאוששות הפוכה שלה משפיעות על הפסדים ורעש.</p>
-<p>MOSFET נשלט במתח שער ומתאים במיוחד למתח נמוך עד בינוני ולתדרי מיתוג גבוהים. הפרמטרים החשובים הם Rds(on), מטען שער וקיבולים פרזיטיים.</p>
+<p>MOSFET נשלט במתח שער ומתאים במיוחד למתח נמוך עד בינוני ולתדרי מיתוג גבוהים. הפרמטרים החשובים הם <span class="ym-math-inline">\(R_{DS(on)}\)</span>, מטען שער וקיבולים פרזיטיים.</p>
 <p>IGBT מתאים להספקים ומתחים גבוהים יותר, אך בדרך כלל איטי יותר מ-MOSFET ובעל מתח רוויה. SCR מתאים לבקרת AC ומיישרים מבוקרים, אך אינו נכבה דרך השער.</p>
       <div class="note"><strong>הנחת עבודה לימודית</strong><p>בשלב הראשון ננתח רכיבים אידיאליים כדי לראות את המבנה. לאחר מכן נתקן את התוצאה בעזרת אי-אידיאליות. זו אינה התחמקות מהמציאות אלא דרך הנדסית מסודרת.</p></div>
     </section>
@@ -96,15 +109,47 @@
 
     <section id="math" class="content-section">
       <h2>פיתוח מתמטי</h2>
-      <div class="definition"><strong>הפסד הולכה ב-MOSFET</strong><p>ה-MOSFET במצב הולכה דומה לנגד קטן. הזרם RMS קובע חימום כי ההפסד תלוי בריבוע הזרם.</p><p class="equation">Pcond = Irms^2 · Rds(on)</p></div>
-<div class="definition"><strong>הפסד הולכה בדיודה או IGBT</strong><p>נפילת מתח קבועה מייצרת איבר התלוי בזרם הממוצע, והתנגדות דיפרנציאלית מוסיפה איבר RMS.</p><p class="equation">Pcond ≈ V0 · Iavg + r · Irms^2</p></div>
-<div class="definition"><strong>הפסדי מיתוג מקורבים</strong><p>האנרגיה בכל מעבר מוכפלת במספר המעברים בשנייה. לכן תדר מיתוג גבוה מגדיל הפסד.</p><p class="equation">Psw ≈ 0.5 · V · I · (tr + tf) · fsw</p></div>
-<div class="definition"><strong>הפסדי שער</strong><p>כדי להדליק ולכבות MOSFET יש להזיז מטען שער Qg בכל מחזור. זה משפיע על בחירת דרייבר.</p><p class="equation">Pgate ≈ Qg · Vdrive · fsw</p></div>
+      <div class="definition"><strong>הפסד הולכה ב-MOSFET</strong><p>ה-MOSFET במצב הולכה דומה לנגד קטן. הזרם RMS קובע חימום כי ההפסד תלוי בריבוע הזרם.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{cond}=I_{rms}^{2}R_{DS(on)}
+\]
+</div></div>
+<div class="definition"><strong>הפסד הולכה בדיודה או IGBT</strong><p>נפילת מתח קבועה מייצרת איבר התלוי בזרם הממוצע, והתנגדות דיפרנציאלית מוסיפה איבר RMS.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{cond}\approx V_0 I_{avg}+rI_{rms}^{2}
+\]
+</div></div>
+<div class="definition"><strong>הפסדי מיתוג מקורבים</strong><p>האנרגיה בכל מעבר מוכפלת במספר המעברים בשנייה. לכן תדר מיתוג גבוה מגדיל הפסד.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{sw}\approx \frac{1}{2}VI(t_r+t_f)f_s
+\]
+</div></div>
+<div class="definition"><strong>הפסדי שער</strong><p>כדי להדליק ולכבות MOSFET יש להזיז מטען שער <span class="ym-math-inline">\(Q_g\)</span> בכל מחזור. זה משפיע על בחירת דרייבר.</p><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{gate}\approx Q_gV_{drive}f_s
+\]
+</div></div>
       <div class="formula-grid">
-        <div class="formula-card"><h3>נוסחה</h3><p class="equation">Pcond=MOSFET: Irms^2Rds(on)</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">Pcond=V0Iavg+rIrms^2</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">Psw≈0.5VI(tr+tf)fsw</p></div>
-<div class="formula-card"><h3>נוסחה</h3><p class="equation">Pgate≈QgVdrivefsw</p></div>
+        <div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{cond, MOSFET}=I_{rms}^{2}R_{DS(on)}
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{cond}=V_0I_{avg}+rI_{rms}^{2}
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{sw}\approx \frac{1}{2}VI(t_r+t_f)f_s
+\]
+</div></div>
+<div class="formula-card"><h3>נוסחה</h3><div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+P_{gate}\approx Q_gV_{drive}f_s
+\]
+</div></div>
       </div>
     </section>
 
@@ -118,7 +163,7 @@ Gate: driver charges/discharges input capacitance</pre>
       <ul class="waveform-list">
         <li><strong>מתח על מתג</strong>גבוה במצב כבוי ונמוך במצב דולק. במעבר ייתכנו קפיצות בגלל השראות פרזיטית.</li>
 <li><strong>זרם מתג</strong>תלוי בטופולוגיה. בממירי DC-DC הוא עשוי להיות משולש או פולסי.</li>
-<li><strong>מתח שער</strong>צריך לעבור סף, אך גם להגיע לרמה שמקטינה Rds(on). קיימת פלטת מילר בזמן מעבר.</li>
+<li><strong>מתח שער</strong>צריך לעבור סף, אך גם להגיע לרמה שמקטינה <span class="ym-math-inline">\(R_{DS(on)}\)</span>. קיימת פלטת מילר בזמן מעבר.</li>
 <li><strong>זרם דיודה</strong>יכול לכלול התאוששות הפוכה כאשר דיודה עוברת מהולכה לחסימה.</li>
 <li><strong>טמפרטורת צומת</strong>אינה משתנה בקצב המיתוג, אך עולה לפי ההספק הממוצע וההתנגדות התרמית.</li>
       </ul>
@@ -128,9 +173,9 @@ Gate: driver charges/discharges input capacitance</pre>
       <h2>משוואות תכן וכללי אצבע</h2>
       <div class="design-rule"><strong>כלל תכן</strong><p>בוחרים מתח חסימה עם מרווח ביטחון מעל המתח הנומינלי והקפיצות הצפויות.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>בודקים זרם RMS לחימום וזרם שיא למגבלות רגעיות.</p></div>
-<div class="design-rule"><strong>כלל תכן</strong><p>ב-MOSFET מהיר בודקים Rds(on), Qg, Coss ויכולת דרייבר.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>ב-MOSFET מהיר בודקים <span class="ym-math-inline">\(R_{DS(on)}\)</span>, <span class="ym-math-inline">\(Q_g\)</span>, <span class="ym-math-inline">\(C_{oss}\)</span> ויכולת דרייבר.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>בדיודות מהירות בודקים reverse recovery כדי לצמצם הפסדים ורעש.</p></div>
-<div class="design-rule"><strong>כלל תכן</strong><p>ב-IGBT בודקים Vce(sat), אנרגיות Eon/Eoff ותדר עבודה מתאים.</p></div>
+<div class="design-rule"><strong>כלל תכן</strong><p>ב-IGBT בודקים <span class="ym-math-inline">\(V_{CE(sat)}\)</span>, אנרגיות Eon/Eoff ותדר עבודה מתאים.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>ב-SCR בודקים זרם אחזקה, זרם הצתה, dv/dt ויכולת כיבוי טבעית.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>כל חישוב הפסדים חייב להתחבר למודל תרמי ולגוף קירור.</p></div>
 <div class="design-rule"><strong>כלל תכן</strong><p>אין לבחור רכיב רק לפי הערך הגדול ביותר בכותרת דף הנתונים.</p></div>
@@ -139,29 +184,29 @@ Gate: driver charges/discharges input capacitance</pre>
 
     <section id="examples" class="content-section">
       <h2>דוגמאות פתורות</h2>
-      <div class="example-block"><h3>דוגמה 1: הפסד הולכה ב-MOSFET</h3><p><strong>נתון:</strong> Rds(on)=30 milliohm, זרם RMS של 10A.</p><p><strong>נדרש:</strong> חשב Pcond.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>ממירים 30 milliohm ל-0.03 ohm.</li><li>P=I^2R=10^2·0.03.</li><li>P=3W.</li></ol><p><strong>תשובה:</strong> הפסד ההולכה הוא 3W.</p><p><strong>פירוש פיזיקלי:</strong> גם התנגדות קטנה מאוד יוצרת חום משמעותי בזרמים גבוהים.</p></div>
-<div class="example-block"><h3>דוגמה 2: דיודה במסלול זרם חופשי</h3><p><strong>נתון:</strong> דיודה מוליכה זרם ממוצע 4A ונפילת המתח שלה 0.85V.</p><p><strong>נדרש:</strong> הערך הפסד.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>משתמשים בקירוב P=Vd·Iavg.</li><li>P=0.85·4=3.4W.</li><li>בודקים אם מארז הדיודה מסוגל לפזר זאת.</li></ol><p><strong>תשובה:</strong> בערך 3.4W.</p><p><strong>פירוש פיזיקלי:</strong> זו סיבה נפוצה לעבור ל-Synchronous Rectification במתחים נמוכים.</p></div>
-<div class="example-block"><h3>דוגמה 3: הפסד מיתוג</h3><p><strong>נתון:</strong> V=200V, I=6A, tr+tf=100ns, fsw=50kHz.</p><p><strong>נדרש:</strong> חשב Psw בקירוב.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>אנרגיה למעבר: 0.5·V·I·t.</li><li>הספק: מכפילים ב-fsw.</li><li>Psw=0.5·200·6·100ns·50kHz=3W.</li></ol><p><strong>תשובה:</strong> כ-3W.</p><p><strong>פירוש פיזיקלי:</strong> אם נכפיל תדר, ההפסד יוכפל בקירוב.</p></div>
+      <div class="example-block"><h3>דוגמה 1: הפסד הולכה ב-MOSFET</h3><p><strong>נתון:</strong> <span class="ym-math-inline">\(R_{DS(on)}\)</span>=30 milliohm, זרם RMS של 10A.</p><p><strong>נדרש:</strong> חשב <span class="ym-math-inline">\(P_{cond}\)</span>.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>ממירים 30 milliohm ל-0.03 ohm.</li><li><span class="ym-math-inline">\(P=I^2R\)</span>=10^2·0.03.</li><li>P=3W.</li></ol><p><strong>תשובה:</strong> הפסד ההולכה הוא 3W.</p><p><strong>פירוש פיזיקלי:</strong> גם התנגדות קטנה מאוד יוצרת חום משמעותי בזרמים גבוהים.</p></div>
+<div class="example-block"><h3>דוגמה 2: דיודה במסלול זרם חופשי</h3><p><strong>נתון:</strong> דיודה מוליכה זרם ממוצע 4A ונפילת המתח שלה 0.85V.</p><p><strong>נדרש:</strong> הערך הפסד.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>משתמשים בקירוב P=<span class="ym-math-inline">\(V_D\)</span>·<span class="ym-math-inline">\(I_{avg}\)</span>.</li><li>P=0.85·4=3.4W.</li><li>בודקים אם מארז הדיודה מסוגל לפזר זאת.</li></ol><p><strong>תשובה:</strong> בערך 3.4W.</p><p><strong>פירוש פיזיקלי:</strong> זו סיבה נפוצה לעבור ל-Synchronous Rectification במתחים נמוכים.</p></div>
+<div class="example-block"><h3>דוגמה 3: הפסד מיתוג</h3><p><strong>נתון:</strong> V=200V, I=6A, tr+tf=100ns, <span class="ym-math-inline">\(f_s\)</span>=50kHz.</p><p><strong>נדרש:</strong> חשב <span class="ym-math-inline">\(P_{sw}\)</span> בקירוב.</p><p><strong>פתרון בשלבים:</strong></p><ol><li>אנרגיה למעבר: 0.5·V·I·t.</li><li>הספק: מכפילים ב-<span class="ym-math-inline">\(f_s\)</span>.</li><li><span class="ym-math-inline">\(P_{sw}\)</span>=0.5·200·6·100ns·50kHz=3W.</li></ol><p><strong>תשובה:</strong> כ-3W.</p><p><strong>פירוש פיזיקלי:</strong> אם נכפיל תדר, ההפסד יוכפל בקירוב.</p></div>
 <div class="example-block"><h3>דוגמה 4: בחירת רכיב לפי מתח</h3><p><strong>נתון:</strong> ממיר עובד על Bus של 400V עם קפיצות אפשריות של 80V.</p><p><strong>נדרש:</strong> האם רכיב 500V מספיק?</p><p><strong>פתרון בשלבים:</strong></p><ol><li>מתח צפוי מרבי: 480V.</li><li>רכיב 500V משאיר מרווח קטן מאוד.</li><li>עדיף לשקול 600V או צמצום קפיצות בעזרת snubber ותכנון PCB.</li></ol><p><strong>תשובה:</strong> 500V גבולי מאוד.</p><p><strong>פירוש פיזיקלי:</strong> תכן אמין מתחשב במעברים, לא רק במתח DC נקוב.</p></div>
     </section>
 
     <section class="content-section">
       <h2>טעויות נפוצות</h2>
-      <div class="mistake-block"><p><strong>הטעות:</strong> בחירת MOSFET רק לפי זרם מרבי.</p><p><strong>דרך נכונה:</strong> זרם מרבי בדף נתונים תלוי בקירור אידיאלי. בתכן חשובים הפסדים, טמפרטורה, מארז ו-Rds(on).</p></div>
+      <div class="mistake-block"><p><strong>הטעות:</strong> בחירת MOSFET רק לפי זרם מרבי.</p><p><strong>דרך נכונה:</strong> זרם מרבי בדף נתונים תלוי בקירור אידיאלי. בתכן חשובים הפסדים, טמפרטורה, מארז ו-<span class="ym-math-inline">\(R_{DS(on)}\)</span>.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> הנחה שדיודה נכבית מיד.</p><p><strong>דרך נכונה:</strong> לדיודה אמיתית יש reverse recovery. הזרם ההפוך יכול להגדיל הפסדי מיתוג ורעש.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> שימוש ב-SCR כאילו הוא MOSFET.</p><p><strong>דרך נכונה:</strong> SCR נדלק בשער אך בדרך כלל אינו נכבה דרך השער. צריך מעבר זרם לאפס או קומוטציה.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מדרייבר שער.</p><p><strong>דרך נכונה:</strong> ללא דרייבר מתאים המעברים איטיים, ההפסדים גדלים ועלולים להופיע הדלקות שווא.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> אי בדיקת טמפרטורת צומת.</p><p><strong>דרך נכונה:</strong> הספק ההפסד חייב להיות מתורגם לעליית טמפרטורה דרך התנגדות תרמית.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> שימוש בנוסחה של רכיבי הספק מוליכים למחצה בלי לבדוק את תחום התקפות שלה.</p><p><strong>דרך נכונה:</strong> לפני כל הצבה מזהים אם ההנחה היא אידיאלית, מצב CCM או DCM, עומס נגדי או RL, גל סינוסי או גל מעוות. נוסחה נכונה בהקשר שגוי נותנת תשובה משכנעת אך שגויה.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> בלבול בין ערך ממוצע, ערך RMS וערך שיא.</p><p><strong>דרך נכונה:</strong> ערך ממוצע מתאים לרכיב DC, ערך RMS מתאים לחימום ולהספק בעומס נגדי, וערך שיא חשוב למתחי חסימה ולזרמי שיא. בכל חישוב כותבים במפורש איזה ערך נדרש.</p></div>
-<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מכיוון זרם ומקוטביות מתח בזמן מעבר בין מצבים.</p><p><strong>דרך נכונה:</strong> מסמנים חצי זרם ומתח בכל מצב מיתוג. אם סימן האנרגיה לא ברור, חוזרים להגדרה p(t)=v(t)i(t) ובודקים אם הרכיב אוגר, מוסר או מבזבז אנרגיה.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> התעלמות מכיוון זרם ומקוטביות מתח בזמן מעבר בין מצבים.</p><p><strong>דרך נכונה:</strong> מסמנים חצי זרם ומתח בכל מצב מיתוג. אם סימן האנרגיה לא ברור, חוזרים להגדרה <span class="ym-math-inline">\(p(t)=v(t)i(t)\)</span> ובודקים אם הרכיב אוגר, מוסר או מבזבז אנרגיה.</p></div>
 <div class="mistake-block"><p><strong>הטעות:</strong> הצבת מספרים בלי בדיקת יחידות.</p><p><strong>דרך נכונה:</strong> לפני התוצאה הסופית מוודאים שהיחידות מתכנסות: וולט, אמפר, ואט, הנרי, פאראד ושניות. בדיקת יחידות מגלה הרבה טעויות עוד לפני סימולציה.</p></div>
-<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שרכיבים אידיאליים מייצגים רכיב אמיתי.</p><p><strong>דרך נכונה:</strong> המודל האידיאלי נועד להבנה ראשונית. בתכן מוסיפים נפילת דיודה, Rds(on), ESR, זמני מיתוג, מגבלות תרמיות, זרמי שיא וסבילות רכיבים.</p></div>
+<div class="mistake-block"><p><strong>הטעות:</strong> הנחה שרכיבים אידיאליים מייצגים רכיב אמיתי.</p><p><strong>דרך נכונה:</strong> המודל האידיאלי נועד להבנה ראשונית. בתכן מוסיפים נפילת דיודה, <span class="ym-math-inline">\(R_{DS(on)}\)</span>, ESR, זמני מיתוג, מגבלות תרמיות, זרמי שיא וסבילות רכיבים.</p></div>
     </section>
 
     <section class="content-section">
       <h2>בדקו את עצמכם</h2>
-      <div class="note"><p><strong>שאלה:</strong> למה MOSFET בתדר גבוה לא נבחר רק לפי Rds(on)?</p><p><strong>תשובה קצרה:</strong> כי Qg וקיבולים משפיעים על הפסדי מיתוג ועל דרייבר השער.</p></div>
+      <div class="note"><p><strong>שאלה:</strong> למה MOSFET בתדר גבוה לא נבחר רק לפי <span class="ym-math-inline">\(R_{DS(on)}\)</span>?</p><p><strong>תשובה קצרה:</strong> כי <span class="ym-math-inline">\(Q_g\)</span> וקיבולים משפיעים על הפסדי מיתוג ועל דרייבר השער.</p></div>
 <div class="note"><p><strong>שאלה:</strong> מה ההבדל העקרוני בין דיודה ל-SCR?</p><p><strong>תשובה קצרה:</strong> דיודה מוליכה בממתח קדמי ללא שליטה. SCR צריך פולס שער להדלקה ונשאר מוליך עד ירידת זרם.</p></div>
 <div class="note"><p><strong>שאלה:</strong> מתי IGBT עדיף על MOSFET?</p><p><strong>תשובה קצרה:</strong> בדרך כלל במתחים והספקים גבוהים יותר, כאשר מתח רוויה מתקבל עדיף על התנגדות MOSFET גבוהה.</p></div>
 <div class="note"><p><strong>שאלה:</strong> מהי השאלה האנרגטית המרכזית ב-רכיבי הספק מוליכים למחצה?</p><p><strong>תשובה קצרה:</strong> לזהות מאיפה האנרגיה מגיעה, מי אוגר אותה זמנית, מי מוסר אותה לעומס, ואיפה נוצרים הפסדים.</p></div>
@@ -172,14 +217,14 @@ Gate: driver charges/discharges input capacitance</pre>
     <section id="practice" class="content-section">
       <h2>תרגילים</h2>
       <div class="exercise-block">
-        <ol><li>חשב Pcond עבור MOSFET עם Rds(on)=18 milliohm ו-Irms=12A.</li><li>דיודה מוליכה Iavg=2.5A עם Vd=0.9V. חשב הפסד.</li><li>חשב Psw עבור V=100V, I=8A, tr+tf=60ns, fsw=200kHz.</li><li>מדוע דרייבר שער חלש מגדיל הפסדי מיתוג?</li><li>מה יקרה ל-Rds(on) כאשר הטמפרטורה עולה בדרך כלל?</li><li>איזה רכיב מתאים יותר לבקרת הספק AC פשוטה: MOSFET יחיד או SCR? הסבר.</li><li>ציין שני סיכונים של reverse recovery בדיודה.</li><li>למה צריך מרווח בטיחות במתח חסימה?</li><li>הסבר את ההבדל בין זרם ממוצע לזרם RMS בבחירת רכיב.</li><li>תכנן רשימת בדיקות קצרה לפני בחירת IGBT למהפך.</li></ol>
+        <ol><li>חשב <span class="ym-math-inline">\(P_{cond}\)</span> עבור MOSFET עם <span class="ym-math-inline">\(R_{DS(on)}\)</span>=18 milliohm ו-<span class="ym-math-inline">\(I_{rms}\)</span>=12A.</li><li>דיודה מוליכה <span class="ym-math-inline">\(I_{avg}\)</span>=2.5A עם <span class="ym-math-inline">\(V_D\)</span>=0.9V. חשב הפסד.</li><li>חשב <span class="ym-math-inline">\(P_{sw}\)</span> עבור V=100V, I=8A, tr+tf=60ns, <span class="ym-math-inline">\(f_s\)</span>=200kHz.</li><li>מדוע דרייבר שער חלש מגדיל הפסדי מיתוג?</li><li>מה יקרה ל-<span class="ym-math-inline">\(R_{DS(on)}\)</span> כאשר הטמפרטורה עולה בדרך כלל?</li><li>איזה רכיב מתאים יותר לבקרת הספק AC פשוטה: MOSFET יחיד או SCR? הסבר.</li><li>ציין שני סיכונים של reverse recovery בדיודה.</li><li>למה צריך מרווח בטיחות במתח חסימה?</li><li>הסבר את ההבדל בין זרם ממוצע לזרם RMS בבחירת רכיב.</li><li>תכנן רשימת בדיקות קצרה לפני בחירת IGBT למהפך.</li></ol>
       </div>
     </section>
 
     <section class="content-section">
       <h2>תשובות ורמזים</h2>
       <div class="answer-block">
-        <ol><li>P=12^2·0.018=2.592W.</li><li>P≈2.25W.</li><li>P≈0.5·100·8·60ns·200kHz=4.8W.</li><li>כי המעבר ארוך יותר ולכן יש חפיפה גדולה יותר בין מתח לזרם.</li><li>ב-MOSFET סיליקון הוא בדרך כלל עולה, ולכן ההפסד גדל.</li><li>SCR מתאים לבקרת פאזה AC פשוטה כי הוא נדלק בפולס ונכבה במעבר אפס.</li><li>הפסדי מיתוג גבוהים וקפיצות מתח/EMI.</li><li>קיימות קפיצות מתח, סבילות רשת, השראות פרזיטית ותנאי מעבר.</li><li>ממוצע מתאים לנפילת מתח קבועה; RMS מתאים להפסדי I^2R.</li><li>מתח, זרם RMS ושיא, Vce(sat), Eon/Eoff, קירור, תדר, SOA ודרייבר.</li></ol>
+        <ol><li>P=12^2·0.018=2.592W.</li><li>P≈2.25W.</li><li>P≈0.5·100·8·60ns·200kHz=4.8W.</li><li>כי המעבר ארוך יותר ולכן יש חפיפה גדולה יותר בין מתח לזרם.</li><li>ב-MOSFET סיליקון הוא בדרך כלל עולה, ולכן ההפסד גדל.</li><li>SCR מתאים לבקרת פאזה AC פשוטה כי הוא נדלק בפולס ונכבה במעבר אפס.</li><li>הפסדי מיתוג גבוהים וקפיצות מתח/EMI.</li><li>קיימות קפיצות מתח, סבילות רשת, השראות פרזיטית ותנאי מעבר.</li><li>ממוצע מתאים לנפילת מתח קבועה; RMS מתאים להפסדי I^2R.</li><li>מתח, זרם RMS ושיא, <span class="ym-math-inline">\(V_{CE(sat)}\)</span>, Eon/Eoff, קירור, תדר, SOA ודרייבר.</li></ol>
       </div>
     </section>
 
@@ -199,7 +244,7 @@ Gate: driver charges/discharges input capacitance</pre>
         </p>
       </div>
       <p>
-        דפי נתונים עלולים להטעות אם קוראים אותם במהירות. זרם מרבי עשוי להיות נתון בטמפרטורת מארז בלתי מציאותית. Rds(on) עשוי להינתן ב-25 מעלות, אך במעגל שלך הצומת תגיע ל-100 מעלות. אנרגיית מיתוג עשויה להימדד בתנאי דרייבר, מתח וזרם שונים משלך. לכן נתון בדף נתונים הוא נקודת התחלה, לא סוף התכן.
+        דפי נתונים עלולים להטעות אם קוראים אותם במהירות. זרם מרבי עשוי להיות נתון בטמפרטורת מארז בלתי מציאותית. <span class="ym-math-inline">\(R_{DS(on)}\)</span> עשוי להינתן ב-25 מעלות, אך במעגל שלך הצומת תגיע ל-100 מעלות. אנרגיית מיתוג עשויה להימדד בתנאי דרייבר, מתח וזרם שונים משלך. לכן נתון בדף נתונים הוא נקודת התחלה, לא סוף התכן.
       </p>
     </section>
 
@@ -211,9 +256,9 @@ Gate: driver charges/discharges input capacitance</pre>
             <tr><th>רכיב</th><th>יתרון מרכזי</th><th>מגבלה מרכזית</th><th>שאלת תכן חשובה</th></tr>
           </thead>
           <tbody>
-            <tr><td>דיודה</td><td>פשוטה, לא דורשת פיקוד</td><td>נפילת מתח וחוסר שליטה</td><td>האם Vf ו-Reverse Recovery מתאימים לתדר ולזרם?</td></tr>
-            <tr><td>MOSFET</td><td>מהיר ונוח למיתוג בתדר גבוה</td><td>Rds(on), Qg וקיבולים פרזיטיים</td><td>האם ההפסד הכולל הולכה+מיתוג נמוך מספיק?</td></tr>
-            <tr><td>IGBT</td><td>מתאים למתח וזרם גבוהים</td><td>איטי יותר, Vce(sat), tail current</td><td>האם תדר העבודה נמוך מספיק ביחס להפסדי המיתוג?</td></tr>
+            <tr><td>דיודה</td><td>פשוטה, לא דורשת פיקוד</td><td>נפילת מתח וחוסר שליטה</td><td>האם <span class="ym-math-inline">\(V_F\)</span> ו-Reverse Recovery מתאימים לתדר ולזרם?</td></tr>
+            <tr><td>MOSFET</td><td>מהיר ונוח למיתוג בתדר גבוה</td><td><span class="ym-math-inline">\(R_{DS(on)}\)</span>, <span class="ym-math-inline">\(Q_g\)</span> וקיבולים פרזיטיים</td><td>האם ההפסד הכולל הולכה+מיתוג נמוך מספיק?</td></tr>
+            <tr><td>IGBT</td><td>מתאים למתח וזרם גבוהים</td><td>איטי יותר, <span class="ym-math-inline">\(V_{CE(sat)}\)</span>, tail current</td><td>האם תדר העבודה נמוך מספיק ביחס להפסדי המיתוג?</td></tr>
             <tr><td>SCR</td><td>עמיד ויעיל לבקרת AC</td><td>ננעל ואינו נכבה דרך השער</td><td>איך ומתי הזרם ירד מתחת לזרם האחזקה?</td></tr>
           </tbody>
         </table>
@@ -228,7 +273,11 @@ Gate: driver charges/discharges input capacitance</pre>
       <p>
         שער של MOSFET או IGBT נראה מבחוץ כמו קבל לא ליניארי. כדי להדליק את הרכיב צריך לטעון את השער; כדי לכבות צריך לפרוק אותו. אם הדרייבר חלש, המעבר יהיה איטי, והחפיפה בין מתח וזרם תימשך זמן רב יותר. אם הדרייבר חזק מדי וה-layout אינו טוב, קצב השינוי הגבוה יגרום לקפיצות מתח, ringing ו-EMI.
       </p>
-      <p class="equation">Ig,avg ≈ Qg · fsw</p>
+      <div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+I_{g,avg}\approx Q_g f_s
+\]
+</div>
       <p>
         זהו זרם ממוצע בלבד; הזרם הרגעי בדרייבר יכול להיות גבוה בהרבה. לכן בוחרים דרייבר לפי זרמי peak, מתח יציאה, יכולת sink/source, בידוד אם צריך, ותיאום לרכיב. התנגדות שער משמשת לכיוון מהירות המעבר: התנגדות קטנה מאיצה אך מגדילה רעש; התנגדות גדולה מקטינה רעש אך מגדילה הפסדי מיתוג.
       </p>
@@ -243,11 +292,15 @@ Gate: driver charges/discharges input capacitance</pre>
     <section class="content-section">
       <h2>מודל תרמי מפורט יותר</h2>
       <p>
-        לאחר שמחשבים Ploss, השאלה הבאה היא לאן החום הולך. החום נוצר בצומת הסיליקון, עובר למארז, משם לגוף קירור או ל-PCB, ולבסוף לאוויר. כל שלב מיוצג בהתנגדות תרמית. אם משתמשים רק ב-RthetaJA מדף הנתונים בלי להבין את תנאי המדידה, אפשר לטעות מאוד.
+        לאחר שמחשבים <span class="ym-math-inline">\(P_{loss}\)</span>, השאלה הבאה היא לאן החום הולך. החום נוצר בצומת הסיליקון, עובר למארז, משם לגוף קירור או ל-PCB, ולבסוף לאוויר. כל שלב מיוצג בהתנגדות תרמית. אם משתמשים רק ב-<span class="ym-math-inline">\(R_{\theta JA}\)</span> מדף הנתונים בלי להבין את תנאי המדידה, אפשר לטעות מאוד.
       </p>
-      <p class="equation">Tj = Ta + Ploss · (RthetaJC + RthetaCS + RthetaSA)</p>
+      <div class="ym-math-block ym-math-highlight" dir="ltr">
+\[
+T_j=T_a+P_{loss}(R_{\theta JC}+R_{\theta CS}+R_{\theta SA})
+\]
+</div>
       <p>
-        RthetaJC הוא מצומת למארז, RthetaCS ממארז לגוף קירור, ו-RthetaSA מגוף קירור לאוויר. במארזים שמקררים דרך PCB, המסלול שונה ותלוי בשטח נחושת, vias וזרימת אוויר. תכן אמין משאיר מרווח לטמפרטורת סביבה גבוהה, הזדקנות, אבק וסבילות רכיבים.
+        <span class="ym-math-inline">\(R_{\theta JC}\)</span> הוא מצומת למארז, <span class="ym-math-inline">\(R_{\theta CS}\)</span> ממארז לגוף קירור, ו-<span class="ym-math-inline">\(R_{\theta SA}\)</span> מגוף קירור לאוויר. במארזים שמקררים דרך PCB, המסלול שונה ותלוי בשטח נחושת, vias וזרימת אוויר. תכן אמין משאיר מרווח לטמפרטורת סביבה גבוהה, הזדקנות, אבק וסבילות רכיבים.
       </p>
     </section>
 
@@ -255,7 +308,7 @@ Gate: driver charges/discharges input capacitance</pre>
       <h2>דוגמאות עומק נוספות</h2>
       <div class="example-block">
         <h3>דוגמה 6: בחירת MOSFET לפי הפסד כולל</h3>
-        <p><strong>נתונים:</strong> שני MOSFETים עובדים ב-20A RMS. רכיב A: Rds(on)=5mΩ, Qg=160nC. רכיב B: Rds(on)=10mΩ, Qg=60nC. תדר המיתוג 400kHz, Vdrive=10V.</p>
+        <p><strong>נתונים:</strong> שני MOSFETים עובדים ב-20A RMS. רכיב A: <span class="ym-math-inline">\(R_{DS(on)}\)</span>=5mΩ, <span class="ym-math-inline">\(Q_g\)</span>=160nC. רכיב B: <span class="ym-math-inline">\(R_{DS(on)}\)</span>=10mΩ, <span class="ym-math-inline">\(Q_g\)</span>=60nC. תדר המיתוג 400kHz, <span class="ym-math-inline">\(V_{drive}=10\,\mathrm{V}\)</span>.</p>
         <p><strong>נדרש:</strong> השוו הפסדי הולכה והפסדי שער.</p>
         <ol>
           <li>A הולכה: P=20²·0.005=2W. B הולכה: P=20²·0.010=4W.</li>
@@ -263,17 +316,17 @@ Gate: driver charges/discharges input capacitance</pre>
           <li>רכיב A טוב יותר בהולכה אך דורש דרייבר חזק יותר ומפסיד יותר בשער.</li>
         </ol>
         <p><strong>תשובה:</strong> אין בחירה אוטומטית. צריך להוסיף גם הפסדי מיתוג, תרמיות ומחיר.</p>
-        <p><strong>פירוש פיזיקלי:</strong> Rds(on) נמוך נקנה לעיתים בקיבול שער גדול יותר. בתדר גבוה זה חשוב.</p>
+        <p><strong>פירוש פיזיקלי:</strong> <span class="ym-math-inline">\(R_{DS(on)}\)</span> נמוך נקנה לעיתים בקיבול שער גדול יותר. בתדר גבוה זה חשוב.</p>
       </div>
       <div class="example-block">
         <h3>דוגמה 7: בדיקת גוף קירור</h3>
-        <p><strong>נתונים:</strong> IGBT מאבד 18W. טמפרטורת סביבה מרבית 50°C. טמפרטורת צומת מותרת 150°C. RthetaJC=1.2°C/W ו-RthetaCS=0.5°C/W.</p>
-        <p><strong>נדרש:</strong> מהו RthetaSA המרבי של גוף הקירור?</p>
+        <p><strong>נתונים:</strong> IGBT מאבד 18W. טמפרטורת סביבה מרבית 50°C. טמפרטורת צומת מותרת 150°C. <span class="ym-math-inline">\(R_{\theta JC}\)</span>=1.2°C/W ו-<span class="ym-math-inline">\(R_{\theta CS}\)</span>=0.5°C/W.</p>
+        <p><strong>נדרש:</strong> מהו <span class="ym-math-inline">\(R_{\theta SA}\)</span> המרבי של גוף הקירור?</p>
         <ol>
           <li>עליית טמפרטורה מותרת: 150-50=100°C.</li>
           <li>התנגדות תרמית כוללת מותרת: 100/18=5.56°C/W.</li>
           <li>כבר קיימים 1.2+0.5=1.7°C/W.</li>
-          <li>לכן RthetaSA לכל היותר 5.56-1.7=3.86°C/W.</li>
+          <li>לכן <span class="ym-math-inline">\(R_{\theta SA}\)</span> לכל היותר 5.56-1.7=3.86°C/W.</li>
         </ol>
         <p><strong>תשובה:</strong> גוף הקירור צריך להיות 3.86°C/W או נמוך יותר.</p>
         <p><strong>פירוש פיזיקלי:</strong> אם משתמשים בגוף קירור קטן יותר, הרכיב יחרוג מטמפרטורת הצומת גם אם הוא עומד חשמלית.</p>
@@ -285,7 +338,7 @@ Gate: driver charges/discharges input capacitance</pre>
         <ol>
           <li>מטען התאוששות בקירוב: Qrr≈0.5·8A·80ns=320nC.</li>
           <li>אנרגיה בקירוב: Err≈V·Qrr=100·320nC=32µJ.</li>
-          <li>הספק: P≈Err·fsw=32µJ·200kHz=6.4W.</li>
+          <li>הספק: P≈Err·<span class="ym-math-inline">\(f_s\)</span>=32µJ·200kHz=6.4W.</li>
         </ol>
         <p><strong>תשובה:</strong> כ-6.4W הפסד נוסף בקירוב.</p>
         <p><strong>פירוש פיזיקלי:</strong> התאוששות הפוכה אינה פרט קטן בתדר גבוה; היא יכולה להיות מקור הפסד ו-EMI מרכזי.</p>
