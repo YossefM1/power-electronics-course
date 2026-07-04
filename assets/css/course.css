@@ -38,7 +38,7 @@ body {
   margin: 0;
   font-family: Arial, "Noto Sans Hebrew", "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at 14% 0%, rgba(79, 141, 247, 0.18), transparent 28rem),
+    radial-gradient(circle at 14% 0%, rgba(79, 142, 247, 0.18), transparent 28rem),
     radial-gradient(circle at 86% 4%, rgba(31, 85, 200, 0.12), transparent 34rem),
     linear-gradient(180deg, var(--page) 0%, #eaf2ff 44%, var(--page-2) 100%);
   color: var(--ink);
